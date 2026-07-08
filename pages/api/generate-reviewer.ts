@@ -43,6 +43,7 @@ function generateFallbackReviewer(text: string) {
 }
 
 export const config = {
+  maxDuration: 60,
   api: { bodyParser: { sizeLimit: '20mb' } },
 };
 

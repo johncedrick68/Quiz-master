@@ -86,6 +86,7 @@ async function generateWithRetry(ai: GoogleGenAI, prompt: string, systemInstruct
 }
 
 export const config = {
+  maxDuration: 60,
   api: {
     bodyParser: {
       sizeLimit: '10mb',
@@ -170,12 +171,13 @@ Respond ONLY with this JSON shape:
         throw new Error('Failed to parse the JSON response from Gemini.');
       }
     } catch (apiError: any) {
-      console.warn("AI Generation failed, falling back to local text processing", apiError);
-      // Fallback if AI fails completely (e.g. 503)
-      return res.status(200).json({
-        topic: parsed?.topic || 'Fallback Quiz (AI Offline)',
-        questions: generateFallbackQuestions(trimmedText),
-        isFallback: true
+      console.warn("AI Generation failed", apiError);
+      const isOverloaded = apiError?.message?.includes('503') || apiError?.message?.includes('UNAVAILABLE') || apiError?.message?.includes('high demand');
+      // Return a proper error — fallback questions were confusing and unhelpful
+      return res.status(503).json({
+        error: isOverloaded
+          ? 'Gemini AI is currently experiencing very high demand. Please wait 30 seconds and try again.'
+          : (apiError?.message || 'AI service failed. Please try again.')
       });
     }
 
