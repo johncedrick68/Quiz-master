@@ -17,12 +17,12 @@ export default function Home() {
   const [appState, setAppState] = useState<AppState>('upload');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   const [documentText, setDocumentText] = useState('');
   const [fileName, setFileName] = useState('');
   const [generatedQuestions, setGeneratedQuestions] = useState<Question[]>([]);
   const [topic, setTopic] = useState('');
-  
+
   const [session, setSession] = useState<QuizSession | null>(null);
 
   const handleContentReady = (text: string, name: string) => {
@@ -40,16 +40,16 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: documentText, fileName, mode }),
       });
-      
+
       const data = await res.json();
-      
+
       if (!res.ok) {
         throw new Error(data.error || 'Failed to generate quiz');
       }
 
       setGeneratedQuestions(data.questions);
       setTopic(data.topic);
-      
+
       // Initialize Session
       startNewSession(data.questions, data.topic, mode);
     } catch (err: any) {
@@ -94,14 +94,14 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>AI Quiz Master</title>
+        <title>AI Quiz by Cedrick</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </Head>
 
       <div className="min-h-screen flex flex-col">
         {/* Header */}
         <header className="p-6 flex items-center justify-between border-b border-dark-800 bg-dark-900/50 backdrop-blur-md sticky top-0 z-10">
-          <motion.div 
+          <motion.div
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             className="flex items-center gap-2"
@@ -110,10 +110,10 @@ export default function Home() {
               <span className="text-white font-bold text-xl leading-none">Q</span>
             </div>
             <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-100 to-slate-400">
-              Quiz Master
+              Quiz Master by Cedrick
             </h1>
           </motion.div>
-          
+
           <Link href="/reviewer">
             <Button variant="outline" className="flex items-center gap-2 border-primary-500/50 hover:bg-primary-500/10 hover:border-primary-500 text-primary-300">
               <BookOpen className="w-4 h-4" /> Study Guide / Reviewer
@@ -124,7 +124,7 @@ export default function Home() {
         {/* Main Content Area */}
         <main className="flex-1 flex flex-col items-center justify-center p-4 overflow-x-hidden">
           <AnimatePresence mode="wait">
-            
+
             {appState === 'upload' && (
               <motion.div
                 key="upload-view"
@@ -164,7 +164,7 @@ export default function Home() {
                       Start Study Mode
                     </Button>
                   </div>
-                  
+
                   <div className="bg-dark-800 border border-dark-700 p-6 rounded-2xl flex flex-col items-center hover:border-orange-500/50 transition-colors">
                     <h3 className="text-xl font-bold text-orange-400 mb-2">Challenge Mode</h3>
                     <p className="text-sm text-slate-400 mb-6 flex-1">
@@ -196,10 +196,10 @@ export default function Home() {
                 exit={{ opacity: 0, scale: 1.05 }}
                 className="w-full"
               >
-                <QuizFlow 
-                  session={session} 
-                  onComplete={handleQuizComplete} 
-                  onUpdateSession={handleUpdateSession} 
+                <QuizFlow
+                  session={session}
+                  onComplete={handleQuizComplete}
+                  onUpdateSession={handleUpdateSession}
                 />
               </motion.div>
             )}
@@ -211,13 +211,13 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 className="w-full"
               >
-                <QuizResults 
-                  session={session} 
-                  onRestart={restartWithSameQuestions} 
+                <QuizResults
+                  session={session}
+                  onRestart={restartWithSameQuestions}
                   onNewQuiz={() => {
                     setSession(null);
                     setAppState('upload');
-                  }} 
+                  }}
                 />
               </motion.div>
             )}

@@ -97,37 +97,46 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const ai = null; // using shared key-rotation utility
 
-  const systemInstruction = `You are an expert quiz master. Create a high-quality multiple-choice quiz based strictly on the provided source material. Do not invent facts outside the document.
-Generate as many meaningful questions as possible from the text, UP TO A MAXIMUM OF 50 QUESTIONS. 
-If the text is short, generate fewer questions. Never duplicate questions.
-Ensure varying difficulty levels (Easy, Medium, Hard).
+  const systemInstruction = `You are a tough oral defense panel examiner for a computer science capstone thesis.
+Your task is to create multiple-choice questions that could be asked during a live oral defense.
+Questions must test deep understanding — "Why?", "How?", "What is the advantage?", "Compare X vs Y", "What would happen if...?" 
+Wrong answer choices (distractors) must be plausible and specific — NOT generic like "All of the above" or "None of the above".
+The explanation for the correct answer must be detailed enough that a student reading it will understand WHY it is correct and WHY the others are wrong.
+Vary difficulty: some conceptual, some factual, some analytical.
 Respond ONLY with valid JSON. No markdown fences, no preamble.`;
 
-  const userPrompt = `Source document${fileName ? ` ("${fileName}")` : ''}:
+  const userPrompt = `Capstone thesis document${fileName ? ` ("${fileName}")` : ''}:
 """
 ${trimmedText}
 """
 
-Write up to 50 multiple-choice questions based strictly on the source above.
+Generate up to 50 defense-quality multiple-choice questions from this document.
 
-Rules:
-1. Every question and correct answer MUST be verifiable from the source text.
-2. Provide exactly 4 options per question, with only 1 correct answer.
-3. Vary difficulty: 'Easy', 'Medium', 'Hard'.
-4. Include a short 1-2 sentence explanation for the correct answer.
-5. Do not include duplicate questions.
-6. Target up to 50 questions if the text supports it, but stop if you run out of meaningful material.
+Requirements for QUESTIONS:
+- Ask about design choices, trade-offs, limitations, and algorithms/methods used
+- Ask "Why was X chosen over Y?", "What is the role of X in the system?", "How does X improve Y?"
+- Sound like what a real panel professor would ask during an oral defense
+- Mix Easy (definitions), Medium (applications), and Hard (analysis/comparison) questions
+
+Requirements for ANSWER OPTIONS:
+- All 4 options must be plausible and specific — no "None of the above" or "All of the above"
+- Wrong options should be close enough to be tricky (related concepts, common mistakes)
+- The correct answer must be unambiguously right based on the document
+
+Requirements for EXPLANATIONS:
+- 2–3 sentences explaining WHY the correct answer is right
+- Briefly mention why the other choices are wrong or misleading
 
 Respond ONLY with this JSON shape:
 {
-  "topic": "short title describing the quiz",
+  "topic": "short descriptive quiz title",
   "questions": [
     {
-      "question": "string",
+      "question": "string — sounds like a panel professor asking out loud",
       "options": ["string", "string", "string", "string"],
       "correctIndex": 0,
-      "explanation": "string",
-      "difficulty": "Easy"
+      "explanation": "string — 2-3 sentences explaining the correct answer and why the distractors are wrong",
+      "difficulty": "Easy | Medium | Hard"
     }
   ]
 }`;

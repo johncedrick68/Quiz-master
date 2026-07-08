@@ -84,31 +84,41 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ? text.slice(0, MAX_CHARS) + '\n[...truncated...]'
       : text;
 
-    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-    const systemInstruction = `You are a capstone defense reviewer expert. Extract or generate question-and-answer pairs from the provided document. 
-Each answer should be a concise, direct "Best Answer" that a student could memorize for their oral defense.
+    const systemInstruction = `You are a strict oral capstone defense examiner for a computer science thesis. 
+Your job is to generate Q&A pairs that a student MUST memorize to pass their oral defense panel.
+Questions should sound like what a tough professor would ask out loud during the defense — direct, probing, and conceptual.
+Answers must be concise (1-3 sentences), technically accurate, and immediately useful as a spoken response.
+Do NOT generate trivial or superficial questions. Focus on "Why?", "How?", "What is the advantage of?", "Compare X vs Y", and "What would happen if...?" style questions.
 Respond ONLY with valid JSON. No markdown, no preamble.`;
 
-    const prompt = `Document content:
+    const prompt = `Capstone thesis document:
 """
 ${text}
 """
 
-Extract or generate as many meaningful Q&A pairs as possible (up to 50) from this document.
-Focus on:
-- Key concepts and their definitions
-- Why certain technologies/methods were chosen
-- System architecture decisions
-- Results and findings
-- Methodology explanations
+Generate up to 50 high-quality oral defense Q&A pairs from this document.
+
+Requirements for QUESTIONS:
+- Ask "Why did you choose X over Y?" type questions
+- Ask about design decisions, trade-offs, and limitations
+- Ask about algorithms, data structures, or methodologies used
+- Ask "What is the significance of...?" or "How does X contribute to Y?"
+- Sound like a real panel professor asking out loud
+- NEVER ask trivial yes/no questions
+
+Requirements for ANSWERS:
+- 1 to 3 sentences maximum — short enough to say out loud under pressure
+- Technically precise and confident in tone  
+- Start with a direct statement (avoid "Well..." or "Basically...")
+- Include the specific reason or evidence from the document
 
 Respond ONLY with this JSON shape:
 {
   "pairs": [
     {
-      "question": "Why was Graph Theory used instead of Network Theory?",
-      "answer": "Graph Theory directly models transportation networks using nodes and edges, making it appropriate for jeepney routes."
+      "question": "Why did you use Graph Theory instead of a standard Network model for your jeepney routing system?",
+      "answer": "Graph Theory provides a mathematically precise representation of transportation networks using nodes and edges, allowing us to apply Dijkstra's algorithm for shortest-path optimization. This gives our system a solid theoretical foundation that network models lack."
     }
   ]
 }`;
