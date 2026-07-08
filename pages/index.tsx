@@ -41,8 +41,15 @@ export default function Home() {
         body: JSON.stringify({ text: documentText, fileName, mode }),
       });
 
-      const data = await res.json();
-
+      let data;
+      const textResponse = await res.text();
+      try {
+        data = JSON.parse(textResponse);
+      } catch {
+        // If Vercel throws a generic timeout or 500 error, it returns plain text like "An error occurred..."
+        throw new Error(textResponse.slice(0, 100) || 'Server returned an invalid response (not JSON).');
+      }
+      
       if (!res.ok) {
         throw new Error(data.error || 'Failed to generate quiz');
       }
