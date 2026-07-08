@@ -22,7 +22,8 @@ export function getApiKeys(): string[] {
   return keys;
 }
 
-const MODELS = ['gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
+// Models supported by new-generation Google AI Studio keys
+const MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'];
 
 /**
  * Tries every (apiKey × model) combination before giving up.
