@@ -46,13 +46,31 @@ export async function generateWithAllKeys(
     
     for (const model of MODELS) {
       try {
-        console.log(`Trying key ending ...${key.slice(-6)}, model: ${model}`);
+        console.log(`Trying key ...${key.slice(-6)}, model: ${model}`);
         const response = await ai.models.generateContent({
           model,
           contents: prompt,
           config: { systemInstruction, responseMimeType: 'application/json' }
         });
-        if (response.text) return response.text;
+
+        const text = response.text?.trim();
+        if (!text) {
+          console.warn(`  → Empty response from ${model}, trying next...`);
+          continue;
+        }
+
+        // Validate it's actually JSON before returning — Gemini sometimes returns
+        // plain-text error messages like "An error occurred" even with responseMimeType set
+        try {
+          JSON.parse(text);
+          return text; // ✅ Valid JSON — return it
+        } catch {
+          console.warn(`  → Response from ${model} is not valid JSON, trying next...`);
+          console.warn(`     Preview: ${text.slice(0, 80)}`);
+          lastError = new Error(`Model returned non-JSON: ${text.slice(0, 80)}`);
+          continue; // try next model
+        }
+
       } catch (err: any) {
         lastError = err;
         const isQuota = err?.message?.includes('429') || err?.message?.includes('RESOURCE_EXHAUSTED') || err?.message?.includes('quota');
@@ -63,11 +81,11 @@ export async function generateWithAllKeys(
           await new Promise(r => setTimeout(r, 500));
           continue;
         }
-        // Non-retriable error (bad prompt, auth issue, etc.)
-        throw err;
+        throw err; // Non-retriable error
       }
     }
   }
+
 
   // All keys and models exhausted
   const retryMatch = lastError?.message?.match(/(\d+)s/);
