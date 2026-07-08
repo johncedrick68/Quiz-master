@@ -2,6 +2,89 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { GoogleGenAI } from '@google/genai';
 import { Question } from '../../types/quiz';
 
+// Fallback logic to generate random questions from text if AI fails
+function generateFallbackQuestions(text: string): Question[] {
+  const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
+  const validSentences = sentences
+    .map(s => s.trim())
+    .filter(s => s.length > 30 && s.length < 150 && s.includes(' '));
+    
+  // Shuffle valid sentences
+  for (let i = validSentences.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [validSentences[i], validSentences[j]] = [validSentences[j], validSentences[i]];
+  }
+
+  const questions: Question[] = [];
+  const max = Math.min(validSentences.length, 50);
+
+  for (let i = 0; i < max; i++) {
+    const sentence = validSentences[i];
+    const words = sentence.split(' ');
+    // Pick a random word > 4 chars to blank out
+    const longWords = words.map((w, i) => ({w, i})).filter(obj => obj.w.length > 4);
+    if (longWords.length === 0) continue;
+    
+    const target = longWords[Math.floor(Math.random() * longWords.length)];
+    const questionText = words.map((w, idx) => idx === target.i ? '_____' : w).join(' ');
+    
+    // Generate dummy options
+    const options = [
+      target.w.replace(/[.,;!?]/g, ''),
+      'Option B',
+      'Option C',
+      'Option D'
+    ];
+    
+    // Shuffle options
+    const correctIndex = Math.floor(Math.random() * 4);
+    [options[0], options[correctIndex]] = [options[correctIndex], options[0]];
+
+    questions.push({
+      question: questionText,
+      options,
+      correctIndex,
+      explanation: 'This is a locally generated fallback question because the AI server is currently overloaded.',
+      difficulty: 'Medium'
+    });
+  }
+
+  if (questions.length === 0) {
+    questions.push({
+      question: "What is the main topic of this document?",
+      options: ["Unknown", "The document title", "Not specified", "No text found"],
+      correctIndex: 1,
+      explanation: 'Fallback generic question.',
+      difficulty: 'Easy'
+    });
+  }
+
+  return questions;
+}
+
+async function generateWithRetry(ai: GoogleGenAI, prompt: string, systemInstruction: string, retries = 3): Promise<string> {
+  const models = ['gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
+  for (let attempt = 0; attempt < retries; attempt++) {
+    const model = models[Math.min(attempt, models.length - 1)];
+    try {
+      const response = await ai.models.generateContent({
+        model,
+        contents: prompt,
+        config: { systemInstruction, responseMimeType: 'application/json' }
+      });
+      if (response.text) return response.text;
+    } catch (err: any) {
+      const isOverloaded = err?.message?.includes('503') || err?.message?.includes('UNAVAILABLE') || err?.message?.includes('high demand');
+      if (isOverloaded && attempt < retries - 1) {
+        await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
+        continue;
+      }
+      throw err;
+    }
+  }
+  throw new Error('All retry attempts failed');
+}
+
 export const config = {
   api: {
     bodyParser: {
@@ -74,25 +157,26 @@ Respond ONLY with this JSON shape:
 }`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: userPrompt,
-      config: {
-        systemInstruction: systemInstruction,
-        responseMimeType: 'application/json',
-      }
-    });
-
-    const output = response.text;
-    if (!output) {
-      throw new Error('No text returned from the model.');
-    }
-
-    let parsed;
+    let output: string;
+    let parsed: any;
+    
     try {
-      parsed = JSON.parse(output);
-    } catch (parseErr) {
-      throw new Error('Failed to parse the JSON response from Gemini.');
+      output = await generateWithRetry(ai, userPrompt, systemInstruction);
+      if (!output) throw new Error('No text returned from the model.');
+      
+      try {
+        parsed = JSON.parse(output);
+      } catch (parseErr) {
+        throw new Error('Failed to parse the JSON response from Gemini.');
+      }
+    } catch (apiError: any) {
+      console.warn("AI Generation failed, falling back to local text processing", apiError);
+      // Fallback if AI fails completely (e.g. 503)
+      return res.status(200).json({
+        topic: parsed?.topic || 'Fallback Quiz (AI Offline)',
+        questions: generateFallbackQuestions(trimmedText),
+        isFallback: true
+      });
     }
 
     if (!parsed.questions || !Array.isArray(parsed.questions) || parsed.questions.length === 0) {

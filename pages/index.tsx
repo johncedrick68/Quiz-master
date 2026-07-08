@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BookOpen } from 'lucide-react';
 import { FileUploader } from '../components/upload/FileUploader';
 import { QuizFlow } from '../components/quiz/QuizFlow';
 import { QuizResults } from '../components/quiz/QuizResults';
@@ -98,7 +100,7 @@ export default function Home() {
 
       <div className="min-h-screen flex flex-col">
         {/* Header */}
-        <header className="p-6 flex items-center justify-center border-b border-dark-800 bg-dark-900/50 backdrop-blur-md sticky top-0 z-10">
+        <header className="p-6 flex items-center justify-between border-b border-dark-800 bg-dark-900/50 backdrop-blur-md sticky top-0 z-10">
           <motion.div 
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -111,6 +113,12 @@ export default function Home() {
               Quiz Master
             </h1>
           </motion.div>
+          
+          <Link href="/reviewer">
+            <Button variant="outline" className="flex items-center gap-2 border-primary-500/50 hover:bg-primary-500/10 hover:border-primary-500 text-primary-300">
+              <BookOpen className="w-4 h-4" /> Study Guide / Reviewer
+            </Button>
+          </Link>
         </header>
 
         {/* Main Content Area */}
