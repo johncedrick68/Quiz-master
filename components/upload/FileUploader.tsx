@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Button';
-import { UploadCloud, FileText, X } from 'lucide-react';
+import { UploadCloud, FileText, X, BookOpen } from 'lucide-react';
 import { extractTextFromFile } from '../../lib/extractText';
 
 interface FileUploaderProps {
@@ -14,8 +14,21 @@ export function FileUploader({ onContentReady, isLoading }: FileUploaderProps) {
   const [pasteMode, setPasteMode] = useState(false);
   const [pastedText, setPastedText] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [manuscripts, setManuscripts] = useState<string[]>([]);
+  const [isLoadingManuscript, setIsLoadingManuscript] = useState(false);
   
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    fetch('/api/manuscripts')
+      .then(res => res.json())
+      .then(data => {
+        if (data.files) {
+          setManuscripts(data.files);
+        }
+      })
+      .catch(err => console.error("Failed to load manuscripts list", err));
+  }, []);
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -33,8 +46,6 @@ export function FileUploader({ onContentReady, isLoading }: FileUploaderProps) {
       if (file.size > 10 * 1024 * 1024) {
         throw new Error("File is too large. Please upload a file smaller than 10MB.");
       }
-      // Note: in a real app, lib/extractText would be updated to TS. 
-      // For now we assume it exports extractTextFromFile.
       const text = await extractTextFromFile(file);
       onContentReady(text, file.name);
     } catch (err: any) {
@@ -68,8 +79,25 @@ export function FileUploader({ onContentReady, isLoading }: FileUploaderProps) {
     onContentReady(pastedText, "Pasted Text");
   };
 
+  const loadManuscript = async (filename: string) => {
+    setError(null);
+    setIsLoadingManuscript(true);
+    try {
+      const res = await fetch(`/api/load-manuscript?filename=${encodeURIComponent(filename)}`);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      onContentReady(data.text, filename);
+    } catch (err: any) {
+      setError(err.message || 'Failed to load manuscript');
+    } finally {
+      setIsLoadingManuscript(false);
+    }
+  };
+
+  const isAnyLoading = isLoading || isLoadingManuscript;
+
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    <div className="w-full max-w-2xl mx-auto flex flex-col gap-8">
       <AnimatePresence mode="wait">
         {!pasteMode ? (
           <motion.div
@@ -93,7 +121,7 @@ export function FileUploader({ onContentReady, isLoading }: FileUploaderProps) {
                 accept=".pdf,.docx,.txt,.md"
                 onChange={handleChange}
                 className="hidden"
-                disabled={isLoading}
+                disabled={isAnyLoading}
               />
               
               <div className="flex flex-col items-center justify-center pointer-events-none">
@@ -106,14 +134,14 @@ export function FileUploader({ onContentReady, isLoading }: FileUploaderProps) {
                 <div className="flex gap-4 pointer-events-auto">
                   <Button 
                     onClick={() => inputRef.current?.click()} 
-                    isLoading={isLoading}
+                    isLoading={isAnyLoading}
                   >
                     Browse Files
                   </Button>
                   <Button 
                     variant="outline" 
                     onClick={() => setPasteMode(true)}
-                    disabled={isLoading}
+                    disabled={isAnyLoading}
                   >
                     Paste Text
                   </Button>
@@ -136,7 +164,7 @@ export function FileUploader({ onContentReady, isLoading }: FileUploaderProps) {
               <button 
                 onClick={() => setPasteMode(false)}
                 className="text-slate-400 hover:text-white p-2 rounded-full hover:bg-dark-700 transition-colors"
-                disabled={isLoading}
+                disabled={isAnyLoading}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -147,20 +175,47 @@ export function FileUploader({ onContentReady, isLoading }: FileUploaderProps) {
               placeholder="Paste your study material here (minimum 50 characters)..."
               value={pastedText}
               onChange={(e) => setPastedText(e.target.value)}
-              disabled={isLoading}
+              disabled={isAnyLoading}
             />
             
             <div className="flex justify-end gap-3">
-              <Button variant="ghost" onClick={() => setPasteMode(false)} disabled={isLoading}>
+              <Button variant="ghost" onClick={() => setPasteMode(false)} disabled={isAnyLoading}>
                 Cancel
               </Button>
-              <Button onClick={handlePasteSubmit} isLoading={isLoading}>
+              <Button onClick={handlePasteSubmit} isLoading={isAnyLoading}>
                 Generate Quiz
               </Button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {manuscripts.length > 0 && !pasteMode && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="bg-dark-800 border border-dark-700 rounded-3xl p-8"
+        >
+          <div className="flex items-center gap-3 mb-6 border-b border-dark-700 pb-4">
+            <BookOpen className="text-primary-400 w-6 h-6" />
+            <h3 className="text-xl font-bold text-slate-200">Pre-loaded Manuscripts</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {manuscripts.map((file, idx) => (
+              <Button
+                key={idx}
+                variant="outline"
+                className="text-left justify-start h-auto p-4 overflow-hidden"
+                onClick={() => loadManuscript(file)}
+                disabled={isAnyLoading}
+              >
+                <FileText className="w-5 h-5 text-slate-400 mr-3 flex-shrink-0" />
+                <span className="truncate flex-1" title={file}>{file.replace('.docx', '')}</span>
+              </Button>
+            ))}
+          </div>
+        </motion.div>
+      )}
 
       {error && (
         <motion.div 
