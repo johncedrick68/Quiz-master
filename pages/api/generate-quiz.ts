@@ -87,15 +87,14 @@ function generateFallbackQuestions(text: string): Question[] {
     });
   }
 
-      question: "What is the main topic of this document?",
-      options: ["Unknown", "The document title", "Not specified", "No text found"],
-      correctIndex: 1,
-      explanation: 'Fallback generic question.',
-      difficulty: 'Easy'
-    });
-  }
+  return questions.length > 0 ? questions : [{
+    question: "Could not generate questions.",
+    options: ["Error", "Error", "Error", "Error"],
+    correctIndex: 0,
+    explanation: "Document was not readable.",
+    difficulty: "Medium"
+  }];
 
-  return questions;
 }
 
 export const config = {
