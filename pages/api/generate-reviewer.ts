@@ -5,42 +5,36 @@ import path from 'path';
 import { generateWithAllKeys } from '../../lib/gemini';
 
 function generateFallbackReviewer(text: string) {
-  const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
-  const validSentences = sentences
-    .map(s => s.trim())
-    .filter(s => s.length > 40 && s.length < 200 && s.includes(' '));
-    
-  for (let i = validSentences.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [validSentences[i], validSentences[j]] = [validSentences[j], validSentences[i]];
-  }
-
   const pairs = [];
-  const max = Math.min(validSentences.length, 50);
-
-  for (let i = 0; i < max; i++) {
-    const sentence = validSentences[i];
-    const words = sentence.split(' ');
-    const longWords = words.map((w, i) => ({w, i})).filter(obj => obj.w.length > 5);
-    if (longWords.length === 0) continue;
-    
-    const target = longWords[Math.floor(Math.random() * longWords.length)];
-    const questionText = "What does the following statement refer to? " + words.map((w, idx) => idx === target.i ? '_____' : w).join(' ');
-    
-    pairs.push({
-      question: questionText,
-      answer: target.w.replace(/[.,;!?]/g, '')
-    });
+  
+  // 1. Check if this is the pre-made PasaHERO Defense Bible format
+  if (text.includes('Q:') && text.includes('Best Answer:')) {
+    const blocks = text.split(/Question \d+/i);
+    for (const block of blocks) {
+      const qMatch = block.match(/Q:\s*(.+?)(?=\n|Best Answer:)/i);
+      const aMatch = block.match(/Best Answer:\s*(.+?)(?=\n|Reviewer Tip:|$)/is);
+      
+      if (qMatch && aMatch) {
+        pairs.push({
+          question: qMatch[1].trim(),
+          answer: aMatch[1].trim()
+        });
+      }
+    }
+    if (pairs.length > 0) return pairs;
   }
 
-  if (pairs.length === 0) {
-    pairs.push({
-      question: "What is the main topic?",
-      answer: "Could not automatically generate fallback questions."
-    });
+  // 2. Generic fallback if not the pre-made format
+  const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
+  for (let i = 0; i < sentences.length; i += 2) {
+    if (sentences[i] && sentences[i + 1] && pairs.length < 20) {
+      pairs.push({
+        question: `What is the significance of: "${sentences[i].trim().slice(0, 50)}..."?`,
+        answer: sentences[i + 1].trim()
+      });
+    }
   }
-
-  return pairs;
+  return pairs.length > 0 ? pairs : [{ question: "Could not parse document", answer: "Please use the official Defense Bible format." }];
 }
 
 export const config = {
@@ -124,6 +118,17 @@ Respond ONLY with this JSON shape:
   ]
 }`;
 
+    // --- 1. INSTANT PRE-MADE PARSING (Skips AI, no 10s timeout) ---
+    // If the document is one of the pre-made Defense Bibles, parse it directly!
+    if (text.includes('Q:') && text.includes('Best Answer:')) {
+      const parsedPairs = generateFallbackReviewer(text);
+      if (parsedPairs.length > 0 && parsedPairs[0].question !== "Could not parse document") {
+        console.log("Successfully parsed pre-made Defense Bible natively! Bypassing AI.");
+        return res.status(200).json({ pairs: parsedPairs });
+      }
+    }
+
+    // --- 2. AI GENERATION (For unstructured text) ---
     let output;
     try {
       output = await generateWithAllKeys(prompt, systemInstruction);
