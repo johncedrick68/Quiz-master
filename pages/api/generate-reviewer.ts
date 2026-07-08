@@ -83,28 +83,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(500).json({ error: 'GEMINI_API_KEY is not set.' });
   }
 
-  const { filename } = req.body || {};
-  if (!filename || typeof filename !== 'string') {
-    return res.status(400).json({ error: 'filename is required.' });
+  const { filename, text: providedText } = req.body || {};
+  
+  if (!filename && !providedText) {
+    return res.status(400).json({ error: 'filename or text is required.' });
   }
 
   try {
-    const manuscriptPath = path.join(process.cwd(), 'manuscript', filename);
-    if (!fs.existsSync(manuscriptPath)) {
-      return res.status(404).json({ error: 'Manuscript not found.' });
+    let text = providedText;
+    
+    if (!text && filename) {
+      const manuscriptPath = path.join(process.cwd(), 'manuscript', filename);
+      if (!fs.existsSync(manuscriptPath)) {
+        return res.status(404).json({ error: 'Manuscript not found.' });
+      }
+      const buffer = fs.readFileSync(manuscriptPath);
+      const mammoth = (await import('mammoth')).default;
+      const result = await mammoth.extractRawText({ buffer });
+      text = result.value;
     }
 
-    const buffer = fs.readFileSync(manuscriptPath);
-    const mammoth = (await import('mammoth')).default;
-    const result = await mammoth.extractRawText({ buffer });
-
-    if (!result.value || result.value.trim().length < 30) {
+    if (!text || text.trim().length < 30) {
       throw new Error('Could not extract text from this document.');
     }
 
-    const text = result.value.length > MAX_CHARS
-      ? result.value.slice(0, MAX_CHARS) + '\n[...truncated...]'
-      : result.value;
+    text = text.length > MAX_CHARS
+      ? text.slice(0, MAX_CHARS) + '\n[...truncated...]'
+      : text;
 
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 

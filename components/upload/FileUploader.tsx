@@ -194,25 +194,38 @@ export function FileUploader({ onContentReady, isLoading }: FileUploaderProps) {
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="bg-dark-800 border border-dark-700 rounded-3xl p-8"
+          className="bg-dark-800 border border-dark-700 rounded-3xl p-6 sm:p-8 shadow-xl"
         >
-          <div className="flex items-center gap-3 mb-6 border-b border-dark-700 pb-4">
-            <BookOpen className="text-primary-400 w-6 h-6" />
-            <h3 className="text-xl font-bold text-slate-200">Pre-loaded Manuscripts</h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {manuscripts.map((file, idx) => (
-              <Button
-                key={idx}
-                variant="outline"
-                className="text-left justify-start h-auto p-4 overflow-hidden"
-                onClick={() => loadManuscript(file)}
-                disabled={isAnyLoading}
-              >
-                <FileText className="w-5 h-5 text-slate-400 mr-3 flex-shrink-0" />
-                <span className="truncate flex-1" title={file}>{file.replace('.docx', '')}</span>
-              </Button>
-            ))}
+          <div className="flex flex-col items-center text-center">
+            <div className="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mb-4">
+              <BookOpen className="text-primary-400 w-8 h-8" />
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-100 mb-2">Comprehensive Quiz</h3>
+            <p className="text-slate-400 mb-8 max-w-md">
+              Generate a randomized 50-item quiz covering all {manuscripts.length} of your pre-loaded manuscript chapters and defense bibles.
+            </p>
+            
+            <Button
+              className="w-full sm:w-auto px-8 py-4 text-lg"
+              onClick={async () => {
+                setError(null);
+                setIsLoadingManuscript(true);
+                try {
+                  const res = await fetch('/api/load-all-manuscripts');
+                  const data = await res.json();
+                  if (!res.ok) throw new Error(data.error);
+                  onContentReady(data.text, 'Comprehensive_All_Manuscripts');
+                } catch (err: any) {
+                  setError(err.message || 'Failed to load comprehensive manuscript');
+                } finally {
+                  setIsLoadingManuscript(false);
+                }
+              }}
+              disabled={isAnyLoading}
+              isLoading={isLoadingManuscript}
+            >
+              Start Comprehensive Quiz
+            </Button>
           </div>
         </motion.div>
       )}
