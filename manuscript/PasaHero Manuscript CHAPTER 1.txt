@@ -1,0 +1,200 @@
+CHAPTER 1 
+
+
+
+INTRODUCTION
+
+
+
+Rationale of the Study
+
+
+
+	Public transportation is a fundamental driver of economic activity and social mobility in rapidly urbanizing environments. However, navigating complex transit networks often imposes significant "transit anxiety" on passengers, characterized by a fear of missing transfers, becoming lost, or overshooting a destination. Research on mental health and travel indicates that nearly half of passengers experience anxiety related to wayfinding, while 46% report stress specifically when required to interact with transit staff or drivers. The absence of understandable transit data creates a significant cognitive load for those new to a city, say urban mobility specialists at the United Nations Human Settlements Programme (UN-Habitat). In addition, transport economists from the World Bank point out that the usual apps, such as Google Maps, do not take into account informal paratransit networks, leaving unknowledgeable commuters completely stranded. Transportation scholars Klopp and Cavoli (2019) argue that informal paratransit networks exist in a "digital blind spot," as mainstream navigation applications often fail to map these systems, forcing commuters into a stressful trial-and-error process to identify boarding points and correct vehicles 
+
+
+
+	In the Philippines, this information gap is particularly acute within the public utility jeepney (PUJ) sector. While the Department of Transportation (DOTr) has prioritized physical fleet upgrades through modernization programs, the availability of digital passenger information remains negligible. Dr. Sheilah Napalang of the Philippine Institute for Development Studies (PIDS) identifies a structural "information asymmetry" where critical data on boarding zones and distance-based fare structures are often limited to local knowledge. This gap creates a significant barrier for "shy communicators" or passengers with social anxiety who hesitate to ask strangers for directions or clarify changing fares, often leading to navigational errors or overpayment. (Zulueta et al., 2024; Manguan et al., 2026).
+
+
+
+	This crisis bottlenecks completely in Cebu City, where the Cebu City Transportation Office (CCTO) and the Land Transportation Franchising and Regulatory Board (LTFRB) Region VII manage a complex alphanumeric routing network (e.g., 04L, 13C) that is entirely unintelligible to newcomers. Regional Director Eduardo Montealto Jr. has noted that a total lack of street-level signage leaves clueless commuters blind regarding which specific jeepney to take, where to wait, and how to find the nearest boarding zone from their present location. Furthermore, once inside the vehicle, passengers have absolute spatial blindness; without visual or auditory route cues, they remain completely clueless about when or where to signal the driver to stop ("Para") or if they have already arrived at their destination, trapping them in a state of constant panic.
+
+	
+
+	
+
+Objectives of the Study
+
+
+
+General Objectives:
+
+The main objective of this study is to develop and evaluate PasaHERO, a web-based commuter assistance application that utilizes multimodal AI navigation, jeepney route visualizations, and fare analytics to help commuters efficiently navigate public transportation routes in Cebu City. The findings of this study will serve as a basis for improving intelligent transportation assistance systems and enhancing the accessibility, efficiency, and convenience of public commuting through digital technologies.
+
+Specific Objectives: 
+
+1. Identify the current or existing commuting and navigation system in Cebu City in terms of:	1.1. route planning process; and	1.2. problems encountered by commuters in locating jeepney routes, determining fares, and navigating unfamiliar destinations.
+
+2. Determine the mechanisms and techniques to be utilized in the proposed PasaHERO system in relation to: 	2.1. multimodal route recommendation; 	2.2. jeepney route visualization; 	2.3. fare calculation and analytics;	2.4. first-mile and last-mile navigation guidance; and	2.5. landmark-based commuter assistance.
+
+3. Define the best features of the proposed PasaHERO system in terms of:
+
+3.1. AI-powered route recommendation;	3.2. jeepney code and signboard identification;	3.3. interactive route visualization;	3.4. automated fare assistance; and	3.5. proactive commuter alerts and notifications.
+
+4. Establish the level of acceptability of the proposed PasaHERO system in terms of:	4.1. functionality;	4.2. usability;	4.3. reliability;	4.4. efficiency; and	4.5. user satisfaction.
+
+
+
+Scope and Limitations 
+
+
+
+Scope of the Study
+
+Public transportation is essential for daily commuting, particularly in highly congested urban areas such as Cebu City. The proposed system, PasaHERO, is designed to assist commuters by generating accurate and efficient jeepney routes, providing fare estimates, and offering clear, landmark-based guidance throughout each trip. 
+
+
+
+Scope of the Proposed System
+
+Users must be registered to access and use the web application.
+
+The system records essential commuter profile information (such as age, gender, educational background, public transportation usage, familiarity with routes, and prior application experience) for research and analytical purposes, with all personal data handled confidentially and in compliance with relevant data privacy regulations.
+
+The system shows specific jeepney routes and signboards (e.g., 04L, 13C) that the commuter should ride to reach a chosen destination.
+
+The system visualizes trips through a color‑coded map, using a red line for the active jeepney/public transport path and a green line for walking paths (first‑mile and last‑mile segments).
+
+The system provides estimated fares based on distance and current LTFRB distance‑based fare rates, distinguishing between traditional and modernized jeepneys.
+
+The system highlights significant landmarks near boarding and drop‑off points to guide users who are unfamiliar with the area.
+
+The system sends geofenced “Para” notifications (visual alerts and/or vibration) when the user approaches the designated drop‑off point.
+
+The system provides first‑mile and last‑mile walking directions between the user’s current location, jeepney stops, and final destination.
+
+The study evaluates the accuracy of route and fare recommendations, clarity of route visualization, usability, and overall user satisfaction for selected jeepney routes in Cebu City.
+
+
+
+
+
+Limitations of the Proposed System
+
+The application is available exclusively as a web‑based system and must be accessed via an internet‑enabled device (e.g., smartphone, tablet, or laptop) with a modern web browser.
+
+A stable internet connection and access to location services (such as GPS or equivalent) are required for route generation and geofenced alerts.
+
+The application supports only jeepney‑based public transportation within selected areas and routes in Cebu City; other modes such as buses, taxis, ride‑hailing services, and ferries are not included.
+
+The system does not provide real‑time jeepney locations or arrival times and relies on predefined jeepney routes and stops.
+
+The fare calculator is limited to standard LTFRB distance‑based rates for traditional and modernized jeepneys and may not automatically compute discounts for students, senior citizens, persons with disabilities, or other special fare arrangements.
+
+The application does not process or handle online payments; all payments are made directly to the driver or conductor, with the fare estimate serving only as a guide.
+
+The system may not immediately reflect sudden changes such as temporary road closures, rerouting, strikes, or unannounced modifications to jeepney routes or fare policies.
+
+The evaluation of the system is limited to a selected group of participants within a defined data collection period and may not fully represent the wider commuting population in Cebu City or in other locations.
+
+The application does not support booking or reserving jeepney seats and is limited to navigation, route guidance, and fare estimation.
+
+The system is implemented and evaluated as a prototype for academic research and may not yet include all features and robustness required for large‑scale commercial deployment.
+
+
+
+Significance of the Study
+
+
+
+The findings and outputs of this study are expected to benefit a wide range of stakeholders in the public transportation sector and beyond.
+
+
+
+Commuters  
+
+The system will help commuters identify appropriate jeepney routes, estimate fares, locate boarding points, and receive destination alerts. This reduces travel uncertainty and improves commuting convenience. In addition, by providing clearer route and fare information, the study can support transport-related offices and agencies in designing more responsive commuter information services and urban mobility initiatives.
+
+
+
+Students 
+
+Traveling daily to schools and universities can benefit from efficient route guidance, reduced travel confusion, and accurate fare information, allowing them to manage their time and transportation expenses more effectively.
+
+
+
+Tourists and First-Time Visitors 
+
+The unfamiliar with Cebu City's transportation system can utilize the application to navigate the city independently without relying heavily on local assistance. 
+
+
+
+Future Researchers and Academicians
+
+They may use this study as a reference for developing intelligent transportation systems, AI-assisted navigation platforms, and smart mobility solutions. 
+
+
+
+Definition of Terms
+
+
+
+Artificial Intelligence (AI): refers to the algorithms in PasaHERO that process location and transport data to suggest routes and compute fares.
+
+
+
+Multimodal Navigation: is guiding a commuter using both walking and jeepney segments in a single trip.
+
+
+
+Jeepney: is a public utility vehicle in the Philippines that follows fixed routes and charges distance-based fares.
+
+
+
+Jeepney Route Code (e.g., 04L, 13C): is the alphanumeric label that identifies a specific jeepney route in Cebu City.
+
+
+
+Signboard: is the route text displayed on a jeepney (e.g., “Colon – Banilad – Talamban”) that shows its main destinations.
+
+
+
+Route Visualization: is the display of walking and jeepney paths as lines on a digital map.
+
+
+
+Color-Coded Route Overlay: is the map style where red lines show jeepney routes and green lines show walking paths.
+
+
+
+First-Mile/Last-Mile Guidance: is navigation from the user’s exact location to the jeepney stop, and from drop-off to the final destination.
+
+
+
+Geofenced “Para” Notification: is an alert triggered when the user is near their planned drop-off point.
+
+
+
+Dynamic Fare Calculator: is the feature that estimates jeepney fare based on distance and current fare rules.
+
+
+
+Landmark-Based Guidance: uses nearby buildings or notable places to help users confirm the correct stop or waiting point.
+
+
+
+LTFRB Fare Matrix: is the official fare schedule used as basis for computing jeepney fares in the system.
+
+
+
+Cebu City Jeepney Commuter: is any person who uses jeepneys within Cebu City for regular or occasional travel
+
+
+
+
+
+
+
+
+

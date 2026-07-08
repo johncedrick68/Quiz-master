@@ -1,0 +1,446 @@
+PasaHERO Defense BibleVersion 2 - Reviewer Part 1(Questions 1-50)
+
+How to Use This Reviewer
+
+Each question includes: the likely panel question, the best answer, and a reviewer tip. Focus on understanding the reasoning rather than memorizing exact words.
+
+Question 1
+
+Q: Please introduce your study.
+
+Best Answer:
+
+Our study is entitled 'PasaHERO: A Multimodal AI Navigation with Jeepney Route Visualization and Fare Analytics in Cebu City.' It is a mobile navigation system designed to help commuters by providing route recommendations, fare estimation, landmark guidance, and destination notifications.
+
+Reviewer Tip: Start with confidence and mention the title exactly.
+
+Question 2
+
+Q: Why did you choose this topic?
+
+Best Answer:
+
+We chose this topic because many commuters experience difficulty identifying the correct jeepney, fare, transfer points, and destination. PasaHERO addresses these real transportation problems.
+
+Reviewer Tip: Relate the answer to commuters.
+
+Question 3
+
+Q: Why Cebu City?
+
+Best Answer:
+
+The study focuses on Cebu City because the route database, landmarks, and fare matrix are based on Cebu City's jeepney transportation system.
+
+Reviewer Tip: Mention scope.
+
+Question 4
+
+Q: Who are the beneficiaries?
+
+Best Answer:
+
+Commuters, students, tourists, researchers, and local government units benefit from improved navigation and transportation planning.
+
+Reviewer Tip: Know every beneficiary.
+
+Question 5
+
+Q: What makes PasaHERO unique?
+
+Best Answer:
+
+It integrates AI-assisted route recommendation, fare estimation, route visualization, landmark guidance, walking navigation, and Para Alert in one platform.
+
+Reviewer Tip: Avoid saying 'because no one has done it'.
+
+Question 6
+
+Q: Why jeepneys only?
+
+Best Answer:
+
+The scope is limited to traditional jeepneys to keep the study manageable and focused.
+
+Reviewer Tip: Mention future enhancements.
+
+Question 7
+
+Q: What is multimodal navigation?
+
+Best Answer:
+
+It combines walking and jeepney travel within one navigation experience.
+
+Reviewer Tip: Simple definition.
+
+Question 8
+
+Q: Why a mobile application?
+
+Best Answer:
+
+Smartphones are widely used and provide GPS, maps, and notifications needed by the system.
+
+Reviewer Tip: Mention convenience.
+
+Question 9
+
+Q: Why is this research?
+
+Best Answer:
+
+The system was developed after identifying a real problem, reviewing literature, conducting surveys, and applying established theories.
+
+Reviewer Tip: Research first, software second.
+
+Question 10
+
+Q: Explain the research gap.
+
+Best Answer:
+
+Existing applications lack an integrated Cebu-specific jeepney navigation solution combining recommendation, fare analytics, and landmark guidance.
+
+Reviewer Tip: Mention comparison.
+
+Question 11
+
+Q: Why Graph Theory?
+
+Best Answer:
+
+Graph Theory models transportation networks using nodes and edges, making it suitable for jeepney routes.
+
+Reviewer Tip: Connect to system.
+
+Question 12
+
+Q: Where is Graph Theory applied?
+
+Best Answer:
+
+It organizes stops, landmarks, and routes before route evaluation.
+
+Reviewer Tip: Don't confuse with DSS.
+
+Question 13
+
+Q: Why GIS?
+
+Best Answer:
+
+GIS provides spatial analysis, digital maps, GPS integration, and route visualization.
+
+Reviewer Tip: Know GPS vs GIS.
+
+Question 14
+
+Q: Difference between GPS and GIS?
+
+Best Answer:
+
+GPS determines the user's location, while GIS manages and visualizes geographic information.
+
+Reviewer Tip: Very common.
+
+Question 15
+
+Q: Why Decision Support System?
+
+Best Answer:
+
+The system evaluates multiple travel criteria and recommends the best route using weighted decision rules.
+
+Reviewer Tip: Key answer.
+
+Question 16
+
+Q: Why not Machine Learning?
+
+Best Answer:
+
+The system does not require historical training data. It evaluates predefined criteria, making DSS more suitable.
+
+Reviewer Tip: Be honest.
+
+Question 17
+
+Q: Where is the AI?
+
+Best Answer:
+
+The AI is implemented through an intelligent Decision Support System that ranks feasible routes using weighted criteria.
+
+Reviewer Tip: Do not claim ML.
+
+Question 18
+
+Q: Why is this AI and not just an algorithm?
+
+Best Answer:
+
+It performs intelligent multi-criteria decision-making rather than a single calculation. The intelligence comes from evaluating several contextual factors before making a recommendation.
+
+Reviewer Tip: Most important.
+
+Question 19
+
+Q: Explain your recommendation engine.
+
+Best Answer:
+
+It retrieves route data, evaluates multiple criteria, computes recommendation scores, ranks feasible routes, and recommends the highest-ranked option.
+
+Reviewer Tip: Know the workflow.
+
+Question 20
+
+Q: Why these recommendation weights?
+
+Best Answer:
+
+They were assigned based on literature review and the relative importance of each travel factor.
+
+Reviewer Tip: Mention justification.
+
+Question 21
+
+Q: Why walking distance has higher weight?
+
+Best Answer:
+
+It directly affects commuter convenience and accessibility.
+
+Question 22
+
+Q: Why nearby landmarks?
+
+Best Answer:
+
+Landmarks help commuters identify boarding and drop-off locations.
+
+Question 23
+
+Q: What is the purpose of fare estimation?
+
+Best Answer:
+
+It helps commuters prepare their budget before traveling.
+
+Question 24
+
+Q: Purpose of Para Alert?
+
+Best Answer:
+
+It notifies commuters when they are near their destination to avoid missing their stop.
+
+Question 25
+
+Q: Why Related Literature?
+
+Best Answer:
+
+It establishes concepts, technologies, and background supporting the study.
+
+Question 26
+
+Q: Why Related Studies?
+
+Best Answer:
+
+They show previous research and identify research gaps.
+
+Question 27
+
+Q: Difference between Literature and Studies?
+
+Best Answer:
+
+Literature explains concepts; studies present previous research.
+
+Question 28
+
+Q: Why Comparative Matrix?
+
+Best Answer:
+
+To compare PasaHERO with existing systems and identify missing features.
+
+Question 29
+
+Q: Why only major features?
+
+Best Answer:
+
+Major features better highlight innovation and avoid clutter.
+
+Question 30
+
+Q: Explain your methodology.
+
+Best Answer:
+
+We used developmental research with quantitative methods to design, develop, and evaluate the proposed system.
+
+Question 31
+
+Q: Why quantitative?
+
+Best Answer:
+
+Because commuter responses were measured using numerical survey data.
+
+Question 32
+
+Q: Why purposive sampling?
+
+Best Answer:
+
+Respondents were selected because they have actual jeepney commuting experience.
+
+Question 33
+
+Q: Why weighted mean?
+
+Best Answer:
+
+It summarizes respondents' perceptions and determines overall agreement.
+
+Question 34
+
+Q: Explain your respondents.
+
+Best Answer:
+
+They are jeepney commuters in Cebu City, including students, workers, and residents.
+
+Question 35
+
+Q: Explain your research environment.
+
+Best Answer:
+
+The research was conducted within Cebu City's jeepney transportation environment.
+
+Question 36
+
+Q: Explain your ERD.
+
+Best Answer:
+
+The ERD shows the entities and relationships that support data storage and system operations.
+
+Question 37
+
+Q: Why normalize the database?
+
+Best Answer:
+
+To reduce redundancy and maintain data consistency.
+
+Question 38
+
+Q: Why ROUTE_STOPS table?
+
+Best Answer:
+
+It manages the relationship between routes and stops efficiently.
+
+Question 39
+
+Q: Why TRIP_SEGMENTS?
+
+Best Answer:
+
+A trip may consist of multiple travel segments such as walking and riding.
+
+Question 40
+
+Q: Why FARE_MATRIX?
+
+Best Answer:
+
+Fare information is managed separately for easier updates.
+
+Question 41
+
+Q: Explain your Use Case Diagram.
+
+Best Answer:
+
+It illustrates the interactions between commuters, administrators, and the system.
+
+Question 42
+
+Q: Explain Program Workflow.
+
+Best Answer:
+
+It describes how the system processes a user's request from destination input to route recommendation.
+
+Question 43
+
+Q: Why Iterative Methodology?
+
+Best Answer:
+
+It supports continuous refinement through repeated development and testing cycles.
+
+Question 44
+
+Q: Difference between SDLC and Methodology?
+
+Best Answer:
+
+SDLC is the overall software life cycle, while the methodology defines how development is carried out.
+
+Question 45
+
+Q: Why ISO 25010?
+
+Best Answer:
+
+It is an internationally recognized software quality standard.
+
+Question 46
+
+Q: What if GPS fails?
+
+Best Answer:
+
+Map visualization remains available, but real-time navigation becomes limited.
+
+Question 47
+
+Q: What if there is no internet?
+
+Best Answer:
+
+Online services such as maps and GPS-dependent functions will be limited.
+
+Question 48
+
+Q: Future enhancements?
+
+Best Answer:
+
+Real-time jeepney tracking, machine learning personalization, offline mode, and support for additional transport modes.
+
+Question 49
+
+Q: Why should we approve your study?
+
+Best Answer:
+
+It addresses a real commuter problem using established theories and a practical system tailored for Cebu City.
+
+Question 50
+
+Q: What is your biggest contribution?
+
+Best Answer:
+
+Providing a localized commuter-focused navigation system that integrates route recommendation, fare analytics, and landmark guidance.
+

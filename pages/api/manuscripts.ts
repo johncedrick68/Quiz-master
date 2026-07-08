@@ -14,7 +14,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       return res.status(200).json({ files: [] });
     }
 
-    const files = fs.readdirSync(manuscriptDir).filter(file => file.endsWith('.docx'));
+    const files = fs.readdirSync(manuscriptDir).filter(file => file.endsWith('.txt'));
     return res.status(200).json({ files });
   } catch (err: any) {
     console.error('manuscripts error:', err);

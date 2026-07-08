@@ -22,25 +22,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(404).json({ error: 'No manuscripts found.' });
     }
 
-    const files = fs.readdirSync(manuscriptDir).filter(file => file.endsWith('.docx'));
+    const files = fs.readdirSync(manuscriptDir).filter(file => file.endsWith('.txt'));
     if (files.length === 0) {
       return res.status(404).json({ error: 'No manuscripts found.' });
     }
 
-    const mammoth = (await import('mammoth')).default;
     let extractedTexts: string[] = [];
 
-    // Parse files sequentially to manage memory
+    // Parse files sequentially
     for (const file of files) {
       try {
-        const buffer = fs.readFileSync(path.join(manuscriptDir, file));
-        const result = await mammoth.extractRawText({ buffer });
-        if (result.value && result.value.trim().length > 0) {
-          extractedTexts.push(result.value);
+        const text = fs.readFileSync(path.join(manuscriptDir, file), 'utf8');
+        if (text && text.trim().length > 0) {
+          extractedTexts.push(text);
         }
-      } catch (err) {
-        console.warn(`Failed to parse ${file}:`, err);
-      }
+    } catch (err) {
+      console.warn(`Failed to parse ${file}:`, err);
+    }
     }
 
     if (extractedTexts.length === 0) {

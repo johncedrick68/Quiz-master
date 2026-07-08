@@ -194,38 +194,63 @@ export function FileUploader({ onContentReady, isLoading }: FileUploaderProps) {
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="bg-dark-800 border border-dark-700 rounded-3xl p-6 sm:p-8 shadow-xl"
+          className="flex flex-col gap-6"
         >
-          <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mb-4">
-              <BookOpen className="text-primary-400 w-8 h-8" />
+          {/* Comprehensive Mode */}
+          <div className="bg-gradient-to-br from-dark-800 to-dark-900 border border-dark-700 rounded-3xl p-6 sm:p-8 shadow-xl">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mb-4">
+                <BookOpen className="text-primary-400 w-8 h-8" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-100 mb-2">Comprehensive Quiz</h3>
+              <p className="text-slate-400 mb-8 max-w-md text-sm sm:text-base">
+                Generate a randomized 50-item quiz covering all {manuscripts.length} of your pre-loaded manuscript chapters and defense bibles.
+              </p>
+              
+              <Button
+                className="w-full sm:w-auto px-8 py-4 text-lg"
+                onClick={async () => {
+                  setError(null);
+                  setIsLoadingManuscript(true);
+                  try {
+                    const res = await fetch('/api/load-all-manuscripts');
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error);
+                    onContentReady(data.text, 'Comprehensive_All_Manuscripts');
+                  } catch (err: any) {
+                    setError(err.message || 'Failed to load comprehensive manuscript');
+                  } finally {
+                    setIsLoadingManuscript(false);
+                  }
+                }}
+                disabled={isAnyLoading}
+                isLoading={isLoadingManuscript}
+              >
+                Start Comprehensive Quiz
+              </Button>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-100 mb-2">Comprehensive Quiz</h3>
-            <p className="text-slate-400 mb-8 max-w-md">
-              Generate a randomized 50-item quiz covering all {manuscripts.length} of your pre-loaded manuscript chapters and defense bibles.
-            </p>
-            
-            <Button
-              className="w-full sm:w-auto px-8 py-4 text-lg"
-              onClick={async () => {
-                setError(null);
-                setIsLoadingManuscript(true);
-                try {
-                  const res = await fetch('/api/load-all-manuscripts');
-                  const data = await res.json();
-                  if (!res.ok) throw new Error(data.error);
-                  onContentReady(data.text, 'Comprehensive_All_Manuscripts');
-                } catch (err: any) {
-                  setError(err.message || 'Failed to load comprehensive manuscript');
-                } finally {
-                  setIsLoadingManuscript(false);
-                }
-              }}
-              disabled={isAnyLoading}
-              isLoading={isLoadingManuscript}
-            >
-              Start Comprehensive Quiz
-            </Button>
+          </div>
+
+          {/* Specific Chapter Mode */}
+          <div className="bg-dark-800 border border-dark-700 rounded-3xl p-6 sm:p-8 shadow-xl">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-200 mb-4 flex items-center gap-2">
+              <FileText className="w-5 h-5 text-primary-400" /> Focus on Specific Chapter
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {manuscripts.map((file, idx) => (
+                <Button
+                  key={idx}
+                  variant="outline"
+                  className="w-full text-left justify-start h-auto p-4 flex-col items-start gap-1"
+                  onClick={() => loadManuscript(file)}
+                  disabled={isAnyLoading}
+                >
+                  <span className="truncate w-full font-semibold text-slate-200" title={file}>
+                    {file.replace('.txt', '').replace('PasaHero Manuscript ', '').replace('PasaHERO_Defense_Bible_V2_', '')}
+                  </span>
+                </Button>
+              ))}
+            </div>
           </div>
         </motion.div>
       )}

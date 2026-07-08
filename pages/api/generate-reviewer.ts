@@ -97,10 +97,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!fs.existsSync(manuscriptPath)) {
         return res.status(404).json({ error: 'Manuscript not found.' });
       }
-      const buffer = fs.readFileSync(manuscriptPath);
-      const mammoth = (await import('mammoth')).default;
-      const result = await mammoth.extractRawText({ buffer });
-      text = result.value;
+      text = fs.readFileSync(manuscriptPath, 'utf8');
     }
 
     if (!text || text.trim().length < 30) {

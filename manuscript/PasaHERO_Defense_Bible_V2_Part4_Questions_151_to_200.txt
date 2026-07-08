@@ -1,0 +1,404 @@
+PasaHERO Defense BibleVersion 2 - Part 4Questions 151-200
+
+Chapter II Masterclass
+
+Question 151
+
+Q: Why Graph Theory instead of Network Theory?
+
+Best Answer:
+
+Graph Theory directly models transportation networks using nodes and edges, making it appropriate for jeepney routes.
+
+Question 152
+
+Q: Can Graph Theory exist without GIS?
+
+Best Answer:
+
+Yes. Graph Theory models relationships while GIS visualizes spatial information.
+
+Question 153
+
+Q: Can GIS exist without Graph Theory?
+
+Best Answer:
+
+Yes. GIS manages maps, but Graph Theory improves route modeling.
+
+Question 154
+
+Q: How do Graph Theory, GIS, and DSS work together?
+
+Best Answer:
+
+Graph Theory models routes, GIS visualizes them, and DSS evaluates the best route.
+
+Question 155
+
+Q: Why is DSS the most important theory?
+
+Best Answer:
+
+Because it powers the recommendation engine.
+
+Question 156
+
+Q: What is DSS?
+
+Best Answer:
+
+A system that assists users by evaluating alternatives using predefined criteria.
+
+Question 157
+
+Q: Does DSS decide for the user?
+
+Best Answer:
+
+No. It recommends; the commuter makes the final decision.
+
+Question 158
+
+Q: DSS vs Expert System?
+
+Best Answer:
+
+Expert Systems imitate experts; DSS evaluates alternatives.
+
+Question 159
+
+Q: DSS vs Machine Learning?
+
+Best Answer:
+
+DSS follows rules; ML learns from data.
+
+Question 160
+
+Q: Can DSS become ML?
+
+Best Answer:
+
+Yes, with historical travel data.
+
+Question 161
+
+Q: Why not Neural Networks?
+
+Best Answer:
+
+No predictive learning is required.
+
+Question 162
+
+Q: What makes your recommendation intelligent?
+
+Best Answer:
+
+It evaluates multiple contextual factors.
+
+Question 163
+
+Q: Is the recommendation deterministic?
+
+Best Answer:
+
+Yes, with the same inputs it gives the same output.
+
+Question 164
+
+Q: Limitation of rule-based systems?
+
+Best Answer:
+
+They do not learn automatically.
+
+Question 165
+
+Q: Why is explainability important?
+
+Best Answer:
+
+Users can understand why a route was recommended.
+
+Question 166
+
+Q: How did literature help?
+
+Best Answer:
+
+It identified key travel criteria.
+
+Question 167
+
+Q: Why review existing apps?
+
+Best Answer:
+
+To identify strengths and limitations.
+
+Question 168
+
+Q: Why Google Maps?
+
+Best Answer:
+
+It provides a baseline for navigation.
+
+Question 169
+
+Q: Why Moovit?
+
+Best Answer:
+
+It demonstrates multimodal transport.
+
+Question 170
+
+Q: Why Cebu apps?
+
+Best Answer:
+
+They show local transportation solutions.
+
+Question 171
+
+Q: Common limitation of existing systems?
+
+Best Answer:
+
+Lack of integrated Cebu jeepney recommendations.
+
+Question 172
+
+Q: What is a research gap?
+
+Best Answer:
+
+An unmet need identified from previous work.
+
+Question 173
+
+Q: How did you identify the gap?
+
+Best Answer:
+
+By comparing literature and existing systems.
+
+Question 174
+
+Q: Why is the gap important?
+
+Best Answer:
+
+It justifies the study.
+
+Question 175
+
+Q: How does PasaHERO address the gap?
+
+Best Answer:
+
+By integrating recommendation, fares, maps, and landmarks.
+
+Question 176
+
+Q: Why recent literature?
+
+Best Answer:
+
+It reflects current technology.
+
+Question 177
+
+Q: Can old literature help?
+
+Best Answer:
+
+Yes, especially foundational theories.
+
+Question 178
+
+Q: How many theories are enough?
+
+Best Answer:
+
+Only those directly supporting the study.
+
+Question 179
+
+Q: Why not TAM?
+
+Best Answer:
+
+Our focus is system design rather than technology adoption.
+
+Question 180
+
+Q: Could TAM be future work?
+
+Best Answer:
+
+Yes, for user acceptance studies.
+
+Question 181
+
+Q: Purpose of Comparative Matrix?
+
+Best Answer:
+
+To compare features and justify innovation.
+
+Question 182
+
+Q: How choose comparison criteria?
+
+Best Answer:
+
+Features related to commuter navigation.
+
+Question 183
+
+Q: Why fare estimation?
+
+Best Answer:
+
+Travel cost affects route choice.
+
+Question 184
+
+Q: Why landmarks?
+
+Best Answer:
+
+They improve orientation.
+
+Question 185
+
+Q: Why route availability?
+
+Best Answer:
+
+Unavailable routes cannot be recommended.
+
+Question 186
+
+Q: Why transfer count?
+
+Best Answer:
+
+Fewer transfers improve convenience.
+
+Question 187
+
+Q: Why walking distance?
+
+Best Answer:
+
+It affects accessibility.
+
+Question 188
+
+Q: Why not shortest distance only?
+
+Best Answer:
+
+Commuters consider multiple factors.
+
+Question 189
+
+Q: Can weights change?
+
+Best Answer:
+
+Yes, if criteria are updated.
+
+Question 190
+
+Q: How justify weights?
+
+Best Answer:
+
+Based on literature and design objectives.
+
+Question 191
+
+Q: Can users customize weights?
+
+Best Answer:
+
+Future enhancement.
+
+Question 192
+
+Q: How does literature strengthen research?
+
+Best Answer:
+
+It grounds the study in existing knowledge.
+
+Question 193
+
+Q: Biggest lesson from literature?
+
+Best Answer:
+
+Existing systems leave room for localized innovation.
+
+Question 194
+
+Q: If theories are challenged?
+
+Best Answer:
+
+They directly align with our objectives.
+
+Question 195
+
+Q: Why trust Chapter II?
+
+Best Answer:
+
+It is supported by relevant theories and literature.
+
+Question 196
+
+Q: Strongest Chapter II section?
+
+Best Answer:
+
+Integration of Graph Theory, GIS, and DSS.
+
+Question 197
+
+Q: Summarize Chapter II.
+
+Best Answer:
+
+It establishes the theoretical and research foundation for PasaHERO.
+
+Question 198
+
+Q: If Chapter II were removed?
+
+Best Answer:
+
+The study would lose its justification and foundation.
+
+Question 199
+
+Q: Why is Chapter II important?
+
+Best Answer:
+
+It proves the need and basis of the proposed system.
+
+Question 200
+
+Q: What should panel remember?
+
+Best Answer:
+
+Every design decision is supported by theory and research.
+

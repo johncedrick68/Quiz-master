@@ -1,0 +1,416 @@
+PasaHERO Defense BibleVersion 2 - Reviewer Part 2(Questions 51-100)
+
+Focus: Chapter III, Database, Testing, Workflow, AI, and Panel Traps.
+
+Question 51
+
+Q: Explain the USERS table.
+
+Best Answer:
+
+It stores account information such as name, email, password, role, and account details for authentication and authorization.
+
+Reviewer Tip: Know every field.
+
+Question 52
+
+Q: Why use user_id as the Primary Key?
+
+Best Answer:
+
+It uniquely identifies each user and prevents duplicate records.
+
+Reviewer Tip: Never say 'because that's standard'.
+
+Question 53
+
+Q: Why use VARCHAR for email?
+
+Best Answer:
+
+Email addresses contain letters, numbers, and symbols with varying lengths.
+
+Question 54
+
+Q: Why encrypt passwords?
+
+Best Answer:
+
+To protect user credentials and improve security.
+
+Reviewer Tip: Mention hashing if asked.
+
+Question 55
+
+Q: Explain the JEEPNEY_ROUTES table.
+
+Best Answer:
+
+It stores route codes, names, and route-related information used by the navigation engine.
+
+Question 56
+
+Q: Explain the STOPS table.
+
+Best Answer:
+
+It stores boarding and drop-off locations with their coordinates.
+
+Question 57
+
+Q: Why store latitude and longitude?
+
+Best Answer:
+
+They allow GPS mapping, routing, and accurate location visualization.
+
+Question 58
+
+Q: Explain LANDMARKS.
+
+Best Answer:
+
+Landmarks assist commuters in identifying nearby reference points for navigation.
+
+Question 59
+
+Q: Explain NOTIFICATIONS.
+
+Best Answer:
+
+It stores destination alerts and important commuter notifications.
+
+Question 60
+
+Q: Explain FEEDBACK.
+
+Best Answer:
+
+It stores user comments and evaluations to improve the system.
+
+Question 61
+
+Q: What is a Primary Key?
+
+Best Answer:
+
+A Primary Key uniquely identifies every record in a table.
+
+Question 62
+
+Q: What is a Foreign Key?
+
+Best Answer:
+
+A Foreign Key creates relationships between tables.
+
+Question 63
+
+Q: Explain one-to-many relationship.
+
+Best Answer:
+
+One record in one table relates to multiple records in another table.
+
+Question 64
+
+Q: Why did you normalize the database?
+
+Best Answer:
+
+To reduce redundancy and improve consistency.
+
+Question 65
+
+Q: Explain your Program Workflow.
+
+Best Answer:
+
+The workflow begins with destination input, retrieves transportation data, evaluates routes, ranks recommendations, and displays the best route.
+
+Reviewer Tip: Know the sequence.
+
+Question 66
+
+Q: Difference between User Workflow and System Workflow?
+
+Best Answer:
+
+User Workflow shows user actions while System Workflow explains internal processing.
+
+Question 67
+
+Q: Explain Functional Decomposition Diagram.
+
+Best Answer:
+
+It breaks the system into major functional modules.
+
+Question 68
+
+Q: Explain the List of Modules.
+
+Best Answer:
+
+Each module represents a major feature such as authentication, route recommendation, fare estimation, notifications, and administration.
+
+Question 69
+
+Q: Which module is the core?
+
+Best Answer:
+
+The AI-Based Route Recommendation module is the core because it generates travel recommendations.
+
+Question 70
+
+Q: Explain the Technology Stack.
+
+Best Answer:
+
+HTML, CSS, Tailwind CSS, JavaScript, Node.js, Express.js, Sequelize ORM, MySQL, and Mapbox GL JS were selected for development.
+
+Question 71
+
+Q: Why Node.js?
+
+Best Answer:
+
+It efficiently handles web requests and supports JavaScript on the server side.
+
+Question 72
+
+Q: Why MySQL?
+
+Best Answer:
+
+It is reliable, relational, and suitable for structured transportation data.
+
+Question 73
+
+Q: Why Sequelize ORM?
+
+Best Answer:
+
+It simplifies database operations and improves maintainability.
+
+Question 74
+
+Q: Why Mapbox instead of Google Maps API?
+
+Best Answer:
+
+Mapbox provides flexible map customization suitable for our interface.
+
+Question 75
+
+Q: Explain Testing Plan.
+
+Best Answer:
+
+The plan includes Unit, Integration, Alpha, and Acceptance Testing.
+
+Question 76
+
+Q: What is Unit Testing?
+
+Best Answer:
+
+It verifies individual modules independently.
+
+Question 77
+
+Q: What is Integration Testing?
+
+Best Answer:
+
+It verifies that modules work correctly together.
+
+Question 78
+
+Q: What is Alpha Testing?
+
+Best Answer:
+
+It is internal testing conducted before deployment to end users.
+
+Question 79
+
+Q: What is Acceptance Testing?
+
+Best Answer:
+
+End users evaluate whether the system meets their needs.
+
+Question 80
+
+Q: Who participated in Acceptance Testing?
+
+Best Answer:
+
+Representative users and evaluators assessed the proposed system.
+
+Question 81
+
+Q: What is ISO 25010?
+
+Best Answer:
+
+It is an international software quality model used to evaluate software systems.
+
+Question 82
+
+Q: Which ISO 25010 characteristics did you use?
+
+Best Answer:
+
+Functional Suitability, Usability, Reliability, Security, Performance Efficiency, and other applicable characteristics.
+
+Reviewer Tip: Know your manuscript.
+
+Question 83
+
+Q: Why use descriptive statistics?
+
+Best Answer:
+
+To summarize respondent responses clearly.
+
+Question 84
+
+Q: What is Weighted Mean?
+
+Best Answer:
+
+It summarizes the average level of agreement of respondents.
+
+Question 85
+
+Q: How do you interpret the weighted mean?
+
+Best Answer:
+
+Using the predefined interpretation scale from Strongly Disagree to Strongly Agree.
+
+Question 86
+
+Q: Why a 4-point Likert Scale?
+
+Best Answer:
+
+It removes the neutral option and encourages a clear opinion.
+
+Question 87
+
+Q: Explain your Validation Board.
+
+Best Answer:
+
+Stage 1 validates transportation problems while Stage 2 validates the proposed solution.
+
+Question 88
+
+Q: What is your Business Model Canvas?
+
+Best Answer:
+
+It explains how the proposed system creates, delivers, and captures value.
+
+Question 89
+
+Q: Why include a Business Roadmap?
+
+Best Answer:
+
+It shows future development and sustainability plans.
+
+Question 90
+
+Q: Can PasaHERO expand to other cities?
+
+Best Answer:
+
+Yes, by replacing route, fare, stop, and landmark datasets.
+
+Question 91
+
+Q: What are the limitations of your study?
+
+Best Answer:
+
+The study focuses only on Cebu City jeepneys and does not include real-time vehicle tracking.
+
+Question 92
+
+Q: How will you update fare changes?
+
+Best Answer:
+
+By updating the Fare Matrix table without changing the recommendation engine.
+
+Question 93
+
+Q: How will route changes be handled?
+
+Best Answer:
+
+Administrators can update the route and stop database.
+
+Question 94
+
+Q: Why not include BRT?
+
+Best Answer:
+
+It is outside the current scope and considered a future enhancement.
+
+Question 95
+
+Q: What if two routes receive the same score?
+
+Best Answer:
+
+The system can prioritize based on secondary criteria such as fewer transfers or shorter travel distance.
+
+Question 96
+
+Q: Can your AI learn automatically?
+
+Best Answer:
+
+Not in the current version. Future versions may incorporate machine learning.
+
+Question 97
+
+Q: What is the biggest challenge in your project?
+
+Best Answer:
+
+Collecting accurate transportation data and designing meaningful recommendation criteria.
+
+Question 98
+
+Q: What is your biggest contribution?
+
+Best Answer:
+
+A localized intelligent commuter navigation system for Cebu City's jeepney network.
+
+Question 99
+
+Q: If given more time, what would you improve?
+
+Best Answer:
+
+Real-time tracking, offline mode, adaptive recommendations, and expanded transport coverage.
+
+Question 100
+
+Q: Final Question: Why should we approve PasaHERO?
+
+Best Answer:
+
+Because it addresses a real commuter problem using validated research, established theories, and a practical, technically feasible solution tailored to Cebu City.
+
+Reviewer Tip: Finish confidently.
+
