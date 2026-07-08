@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import path from 'path';
+// Uses shared key-rotation utility — no direct GoogleGenAI import needed here
 import { generateWithAllKeys } from '../../lib/gemini';
 
 function generateFallbackReviewer(text: string) {
