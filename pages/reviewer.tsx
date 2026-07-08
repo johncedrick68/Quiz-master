@@ -241,7 +241,7 @@ export default function Reviewer() {
 
                     <div className="sm:ml-8 flex justify-end">
                       <Button 
-                        variant={isRevealed ? "ghost" : "default"} 
+                        variant={isRevealed ? "ghost" : "primary"} 
                         onClick={() => toggleReveal(globalIndex)}
                         className="flex items-center gap-2"
                       >
