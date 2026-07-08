@@ -49,12 +49,13 @@ export const config = {
 
 const MAX_CHARS = 35000;
 
-async function generateWithRetry(ai: GoogleGenAI, prompt: string, systemInstruction: string, retries = 3): Promise<string> {
-  const models = ['gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
-  
-  for (let attempt = 0; attempt < retries; attempt++) {
-    const model = models[Math.min(attempt, models.length - 1)];
+async function generateWithRetry(ai: GoogleGenAI, prompt: string, systemInstruction: string): Promise<string> {
+  const models = ['gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-1.0-pro'];
+  let lastError: any;
+
+  for (const model of models) {
     try {
+      console.log(`Reviewer trying model: ${model}`);
       const response = await ai.models.generateContent({
         model,
         contents: prompt,
@@ -62,16 +63,28 @@ async function generateWithRetry(ai: GoogleGenAI, prompt: string, systemInstruct
       });
       if (response.text) return response.text;
     } catch (err: any) {
+      lastError = err;
+      const isQuotaExhausted = err?.message?.includes('429') || err?.message?.includes('RESOURCE_EXHAUSTED') || err?.message?.includes('quota');
       const isOverloaded = err?.message?.includes('503') || err?.message?.includes('UNAVAILABLE') || err?.message?.includes('high demand');
-      if (isOverloaded && attempt < retries - 1) {
-        // Wait before retrying (exponential backoff)
-        await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
+      
+      if (isQuotaExhausted || isOverloaded) {
+        console.warn(`Model ${model} failed, trying next...`);
+        await new Promise(r => setTimeout(r, 1000));
         continue;
       }
       throw err;
     }
   }
-  throw new Error('All retry attempts failed');
+
+  const retryMatch = lastError?.message?.match(/(\d+)s/);
+  const waitSeconds = retryMatch ? parseInt(retryMatch[1]) : 60;
+  const isQuota = lastError?.message?.includes('429') || lastError?.message?.includes('quota');
+
+  throw new Error(
+    isQuota
+      ? `All AI models have reached their daily quota. Please wait ${waitSeconds} seconds and try again.`
+      : 'All AI models are currently unavailable. Please try again in a minute.'
+  );
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
