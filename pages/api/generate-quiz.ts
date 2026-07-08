@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { GoogleGenAI } from '@google/genai';
 import { Question } from '../../types/quiz';
+import { generateWithAllKeys } from '../../lib/gemini';
 
 // Fallback logic to generate random questions from text if AI fails
 function generateFallbackQuestions(text: string): Question[] {
@@ -62,47 +62,6 @@ function generateFallbackQuestions(text: string): Question[] {
   return questions;
 }
 
-async function generateWithRetry(ai: GoogleGenAI, prompt: string, systemInstruction: string): Promise<string> {
-  // Try each model in order — on 429 quota or 503 overload, move to next model
-  const models = ['gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-1.0-pro'];
-  let lastError: any;
-
-  for (const model of models) {
-    try {
-      console.log(`Trying model: ${model}`);
-      const response = await ai.models.generateContent({
-        model,
-        contents: prompt,
-        config: { systemInstruction, responseMimeType: 'application/json' }
-      });
-      if (response.text) return response.text;
-    } catch (err: any) {
-      lastError = err;
-      const isQuotaExhausted = err?.message?.includes('429') || err?.message?.includes('RESOURCE_EXHAUSTED') || err?.message?.includes('quota');
-      const isOverloaded = err?.message?.includes('503') || err?.message?.includes('UNAVAILABLE') || err?.message?.includes('high demand');
-      
-      if (isQuotaExhausted || isOverloaded) {
-        console.warn(`Model ${model} failed (${isQuotaExhausted ? '429 quota' : '503 overloaded'}), trying next model...`);
-        // Small delay before next model
-        await new Promise(r => setTimeout(r, 1000));
-        continue; // try next model
-      }
-      throw err; // non-retriable error
-    }
-  }
-
-  // Extract retry delay from error message if available
-  const retryMatch = lastError?.message?.match(/(\d+)s/);
-  const waitSeconds = retryMatch ? parseInt(retryMatch[1]) : 60;
-  const isQuota = lastError?.message?.includes('429') || lastError?.message?.includes('quota');
-
-  throw new Error(
-    isQuota
-      ? `All AI models have reached their daily quota. Please wait about ${waitSeconds} seconds and try again, or upgrade to a paid Gemini API key at https://ai.dev.`
-      : 'All AI models are currently unavailable. Please try again in a minute.'
-  );
-}
-
 export const config = {
   maxDuration: 60,
   api: {
@@ -121,9 +80,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (!process.env.GEMINI_API_KEY) {
-    return res.status(500).json({
-      error: 'GEMINI_API_KEY is not set on the server.',
-    });
+    return res.status(500).json({ error: 'GEMINI_API_KEY is not set on the server.' });
   }
 
   const { text, fileName, mode } = req.body || {};
@@ -138,7 +95,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     ? text.slice(0, MAX_CHARS) + '\n\n[...content truncated for length...]'
     : text;
 
-  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  const ai = null; // using shared key-rotation utility
 
   const systemInstruction = `You are an expert quiz master. Create a high-quality multiple-choice quiz based strictly on the provided source material. Do not invent facts outside the document.
 Generate as many meaningful questions as possible from the text, UP TO A MAXIMUM OF 50 QUESTIONS. 
@@ -180,7 +137,7 @@ Respond ONLY with this JSON shape:
     let parsed: any;
     
     try {
-      output = await generateWithRetry(ai, userPrompt, systemInstruction);
+      output = await generateWithAllKeys(userPrompt, systemInstruction);
       if (!output) throw new Error('No text returned from the model.');
       
       try {

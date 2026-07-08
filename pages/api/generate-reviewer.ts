@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import path from 'path';
-import { GoogleGenAI } from '@google/genai';
+import { generateWithAllKeys } from '../../lib/gemini';
 
 function generateFallbackReviewer(text: string) {
   const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
@@ -48,44 +48,6 @@ export const config = {
 };
 
 const MAX_CHARS = 35000;
-
-async function generateWithRetry(ai: GoogleGenAI, prompt: string, systemInstruction: string): Promise<string> {
-  const models = ['gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-1.0-pro'];
-  let lastError: any;
-
-  for (const model of models) {
-    try {
-      console.log(`Reviewer trying model: ${model}`);
-      const response = await ai.models.generateContent({
-        model,
-        contents: prompt,
-        config: { systemInstruction, responseMimeType: 'application/json' }
-      });
-      if (response.text) return response.text;
-    } catch (err: any) {
-      lastError = err;
-      const isQuotaExhausted = err?.message?.includes('429') || err?.message?.includes('RESOURCE_EXHAUSTED') || err?.message?.includes('quota');
-      const isOverloaded = err?.message?.includes('503') || err?.message?.includes('UNAVAILABLE') || err?.message?.includes('high demand');
-      
-      if (isQuotaExhausted || isOverloaded) {
-        console.warn(`Model ${model} failed, trying next...`);
-        await new Promise(r => setTimeout(r, 1000));
-        continue;
-      }
-      throw err;
-    }
-  }
-
-  const retryMatch = lastError?.message?.match(/(\d+)s/);
-  const waitSeconds = retryMatch ? parseInt(retryMatch[1]) : 60;
-  const isQuota = lastError?.message?.includes('429') || lastError?.message?.includes('quota');
-
-  throw new Error(
-    isQuota
-      ? `All AI models have reached their daily quota. Please wait ${waitSeconds} seconds and try again.`
-      : 'All AI models are currently unavailable. Please try again in a minute.'
-  );
-}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -153,7 +115,7 @@ Respond ONLY with this JSON shape:
 
     let output;
     try {
-      output = await generateWithRetry(ai, prompt, systemInstruction);
+      output = await generateWithAllKeys(prompt, systemInstruction);
     } catch (apiError: any) {
       console.warn("AI Generation failed, falling back to local text processing", apiError);
       return res.status(200).json({ pairs: generateFallbackReviewer(text), isFallback: true });
