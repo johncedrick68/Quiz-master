@@ -154,9 +154,9 @@ Requirements for QUESTIONS:
 - Mix Easy (definitions), Medium (applications), and Hard (analysis/comparison) questions
 
 Requirements for ANSWER OPTIONS:
-- All 4 options must be plausible and specific — no "None of the above" or "All of the above"
-- Wrong options should be close enough to be tricky (related concepts, common mistakes)
-- The correct answer must be unambiguously right based on the document
+- The CORRECT answer MUST ALWAYS be the FIRST item in the "options" array (index 0).
+- The other 3 items must be plausible and tricky distractors.
+- All 4 options must be specific — no "None of the above" or "All of the above".
 
 Requirements for EXPLANATIONS:
 - 2–3 sentences explaining WHY the correct answer is right
@@ -168,8 +168,7 @@ Respond ONLY with this JSON shape:
   "questions": [
     {
       "question": "string — sounds like a panel professor asking out loud",
-      "options": ["string", "string", "string", "string"],
-      "correctIndex": 0,
+      "options": ["CORRECT answer string", "distractor string", "distractor string", "distractor string"],
       "explanation": "string — 2-3 sentences explaining the correct answer and why the distractors are wrong",
       "difficulty": "Easy | Medium | Hard"
     }
@@ -220,11 +219,17 @@ Respond ONLY with this JSON shape:
           q &&
           typeof q.question === 'string' &&
           Array.isArray(q.options) &&
-          q.options.length === 4 &&
-          Number.isInteger(q.correctIndex) &&
-          q.correctIndex >= 0 &&
-          q.correctIndex < 4
+          q.options.length === 4
       )
+      .map((q: any) => {
+        const correctStr = q.options[0];
+        const shuffled = [...q.options].sort(() => 0.5 - Math.random());
+        return {
+          ...q,
+          options: shuffled,
+          correctIndex: shuffled.indexOf(correctStr)
+        };
+      })
       .slice(0, 15);
 
     if (questions.length === 0) {
