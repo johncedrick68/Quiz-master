@@ -24,7 +24,7 @@ if (keys.length === 0) {
   process.exit(1);
 }
 
-const MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'];
+const MODELS = ['gemini-3.1-pro', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'];
 
 async function generateWithAllKeys(prompt, systemInstruction) {
   let lastError = null;
