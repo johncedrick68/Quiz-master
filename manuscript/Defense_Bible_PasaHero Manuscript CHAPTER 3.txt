@@ -2,241 +2,425 @@ PasaHERO Defense Bible - Generated from PasaHero Manuscript CHAPTER 3.txt
 
 Question 1
 
-Q: Your study utilized a quantitative research method. Could you explain why this approach was most suitable for PasaHERO, especially given your objectives?
+Q: Why did you choose a quantitative research method for this study?
 
 Best Answer:
 
-The quantitative method allowed us to systematically gather measurable and standardized data from a larger participant pool. This was crucial for identifying common commuting issues and evaluating the perceived effectiveness of PasaHERO's features in a statistically significant way, forming a robust foundation for our system design.
+Quantitative research allowed us to systematically gather measurable and standardized data from a larger group of commuters to objectively identify common commuting issues and validate the perceived effectiveness of the proposed features.
 
 Question 2
 
-Q: You employed a systematic survey questionnaire. What specific types of data did this instrument aim to collect, and how did it directly inform the PasaHERO system development?
+Q: Explain your sampling method and why it is appropriate for this project.
 
 Best Answer:
 
-The survey collected demographic data, current commuting experiences and challenges, and perceptions of PasaHERO's proposed features using a Likert scale. This data directly informed user requirements, guiding the analysis, design, and creation of system functionalities like route recommendation and fare analytics.
+We used purposive sampling, a non-probability method, because it allowed us to target individuals with direct experience commuting by jeepney in Cebu City, ensuring the data gathered was relevant and expert-based.
 
 Question 3
 
-Q: You used a four-point Likert scale for your survey questions. Why did you opt for a four-point scale instead of a more common five-point or seven-point scale, and what are the implications of this choice?
+Q: What is the purpose of the four-point Likert scale in your research instrument?
 
 Best Answer:
 
-We chose a four-point Likert scale to eliminate a neutral midpoint, forcing respondents to lean towards agreement or disagreement. This helps in obtaining a clearer stance on their experiences and perceptions, reducing fence-sitting and providing more decisive data for our analysis.
+The four-point scale was used to obtain standardized responses regarding user agreement, specifically avoiding a 'neutral' option to force a definitive positive or negative stance on the proposed system features.
 
 Question 4
 
-Q: Your sampling method was purposive sampling. Justify this choice for selecting your research respondents. What potential limitations does this method introduce?
+Q: How did you ensure the validity of your research instrument?
 
 Best Answer:
 
-Purposive sampling was chosen because we specifically needed participants with direct jeepney commuting experience in Cebu City to provide relevant insights. A limitation is that findings may not be generalizable to the entire commuter population, but it ensured rich, targeted data relevant to our system's context.
+The questionnaire was submitted to a panel of experts for content validation to ensure clarity, relevance, and alignment with the study's objectives, and their recommendations were incorporated before distribution.
 
 Question 5
 
-Q: The data analysis primarily relied on descriptive statistics, including frequency counts, percentages, and weighted means. Why was descriptive statistics sufficient for this study, and what specific insights did it yield for PasaHERO?
+Q: What is the core function of the AI-Based Route Recommendation Engine?
 
 Best Answer:
 
-Descriptive statistics were sufficient for summarizing user needs, identifying prevalent commuting challenges, and gauging the perceived usefulness of proposed features. It allowed us to clearly pinpoint common pain points and preferred system functionalities, directly informing our design choices without needing inferential conclusions for hypothesis testing.
+It serves as the decision-support component that evaluates multiple travel-related factors to rank and recommend the most appropriate jeepney route based on a suitability score.
 
 Question 6
 
-Q: Your 'Flow of the Study' mentions a comprehensive testing phase, including both system testing and user testing. What were the distinct objectives of each type of testing, and how did their results contribute to the final system?
+Q: What specific criteria does the AI engine use to calculate the recommendation score?
 
 Best Answer:
 
-System testing evaluated internal aspects like functionality, reliability, efficiency, and accuracy of route/fare calculations. User testing, on the other hand, assessed usability, satisfaction, and real-world applicability with diverse users. Combined, these tests identified technical flaws and usability issues, leading to refinements for an acceptable and effective application.
+The engine evaluates walking distance, estimated fare, route availability, transfer count, travel distance, and proximity to nearby landmarks.
 
 Question 7
 
-Q: PasaHERO was developed using an 'Iterative methodology.' Why was this specific software engineering approach chosen over, say, a Waterfall model, and what advantages did it offer your team?
+Q: How does the system handle fare estimation?
 
 Best Answer:
 
-The Iterative methodology was chosen for its flexibility and improvement-driven nature, allowing for continuous refinement of mapping, routing algorithms, and geofencing based on ongoing feedback. This approach was superior to Waterfall as it accommodated evolving user needs and the complexity of integrating core features effectively.
+Fare estimation is calculated using an automated distance-based fare analytics system that adheres to the LTFRB-approved fare matrix.
 
 Question 8
 
-Q: Your AI-Based Route Recommendation Engine evaluates multiple travel-related factors. How exactly does the system assign a 'recommendation score' based on criteria like walking distance, estimated fare, and transfer count, and how are these factors weighted?
+Q: Explain the 'Para' alert mechanism in your system.
 
 Best Answer:
 
-Each feasible route is assessed against predefined recommendation criteria, where favorable conditions like shorter walking distance, lower fare, and fewer transfers receive higher sub-scores. These sub-scores are then aggregated, likely through a weighted sum, to produce an overall recommendation score, prioritizing routes with the best combination of these factors for the commuter.
+It is a geofenced notification that triggers an alert for the commuter when their real-time GPS location indicates they are approaching the designated drop-off point.
 
 Question 9
 
-Q: The system utilizes 'multimodal AI navigation.' Can you elaborate on what 'multimodal' specifically entails in the context of PasaHERO for jeepney commuters in Cebu City?
+Q: Why did you select the Iterative methodology for software development?
 
 Best Answer:
 
-In PasaHERO, multimodal refers to integrating different modes of travel within a single journey recommendation. Specifically, it combines walking directions for the 'first-mile' and 'last-mile' segments with jeepney routes for the main transportation, providing a complete door-to-door navigation solution.
+The iterative method's cyclical nature allowed us to gradually test and refine complex components like routing algorithms and geofencing scripts based on ongoing feedback.
 
 Question 10
 
-Q: You mention 'geofenced 'Para' notification.' Explain the technical mechanism behind this feature. How does the system determine the appropriate time and location to trigger this alert for the commuter?
+Q: What is the purpose of the Validation Board in your study?
 
 Best Answer:
 
-The system continuously tracks the commuter's real-time GPS location and monitors their proximity to a predefined virtual boundary, or geofence, around the designated drop-off point. When the commuter crosses into this geofenced area, the system automatically triggers the 'Para' alert, notifying them to prepare to alight.
+The Validation Board was used in two stages: Stage 1 to validate that the transportation problems actually exist, and Stage 2 to validate that users would actually find the proposed features useful.
 
 Question 11
 
-Q: Your 'System Workflow' details data retrieval from a MySQL database. What specific types of data are stored and managed in this database, and why is MySQL a suitable choice for PasaHERO?
+Q: What was the success metric for the first stage of your validation process?
 
 Best Answer:
 
-The MySQL database stores critical data such as jeepney routes, route codes, signboards, landmarks, stops, and LTFRB-approved fare rates. MySQL is a suitable choice due to its robustness, scalability, and widespread support, making it reliable for managing relational data essential for route recommendations and navigation.
+The success metric was that at least 60% of the respondents must agree that they experience the identified commuting challenges.
 
 Question 12
 
-Q: The 'Admin Workflow' outlines tasks such as managing jeepney routes, fare rates, and user accounts. How does the system ensure data accuracy and integrity, especially for constantly evolving public transport information?
+Q: Describe your technology stack and why it was chosen.
 
 Best Answer:
 
-Administrators manage data through a secure dashboard, allowing updates to jeepney routes, fare rates, and landmarks. Data integrity is preserved through database backup, restoration, and integrity checks. Regular updates and adherence to official LTFRB matrices ensure information remains accurate and reliable.
+We used a unified JavaScript stack consisting of Node.js and Express.js for the backend, MySQL with Sequelize ORM for data management, and HTML5, CSS3, and Mapbox GL JS for the frontend to ensure seamless integration and real-time mapping capabilities.
 
 Question 13
 
-Q: You conducted a 'Validation Board' process in two stages. What was the core hypothesis you aimed to validate in Stage 1, and what was the 'success metric' that determined your progression?
+Q: How does the system handle first-mile and last-mile navigation?
 
 Best Answer:
 
-In Stage 1, the core hypothesis was that jeepney commuters experience difficulties in identifying routes, estimating fares, and locating stops. The success metric was that at least 60% of respondents must agree they experience these identified commuting challenges, which would then allow us to proceed with system development.
+The system provides multimodal navigation by integrating walking directions from the user's origin to the boarding point and from the drop-off point to the final destination.
 
 Question 14
 
-Q: The 'Business Model Canvas' identifies 'in-application advertisements' as a primary sustainability support. Can you elaborate on how these advertisements are integrated into the user experience without being overly intrusive?
+Q: What is the role of Mapbox GL JS and the Mapbox Directions API in your application?
 
 Best Answer:
 
-Advertisements are strategically displayed after a few route searches, rather than during active navigation or immediately upon app launch. This balances revenue generation with maintaining a clean, uninterrupted user experience for core commuting tasks.
+Mapbox GL JS is used for interactive route visualization, while the Directions API handles the calculation of paths and routing between the origin and destination.
 
 Question 15
 
-Q: Regarding your technology stack, why did you choose Mapbox GL JS and Mapbox Directions API for the mapping and routing functionalities, as opposed to alternatives like Google Maps API?
+Q: How does the Admin Workflow contribute to the system's reliability?
 
 Best Answer:
 
-Mapbox GL JS and Directions API were chosen for their flexibility, customization capabilities, and strong support for interactive web mapping with vector tiles. They allowed us to create highly tailored route visualizations and integrate custom data more seamlessly, which was crucial for the unique jeepney route system in Cebu City.
+The admin workflow allows for the constant updating of route codes, signboards, LTFRB fare rates, and landmarks, ensuring that the data provided to commuters remains accurate.
 
 Question 16
 
-Q: How does PasaHERO incorporate 'landmark-based guidance' into its navigation, and why is this particularly important for jeepney commuters in Cebu City?
+Q: How does the system determine the 'highest-ranked' route?
 
 Best Answer:
 
-PasaHERO identifies nearby prominent landmarks to assist commuters in recognizing boarding points, drop-off locations, and turns. This is crucial in Cebu City because jeepney navigation often relies on verbal instructions tied to landmarks rather than precise street addresses, enhancing practicality for local users.
+The system calculates a recommendation score for all feasible routes based on predefined criteria; the route with the highest total score is selected and presented to the user.
 
 Question 17
 
-Q: What is the role of the HTML5 Geolocation API in PasaHERO, and how does it integrate with Mapbox GL JS for real-time location tracking?
+Q: What is the significance of the Functional Decomposition Diagram in your design phase?
 
 Best Answer:
 
-The HTML5 Geolocation API provides the user's current location, either for auto-detection or to serve as the origin point. This data is then fed to Mapbox GL JS, which renders the user's position on the map, enabling real-time location tracking and facilitating dynamic route updates during navigation.
+It breaks down the overall system into eight major modules—such as User Management and Fare Analytics—to illustrate the system's functional structure and how different components interact.
 
 Question 18
 
-Q: Your 'Review Phase' assessed system performance and overall acceptability. What specific metrics or criteria were used to evaluate system performance beyond user satisfaction?
+Q: How did you handle the ethical considerations of data gathering?
 
 Best Answer:
 
-Beyond user satisfaction, system performance was evaluated based on route recommendation accuracy, fare calculation accuracy, navigation effectiveness, and system responsiveness. These technical metrics ensured the system delivered on its core functionalities reliably.
+We adhered to the Data Privacy Act of 2012 by obtaining informed consent, ensuring anonymity, and keeping all collected data strictly confidential.
 
 Question 19
 
-Q: You mentioned adhering to the Data Privacy Act of 2012 (Republic Act No. 10173). What specific measures did you implement to ensure data privacy and protect respondent information?
+Q: What is the primary value proposition of PasaHERO as defined in your Business Model Canvas?
 
 Best Answer:
 
-We implemented informed consent procedures, ensuring voluntary participation and explaining data usage. We guaranteed confidentiality and anonymity, storing collected data securely and accessible only to researchers, and strictly avoided collecting personally identifiable information beyond what was necessary for the study objectives.
+The value proposition is a web-based assistant that improves efficiency through AI-powered route recommendations, color-coded maps, automated fare estimation, and proactive commuter notifications.
 
 Question 20
 
-Q: The PasaHERO 'User Workflow' includes an optional feedback mechanism. How is this feedback collected and what is its intended use within the system's continuous improvement cycle?
+Q: How do you plan to sustain the system financially?
 
 Best Answer:
 
-After completing a trip, users can optionally rate their travel experience and provide comments. This feedback is stored in the database and is crucial for identifying areas for system enhancement, validating feature usefulness, and driving continuous improvements based on real user experiences.
+Sustainability is supported through in-application advertisements displayed after route searches and potential future partnerships with the Cebu City Local Government Unit.
 
 Question 21
 
-Q: Your 'Functional Decomposition Diagram' lists 'Smart Notifications.' What specific types of notifications does PasaHERO provide, apart from the 'Para' alert, and what is their purpose?
+Q: What is the difference between the User Workflow and the System Workflow?
 
 Best Answer:
 
-Beyond the 'Para' alert, the Smart Notifications module can potentially include alerts for route changes, traffic updates, or even promotional messages. Their purpose is to keep commuters informed in real-time and enhance their overall journey experience beyond just destination guidance.
+The User Workflow describes the external interactions (e.g., logging in and starting navigation), while the System Workflow describes the internal logic (e.g., data retrieval from MySQL and AI score calculation).
 
 Question 22
 
-Q: How does PasaHERO ensure that the 'estimated fare' is consistently accurate, especially given potential variations in jeepney routes or changes in fare matrices from LTFRB?
+Q: Why is the 'landmark-based guidance' feature important for Cebu City commuters?
 
 Best Answer:
 
-The system calculates estimated fares based on the officially approved LTFRB distance-based fare matrix. Accuracy is maintained through the 'Admin Workflow,' where administrators are responsible for regularly updating the fare database to reflect any changes in LTFRB regulations.
+Landmarks help commuters recognize boarding and drop-off points more easily than coordinates alone, especially for first-time travelers and tourists in unfamiliar areas.
 
 Question 23
 
-Q: Your 'Research Environment' states Cebu City has 'widespread jeepney system.' How does PasaHERO handle the complexity of potentially overlapping routes, different signboard codes, and varying operational hours of jeepneys?
+Q: What happens in the 'Review Phase' of your study flow?
 
 Best Answer:
 
-PasaHERO addresses this complexity by utilizing a comprehensive 'jeepney route database' that stores specific route codes, signboards, and associated paths. The AI-Based Route Recommendation Engine then evaluates 'route availability' as a factor, suggesting feasible routes based on this structured data and current contextual factors.
+The system is assessed based on user satisfaction, route and fare accuracy, and overall performance to determine its acceptability and pinpoint areas for further enhancement.
 
 Question 24
 
-Q: You mentioned the use of Sequelize ORM. What specific benefits did Sequelize provide in the development of PasaHERO, particularly concerning its database interactions?
+Q: How is the weighted mean calculated for the Likert scale data?
 
 Best Answer:
 
-Sequelize ORM facilitated seamless interaction with our MySQL database by allowing us to work with JavaScript objects instead of raw SQL queries. This accelerated development, improved code readability, and enhanced database schema management, making it easier to define and manipulate data models.
+It is calculated by multiplying the number of responses for each Likert value by its numerical weight, summing them, and dividing by the total number of responses.
 
 Question 25
 
-Q: What specific security frameworks or protocols were considered and implemented in the 'Design Phase' to protect user data and system integrity?
+Q: What are the non-functional requirements considered in your analysis phase?
 
 Best Answer:
 
-While not explicitly detailed, the 'Design Phase' included a 'security framework.' This would typically involve secure user authentication (e.g., password hashing), protection against common web vulnerabilities (like SQL injection through ORM use), and ensuring data privacy compliant with RA 10173 during storage and transmission.
+Our analysis focused on security and privacy, data storage efficiency, and overall system performance to ensure the application is robust and secure.
 
 Question 26
 
-Q: The 'Business Roadmap' outlines an 'expansion and continuous improvement phase' in early 2028. What are some specific new features or partnerships you envision during this phase for PasaHERO?
+Q: What is the purpose of using a geofence for the 'Para' notification?
 
 Best Answer:
 
-During expansion, we envision integrating real-time jeepney tracking, payment system integration, or even incorporating other public transport modes. Partnerships with local transport groups and the Cebu City LGU would be crucial for data sharing, official endorsements, and broader public adoption.
+A geofence creates a virtual boundary around the destination; when the user's GPS coordinates enter this boundary, the system automatically triggers the notification.
 
 Question 27
 
-Q: How does your AI-Based Route Recommendation Engine differentiate between 'travel distance' and 'walking distance' in its evaluation criteria, and why is this distinction important?
+Q: What is the significance of the Business Roadmap's timeline?
 
 Best Answer:
 
-Walking distance evaluates the proximity of the commuter to boarding/drop-off points, which is the first/last mile. Travel distance, however, estimates the total length of the jeepney route itself. This distinction is crucial because a shorter travel distance might still involve a long walking distance, impacting overall convenience, so both are assessed.
+It provides a strategic path from R&D in 2026 to public launch in 2027 and expansion in 2028, ensuring a structured transition from a prototype to a scalable public tool.
 
 Question 28
 
-Q: Your 'System Workflow' mentions validating user input. What kind of input validation is performed, and what are the consequences of invalid input?
+Q: How does the system handle multimodal routing?
 
 Best Answer:
 
-Input validation checks for valid current locations, destination formats, and ensures that entered data corresponds to known routes or landmarks. Invalid input would result in an error message to the user, preventing the system from processing an unroutable request and ensuring data quality.
+It combines different modes of transport—specifically walking and jeepney travel—into a single journey, providing a complete end-to-end route.
 
 Question 29
 
-Q: The 'Admin Management' module in your Functional Decomposition Diagram handles 'user permissions.' What specific roles or permission levels are envisioned for administrators, and why is this granularity important?
+Q: Which specific part of the research instrument identifies the gaps in current commuting experiences?
 
 Best Answer:
 
-Admin roles could include a super-administrator with full control, and more restricted roles like 'route manager' or 'content editor' for specific data types. This granularity is important for security, preventing unauthorized changes to critical system data, and ensuring accountability.
+Part II of the questionnaire specifically focuses on current commuting experiences and the challenges encountered in route navigation and fare information.
 
 Question 30
 
-Q: Your 'Overall Program Workflow' describes saving trip history. What specific data points are saved in this history, and what is its utility for the user or the system?
+Q: How does the AI-Based Route Recommendation Engine handle 'Route Availability'?
 
 Best Answer:
 
-The trip history saves the recommended route taken, estimated fare, travel distance, and travel time. For the user, it provides a record of past journeys. For the system, it can potentially be used to personalize future recommendations or analyze travel patterns for system optimization.
+It queries the jeepney route database to verify if a viable route exists between the current origin and destination before calculating the suitability score.
+
+Question 31
+
+Q: What is the role of Sequelize ORM in your system?
+
+Best Answer:
+
+Sequelize ORM is used to manage the interaction between the Node.js application and the MySQL database, facilitating easier data querying and manipulation.
+
+Question 32
+
+Q: Why did you include 'Transfer Count' as a factor in the recommendation engine?
+
+Best Answer:
+
+Reducing the number of transfers is typically a preference for commuters as it reduces travel time, cost, and complexity, thus routes with fewer transfers receive higher scores.
+
+Question 33
+
+Q: How does the system track the commuter's location in real-time?
+
+Best Answer:
+
+The system utilizes the HTML5 Geolocation API to continuously fetch the user's coordinates during the navigation phase.
+
+Question 34
+
+Q: What happens after the commuter reaches their destination in the program workflow?
+
+Best Answer:
+
+The system generates a trip summary (fare, distance, time), saves the trip history to the database, and allows the user to provide optional feedback.
+
+Question 35
+
+Q: How did you define the 'Customer Segment' for this project?
+
+Best Answer:
+
+The segment includes all jeepney commuters in Cebu City, specifically targeting students, workers, residents, and occasional travelers/tourists.
+
+Question 36
+
+Q: In the context of your study, what constitutes 'multimodal navigation'?
+
+Best Answer:
+
+Multimodal navigation is the integration of walking paths (first/last mile) and jeepney routes into one seamless navigation experience.
+
+Question 37
+
+Q: What is the purpose of the 'Respondent Profile' in Part I of your survey?
+
+Best Answer:
+
+It gathers demographic data like age, occupation, and familiarity with routes to help analyze if certain user groups experience more difficulties than others.
+
+Question 38
+
+Q: How does the system maintain 'data integrity' as mentioned in the Admin Workflow?
+
+Best Answer:
+
+The administrator performs regular database backups, restoration, and integrity checks to ensure the navigation data remains reliable.
+
+Question 39
+
+Q: What is the intended outcome of the 'Beta Deployment' phase in 2027?
+
+Best Answer:
+
+The goal is to test the system in a real-world setting with a limited user group to gather feedback for final refinements before the official public launch.
+
+Question 40
+
+Q: How does the system handle the 'Boarding and Drop-off' guidance?
+
+Best Answer:
+
+The system identifies the nearest boarding points and designated drop-off locations and displays them on the interactive map with associated walking directions.
+
+Question 41
+
+Q: Why is 'Tailwind CSS' used in your technology stack?
+
+Best Answer:
+
+Tailwind CSS allows for rapid UI development and ensures the application is responsive and user-friendly across different devices.
+
+Question 42
+
+Q: What is the relationship between the LTFRB fare matrix and your Fare Analytics module?
+
+Best Answer:
+
+The Fare Analytics module uses the LTFRB-approved rates as the base data to calculate the estimated fare based on the travel distance of the recommended route.
+
+Question 43
+
+Q: How does the system support 'first-time travelers'?
+
+Best Answer:
+
+It provides route visualization, landmark-based guidance, and proactive 'Para' alerts, which reduce the anxiety of navigating an unfamiliar city.
+
+Question 44
+
+Q: What is the function of the User Management module?
+
+Best Answer:
+
+It handles registration, authentication, and profile management, ensuring secure access and allowing for personalized experiences like saved trip histories.
+
+Question 45
+
+Q: Explain the significance of 'Color-coded route maps' in the value proposition.
+
+Best Answer:
+
+Color-coding helps users visually distinguish between different jeepney routes, making the map easier to read and navigate quickly.
+
+Question 46
+
+Q: What is the purpose of the 'Trip Summary' generated at the end of the journey?
+
+Best Answer:
+
+It provides the user with a recap of their travel distance, time, and fare, while the data is stored for future analysis and user history.
+
+Question 47
+
+Q: How does the system handle 'Manual Input' for location?
+
+Best Answer:
+
+If the user disables GPS or prefers manual entry, the system provides an input field where the user can specify their current location and destination.
+
+Question 48
+
+Q: What is the 'Success Metric' for the second stage of the Validation Board?
+
+Best Answer:
+
+The success metric is that at least 60% of the respondents agree that the proposed mechanisms and features would be useful for commuting in Cebu City.
+
+Question 49
+
+Q: Why is the 'Research Environment' specified as Cebu City?
+
+Best Answer:
+
+Cebu City provides a real-world context with a complex jeepney network, making it an ideal environment to test the system's ability to handle urban transit challenges.
+
+Question 50
+
+Q: What is the role of the 'Database Management' module in the Functional Decomposition Diagram?
+
+Best Answer:
+
+It manages the storage, retrieval, and maintenance of all core data, including routes, fares, user accounts, and landmarks.
+
+Question 51
+
+Q: How does the AI engine prioritize routes?
+
+Best Answer:
+
+It prioritizes routes that satisfy favorable conditions—such as lower cost, fewer transfers, and shorter walking distance—by assigning them higher recommendation scores.
+
+Question 52
+
+Q: What ensures that the system's recommendations are 'context-aware'?
+
+Best Answer:
+
+The system is context-aware because it integrates real-time GPS data with current route availability, distance, and landmark locations to tailor the recommendation.
+
+Question 53
+
+Q: What is the purpose of the 'Transmittal Letter' in your research procedure?
+
+Best Answer:
+
+It serves as the formal request for permission from the research adviser, coordinator, and dean to conduct the study and administer the surveys.
 
