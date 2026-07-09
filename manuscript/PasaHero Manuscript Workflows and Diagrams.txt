@@ -1,0 +1,225 @@
+Program Workflow
+This section describes the program workflow of the proposed PasaHERO system. It illustrates the sequence of user interactions and automated system processes that work together to provide intelligent public transportation navigation in Cebu City. The workflow demonstrates how user inputs, real-time location data, jeepney route information, landmark records, and fare data are processed by the AI-Based Route Recommendation Engine to generate multimodal route recommendations, interactive route visualizations, fare estimates, and navigation assistance. It also illustrates how the application continuously monitors the commuter's location to provide destination notifications ("Para" alerts) upon approaching the designated drop-off point. The PasaHERO program workflow consists of four interconnected workflows: the Overall Program Workflow, User Workflow, System Workflow, and Admin Workflow, each representing the major operational processes that support the functionality and maintenance of the proposed system. 
+Detailed Workflow
+Illustrates the overall operation of the PasaHERO application, beginning with user authentication and ending with trip completion. After logging into the system, commuters provide their current location through GPS or manual input and enter their intended destination. The system retrieves the necessary route, fare, and landmark information before the AI-Based Route Recommendation Engine evaluates multiple contextual travel factors, including walking distance, estimated fare, route availability, number of transfers, travel distance, and nearby landmarks. Each feasible route is assigned a recommendation score based on predefined recommendation criteria. The available routes are then ranked according to their recommendation scores, and the highest-ranked multimodal route is selected as the recommended route for the commuter.
+The selected route is presented through an interactive map displaying jeepney routes, walking paths, boarding and drop-off points, nearby landmarks, estimated fares, and estimated travel time. During navigation, the application continuously tracks the commuter's real-time location, monitors route progress, and evaluates geofence boundaries to trigger a Destination Notification ("Para" Alert) when the commuter is approaching the designated drop-off location. Once the destination is reached, the system generates a trip summary containing the recommended route taken, estimated fare, travel distance, and travel time, saves the trip history in the database, and allows commuters to optionally provide feedback regarding their travel experience before completing the trip.
+
+User Workflow
+The User Workflow illustrates how commuters interact with the PasaHERO application throughout their journey. The workflow begins when users access the application and either log in to an existing account or register a new one. After authentication, the system verifies the user's credentials before directing them to the user dashboard. Commuters then set their trip details by providing their current location through GPS auto-detection or manual input and entering their intended destination. The system subsequently generates and displays an AI-powered recommended route that includes the appropriate jeepney route and signboard, first-mile and last-mile walking paths, estimated fare and travel time, boarding and drop-off points, and nearby landmarks. Users then start navigation and receive real-time route guidance, live location updates, and walking directions throughout the trip. As the commuter approaches the designated drop-off point, the application sends a geofenced "PARA" notification to remind the user to prepare for alighting. Once the destination is reached, the system presents a trip summary containing the route taken, estimated fare, distance traveled, and travel time. Users may optionally provide feedback by rating their travel experience before ending their session by logging out of the application. 
+
+System Workflow
+The System Workflow describes the internal operations performed by the proposed PasaHERO system after receiving a commuter's travel request. The process begins when the user provides the current location and destination, after which the system validates the input and retrieves the necessary data from the MySQL database, including jeepney routes, route codes and signboards, landmarks and stops, and LTFRB-approved fare rates. The AI-Based Route Recommendation Engine then evaluates all feasible routes by considering multiple contextual travel factors such as walking distance, estimated fare, route availability and frequency, number of transfers, travel distance, and nearby landmarks and safety. Each route is assigned a recommendation score and ranked according to its overall suitability before the highest-ranked route is selected and presented through an interactive map showing the jeepney route, boarding and drop-off points, walking directions, estimated fare, estimated travel time, and nearby landmarks. During the trip, the system continuously tracks the commuter's location using GPS to provide real-time navigation and automatically sends a geofenced "PARA" notification when the commuter approaches the designated drop-off point. Upon reaching the destination, the system generates a trip summary containing the route taken, fare, travel time, and trip date, allows the commuter to submit feedback, and stores the completed trip in the MySQL database for future reference. 
+
+Admin Workflow
+The Admin Workflow illustrates the administrative processes responsible for maintaining the accuracy, reliability, and efficiency of the proposed PasaHERO system. The workflow begins when the administrator securely logs into the admin dashboard using authorized credentials, where system statistics and recent activities are displayed. From the dashboard, the administrator manages jeepney routes, route codes and signboards, LTFRB fare rates, landmarks, jeepney stops, and user accounts to ensure that all navigation data remains accurate and up to date. The administrator also monitors reports and analytics, reviews trip records and statistics, manages announcements and notifications, configures system settings and user permissions, and performs database backup, restoration, maintenance, and integrity checks to preserve data reliability. All administrative updates are securely stored in the MySQL database, allowing the latest information to be reflected throughout the application and ensuring commuters receive accurate route recommendations, fare information, and real-time navigation services before the administrator securely logs out of the system. 
+
+Use Case Diagrams
+Use Case Diagrams
+A use case diagram is a behavioral diagram that illustrates how the proposed system interacts with its external actors. The figures below present the interactions between the users and administrators with the PasaHERO system, showing the primary functions available to each actor and how they contribute to the overall operation of the application.
+
+ Figure 16: User Use Case Diagram
+The User Use Case Diagram illustrates the primary interactions of commuters with the PasaHERO system. The main use cases include user registration and login, destination search, viewing AI-recommended jeepney routes, viewing Route Information Display and signboards, accessing interactive route maps, estimating fares based on LTFRB fare rates, viewing nearby landmarks and jeepney stops, receiving first-mile and last-mile navigation guidance, receiving geofenced "Para" notifications, and viewing trip history. These interactions enable commuters to efficiently plan their journeys, navigate unfamiliar locations, and make informed transportation decisions while traveling within Cebu City. 
+Figure 17: Admin Use Case  Diagram
+The Admin Use Case Diagram illustrates the major administrative functions of the PasaHERO system. The primary use cases include administrator login, management of jeepney routes, route codes and signboards, fare rates, landmarks and stops, user accounts, reports and analytics, trip records, system announcements and notifications, system settings and configuration, backup and restoration of data, and administrator logout. These functions allow administrators to maintain accurate transportation information, manage system data, monitor application performance, and ensure the reliability, security, and continuous operation of the PasaHERO platform. 
+
+Storyboard
+Storyboard - User 
+The Storyboard (User) provides a visual sequence that illustrates how PasaHERO operates from the commuter's perspective, giving users a clear overview of the system's workflow through its mobile web interface. 
+
+
+
+
+
+
+
+
+
+
+Figure 18: Splash Screen - User
+The Splash Screen (User) serves as the initial interface displayed when the PasaHERO mobile web application is accessed through a web browser. It introduces the official branding of the system while initializing the essential resources required for operation. Once the loading process is completed, the system automatically proceeds to the Welcome and Onboarding Screens. 
+
+
+
+
+
+
+
+
+
+
+
+Figure 19: Welcome and Onboarding Screens – User
+The Welcome and Onboarding Screens (User) serve as the introductory interface for first-time users of the PasaHERO mobile application. These screens present the application's primary features, including AI-powered route recommendation, jeepney route visualization, fare estimation, and real-time commuter guidance, allowing users to become familiar with the system before using its services. A "Get Started" button is provided to allow users to proceed to the account authentication process. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 20: Account Authentication – User
+The Account Authentication (User) screens allow commuters to securely access the PasaHERO mobile web application by creating a new account or signing in using their registered credentials. These screens also include email verification and location permission requests to enable personalized navigation and location-based services. After successful authentication, users are directed to the Home Dashboard. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 21: Home Dashboard – User
+The Home Dashboard (User) serves as the primary interface of the PasaHERO mobile web application after successful authentication. It provides users with quick access to destination search, recent searches, notifications, and other essential navigation features required to begin planning a trip. A destination search bar is provided to allow users to search for their intended destination. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 22: Destination Search – User
+The Destination Search (User) screens allow commuters to search for destinations within Cebu City using the mobile web application's search functionality. These screens display live search results, recent searches, suggested destinations, and saved places to help users quickly select their intended location. After selecting a destination, the system proceeds to the AI Route Recommendation. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 23: AI Route Recommendation – User
+The AI Route Recommendation (User) screen presents the most suitable jeepney route based on the commuter's current location and selected destination. It displays the recommended jeepney route code, estimated travel time, walking distance, fare estimate, and route overview to assist users in choosing the most efficient route. A "Start Navigation" button is provided to allow users to begin the navigation process. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 24: First-Mile Navigation – User
+The First-Mile Navigation (User) screens guide commuters from their current location to the designated jeepney boarding point using live map navigation. These screens display real-time location updates, walking directions, and boarding stop information to ensure users arrive at the correct pickup location before boarding the recommended jeepney. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 25: Transportation Mode – User
+The Transportation Mode (User) screens provide real-time navigation while commuters traveling on the recommended jeepney route. These screens display the commuter's current location, route progress, nearby landmarks, remaining distance, and geofenced destination alerts to assist users throughout their journey until they reach the designated drop-off point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 26: Trip Completion – User
+The Trip Completion (User) screen is displayed after the commuter successfully reaches the selected destination. It provides a summary of the completed trip, including the destination, estimated travel time, distance traveled, jeepney route used, and fare information. The completed trip is automatically recorded in the user's trip history for future reference. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 27: User Profile and Saved Places – User
+The User Profile and Saved Places (User) screens allow commuters to manage their personal account information and frequently visited destinations. These screens enable users to update their profile details, add or modify saved places, and personalize their commuting experience for faster and more convenient trip planning.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 28: Trip History – User
+The Trip History (User) screens allow commuters to review previously completed trips recorded by the PasaHERO mobile web application. These screens display essential trip information, including destinations, travel dates, jeepney routes, estimated fares, and travel durations. Users may also view detailed information about each completed trip for future reference. 

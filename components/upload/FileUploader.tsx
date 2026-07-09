@@ -114,7 +114,8 @@ export function FileUploader({ onContentReady, isLoading }: FileUploaderProps) {
     return file
       .replace('.txt', '')
       .replace('PasaHero Manuscript ', '')
-      .replace('PasaHERO_Defense_Bible_V2_', '');
+      .replace('PasaHERO_Defense_Bible_V2_', 'Defense Bible V2 — ')
+      .replace(/_/g, ' ');
   }
 
   return (

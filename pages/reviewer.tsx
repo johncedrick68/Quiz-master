@@ -152,7 +152,7 @@ export default function Reviewer() {
                     onClick={() => loadReviewer(file, false)}
                   >
                     <span className="truncate w-full font-semibold text-slate-200" title={file}>
-                      {file.replace('.txt', '').replace('PasaHero Manuscript ', '').replace('PasaHERO_Defense_Bible_V2_', '')}
+                      {file.replace('.txt', '').replace('PasaHero Manuscript ', '').replace('PasaHERO_Defense_Bible_V2_', 'Defense Bible V2 — ').replace(/_/g, ' ')}
                     </span>
                   </Button>
                 ))}

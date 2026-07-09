@@ -195,8 +195,19 @@ Respond ONLY with this JSON shape:
       
       try {
         parsed = JSON.parse(output);
-      } catch (parseErr) {
-        throw new Error('Failed to parse the JSON response from Gemini.');
+      } catch {
+        // OpenRouter sometimes wraps JSON with extra conversational text
+        // Try to extract just the JSON block using regex
+        const jsonMatch = output.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          try {
+            parsed = JSON.parse(jsonMatch[0]);
+          } catch {
+            throw new Error('Failed to parse the JSON response from the AI model.');
+          }
+        } else {
+          throw new Error('Failed to parse the JSON response from the AI model.');
+        }
       }
     } catch (apiError: any) {
       console.warn("AI Generation failed", apiError);

@@ -39,7 +39,7 @@ async function generateWithAllKeys(prompt, systemInstruction) {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "google/gemma-4-31b-it:free",
+          model: "openrouter/free",
           messages: [
             { role: "system", content: systemInstruction },
             { role: "user", content: prompt }
@@ -47,11 +47,12 @@ async function generateWithAllKeys(prompt, systemInstruction) {
         })
       });
       const data = await res.json();
-      if (data.error) throw new Error(data.error.message);
+      if (data.error) throw new Error(data.error.message || "OpenRouter Error");
       
       let text = data.choices[0].message.content.trim();
-      if (text.startsWith("\`\`\`json")) {
-        text = text.replace(/^\`\`\`json\n?/, '').replace(/\`\`\`$/, '').trim();
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        text = jsonMatch[0];
       }
       return JSON.parse(text);
     } catch (err) {

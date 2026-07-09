@@ -22,7 +22,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(404).json({ error: 'No manuscripts found.' });
     }
 
-    const files = fs.readdirSync(manuscriptDir).filter(file => file.endsWith('.txt'));
+    const allFiles = fs.readdirSync(manuscriptDir).filter(file => file.endsWith('.txt'));
+
+    // For comprehensive mode, prefer pre-made Defense Bibles (Q&A format, no AI needed)
+    // Include: Defense_Bible_ files + PasaHERO_Defense_Bible_V2 standalone files
+    // Exclude: raw manuscripts (they are just source text; their Defense Bibles already cover them)
+    let files = allFiles.filter(f => f.startsWith('Defense_Bible_') || f.startsWith('PasaHERO_Defense_Bible'));
+
+    // Fallback: if no Defense Bibles found, use all raw manuscripts
+    if (files.length === 0) {
+      files = allFiles;
+    }
+
     if (files.length === 0) {
       return res.status(404).json({ error: 'No manuscripts found.' });
     }

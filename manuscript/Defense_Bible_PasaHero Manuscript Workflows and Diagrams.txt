@@ -1,0 +1,402 @@
+PasaHERO Defense Bible - Generated from PasaHero Manuscript Workflows and Diagrams.txt
+
+Question 1
+
+Q: What are the four interconnected workflows that constitute the PasaHERO program workflow?
+
+Best Answer:
+
+The four workflows are the Overall Program Workflow, User Workflow, System Workflow, and Admin Workflow, each covering distinct operational aspects of the system.
+
+Question 2
+
+Q: How does the system obtain a commuter's current location?
+
+Best Answer:
+
+The system obtains the commuter's location via GPS auto‑detection or manual input provided by the user.
+
+Question 3
+
+Q: What triggers a "Para" alert during navigation?
+
+Best Answer:
+
+A "Para" alert is triggered when the system's geofence detection identifies that the commuter is approaching the designated drop‑off point.
+
+Question 4
+
+Q: Which data sources are retrieved from MySQL for route recommendation?
+
+Best Answer:
+
+MySQL is queried for jeepney routes, route codes and signboards, landmark and stop records, and LTFRB‑approved fare rates.
+
+Question 5
+
+Q: What factors does the AI‑Based Route Recommendation Engine consider when evaluating routes?
+
+Best Answer:
+
+The engine evaluates walking distance, estimated fare, route availability and frequency, number of transfers, travel distance, nearby landmarks, and safety considerations.
+
+Question 6
+
+Q: How is a route selected for recommendation?
+
+Best Answer:
+
+Routes are scored according to predefined criteria, ranked, and the highest‑ranked multimodal route is selected as the recommendation.
+
+Question 7
+
+Q: What does the interactive map display to the user?
+
+Best Answer:
+
+The interactive map shows jeepney routes, walking paths, boarding and drop‑off points, nearby landmarks, estimated fare, and travel time.
+
+Question 8
+
+Q: How does the system continuously monitor the commuter's location during navigation?
+
+Best Answer:
+
+Real‑time location is continuously tracked using GPS, allowing the system to monitor progress and evaluate geofence boundaries.
+
+Question 9
+
+Q: What is stored in the database after a trip is completed?
+
+Best Answer:
+
+After completion, the system saves a trip summary containing the route taken, fare, distance, travel time, and timestamp in the MySQL database.
+
+Question 10
+
+Q: What is the purpose of the Admin Workflow?
+
+Best Answer:
+
+The Admin Workflow maintains data accuracy, system reliability, and operational efficiency by managing information and performing administrative tasks.
+
+Question 11
+
+Q: Which administrative tasks involve updating fare rates?
+
+Best Answer:
+
+Administrators manage LTFRB‑approved fare rates to keep fare data current and compliant.
+
+Question 12
+
+Q: How does the system ensure data reliability when administrators make updates?
+
+Best Answer:
+
+All admin updates are stored securely in MySQL, ensuring the front‑end reflects the latest information instantly.
+
+Question 13
+
+Q: What is the first step in the User Workflow after accessing the application?
+
+Best Answer:
+
+The User Workflow starts when a commuter accesses the app and either logs in or registers a new account.
+
+Question 14
+
+Q: After authentication, what screen does the user see?
+
+Best Answer:
+
+After authentication, the user is taken to the user dashboard, the primary interface for trip planning.
+
+Question 15
+
+Q: How can a commuter set their current location?
+
+Best Answer:
+
+Commuters set their current location via GPS auto‑detection or manual entry.
+
+Question 16
+
+Q: What information is displayed on the AI Route Recommendation screen?
+
+Best Answer:
+
+The AI Route Recommendation screen displays the recommended jeepney route code, estimated travel time, walking distance, fare estimate, and a route overview.
+
+Question 17
+
+Q: What is the function of the "Start Navigation" button?
+
+Best Answer:
+
+Pressing "Start Navigation" initiates real‑time route guidance, live location updates, and tracking of the commuter’s progress.
+
+Question 18
+
+Q: How does the system provide first‑mile navigation?
+
+Best Answer:
+
+First‑mile navigation provides live map directions, walking instructions, and boarding stop details to guide the user to the jeepney pickup point.
+
+Question 19
+
+Q: What real‑time information is shown on the Transportation Mode screen?
+
+Best Answer:
+
+The Transportation Mode screen shows the commuter’s current location, route progress, nearby landmarks, remaining distance, and geofenced alerts.
+
+Question 20
+
+Q: What is included in the trip summary presented after reaching the destination?
+
+Best Answer:
+
+The trip summary lists the destination, travel time, distance traveled, jeepney route used, fare information, and allows optional feedback.
+
+Question 21
+
+Q: What optional action can a user take after a trip is completed?
+
+Best Answer:
+
+Users may optionally rate their travel experience before ending the session.
+
+Question 22
+
+Q: How are user accounts managed in the Admin Workflow?
+
+Best Answer:
+
+In the Admin Workflow, administrators manage user accounts to maintain data integrity and control access.
+
+Question 23
+
+Q: What types of data does the admin manage regarding jeepney routes?
+
+Best Answer:
+
+Admin tasks include updating jeepney routes, route codes, and signboard information to keep navigation data accurate.
+
+Question 24
+
+Q: How does the system trigger a "Para" notification?
+
+Best Answer:
+
+A "Para" notification is sent when geofence evaluation detects the commuter is nearing the pre‑defined drop‑off location.
+
+Question 25
+
+Q: What is the role of the AI‑Based Route Recommendation Engine?
+
+Best Answer:
+
+The AI‑Based Route Recommendation Engine assesses multiple travel factors and assigns a score to rank feasible routes.
+
+Question 26
+
+Q: How are recommendation scores determined?
+
+Best Answer:
+
+Recommendation scores are calculated from predefined criteria that weigh walking distance, fare, transfers, landmarks, and other suitability metrics.
+
+Question 27
+
+Q: What happens to trip history after a commuter logs out?
+
+Best Answer:
+
+Completed trips are stored in the MySQL database, preserving the route, fare, distance, time, and date for future reference.
+
+Question 28
+
+Q: Which diagram illustrates the interactions between users and the system?
+
+Best Answer:
+
+Figure 16, the User Use Case Diagram, depicts how users interact with the PasaHERO system.
+
+Question 29
+
+Q: What primary function does the Destination Search screen enable?
+
+Best Answer:
+
+The Destination Search screen lets commuters search for Cebu City destinations with live results, suggestions, and saved places.
+
+Question 30
+
+Q: How does the system verify user credentials after login?
+
+Best Answer:
+
+The system validates entered credentials against stored user data before granting access to the dashboard.
+
+Question 31
+
+Q: What is the purpose of the onboarding screens for first‑time users?
+
+Best Answer:
+
+Onboarding screens introduce core features and guide first‑time users before they log in.
+
+Question 32
+
+Q: Which screen provides users with quick access to destination search and recent searches?
+
+Best Answer:
+
+The Home Dashboard provides quick access to destination search, recent searches, and notifications.
+
+Question 33
+
+Q: What role does email verification play in authentication?
+
+Best Answer:
+
+Email verification confirms the user’s email address, enabling personalized navigation and location services.
+
+Question 34
+
+Q: How does the system determine the estimated fare for a route?
+
+Best Answer:
+
+Estimated fare is derived from LTFRB‑approved fare rates retrieved from the MySQL database.
+
+Question 35
+
+Q: Why is real‑time GPS tracking important during navigation?
+
+Best Answer:
+
+Real‑time GPS tracking ensures accurate navigation guidance and timely geofence‑based alerts.
+
+Question 36
+
+Q: How does the system consider route availability and frequency in its evaluation?
+
+Best Answer:
+
+The system checks whether a jeepney operates regularly and its service cadence when scoring routes.
+
+Question 37
+
+Q: How are admin updates reflected instantly in the application?
+
+Best Answer:
+
+Admin updates are written to MySQL, so the application instantly reflects the latest route, fare, and landmark information.
+
+Question 38
+
+Q: What is the purpose of the trip summary generated after completion?
+
+Best Answer:
+
+The trip summary records the completed route, fare, distance, travel time, and timestamp for the user’s history.
+
+Question 39
+
+Q: How can users modify their saved places?
+
+Best Answer:
+
+Users modify saved places via the Profile and Saved Places screens, where they can add, edit, or delete destinations.
+
+Question 40
+
+Q: What is the benefit of maintaining a trip history?
+
+Best Answer:
+
+Trip history lets users review past journeys, including routes, fares, and durations, aiding future trip planning.
+
+Question 41
+
+Q: Which administrative task involves data backup and restoration?
+
+Best Answer:
+
+Database backup and restoration preserve data reliability and protect against loss during admin maintenance.
+
+Question 42
+
+Q: How does the system keep route recommendations accurate over time?
+
+Best Answer:
+
+Continuous updates to route, fare, and landmark data via the admin workflow keep route recommendations accurate over time.
+
+Question 43
+
+Q: What is the difference between the Overall Program Workflow and the User Workflow?
+
+Best Answer:
+
+The Overall Workflow describes the full system operation, while the User Workflow focuses on commuter actions from login to trip completion.
+
+Question 44
+
+Q: How does the engine handle multiple feasible routes before presenting a recommendation?
+
+Best Answer:
+
+The engine evaluates all feasible routes, scores them, ranks them, and selects the highest‑scoring multimodal route for recommendation.
+
+Question 45
+
+Q: What is the purpose of the geofence mechanism in the navigation process?
+
+Best Answer:
+
+The geofence mechanism monitors proximity to the drop‑off point and triggers a "Para" alert when the user is near it.
+
+Question 46
+
+Q: Which component validates user input before retrieving data?
+
+Best Answer:
+
+Input validation occurs in the System Workflow before any data is retrieved from the database.
+
+Question 47
+
+Q: How do administrators manage user permissions?
+
+Best Answer:
+
+Administrators configure user permissions through settings in the admin dashboard to control access rights.
+
+Question 48
+
+Q: What type of diagram depicts actor‑use case relationships in PasaHERO?
+
+Best Answer:
+
+Use case diagrams, such as Figure 16 for users and Figure 17 for admins, illustrate actor‑use case relationships.
+
+Question 49
+
+Q: Why is GPS used for location tracking during navigation?
+
+Best Answer:
+
+GPS provides precise, real‑time location data necessary for dynamic navigation and accurate geofence detection.
+
+Question 50
+
+Q: What happens if a commuter disables location permissions during authentication?
+
+Best Answer:
+
+If location permissions are disabled, the system cannot auto‑detect the user’s position, limiting recommendation accuracy and navigation effectiveness.
+

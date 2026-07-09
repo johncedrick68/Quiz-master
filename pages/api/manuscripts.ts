@@ -14,7 +14,27 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       return res.status(200).json({ files: [] });
     }
 
-    const files = fs.readdirSync(manuscriptDir).filter(file => file.endsWith('.txt'));
+    const allFiles = fs.readdirSync(manuscriptDir).filter(file => file.endsWith('.txt'));
+
+    // Build a set of raw manuscript base names that have a matching Defense Bible
+    const defenseBibleBases = new Set(
+      allFiles
+        .filter(f => f.startsWith('Defense_Bible_'))
+        .map(f => f.replace('Defense_Bible_', ''))
+    );
+
+    const files = allFiles.filter(file => {
+      // Always exclude generated Defense_Bible_ files — clicking the raw manuscript
+      // will auto-load its Defense Bible automatically (see load-manuscript.ts).
+      if (file.startsWith('Defense_Bible_')) return false;
+
+      // Keep PasaHERO_Defense_Bible_V2 standalone files (no raw counterpart)
+      if (file.startsWith('PasaHERO_Defense_Bible')) return true;
+
+      // Keep raw manuscripts
+      return true;
+    });
+
     return res.status(200).json({ files });
   } catch (err: any) {
     console.error('manuscripts error:', err);

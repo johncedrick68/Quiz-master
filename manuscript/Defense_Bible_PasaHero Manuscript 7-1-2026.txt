@@ -2,401 +2,401 @@ PasaHERO Defense Bible - Generated from PasaHero Manuscript 7-1-2026.txt
 
 Question 1
 
-Q: What specific problem does PasaHERO aim to solve in Cebu City's public transportation, as outlined in your rationale?
+Q: Why was Graph Theory selected as a theoretical foundation for PasaHERO?
 
 Best Answer:
 
-PasaHERO addresses 'transit anxiety' and the 'digital blind spot' in Cebu City's informal jeepney network by providing digital information on complex routes, fares, and navigation cues that are often limited to local knowledge.
+Graph Theory models transportation networks as nodes and edges, enabling precise route suggestions and visualization of jeepney stops and walking segments.
 
 Question 2
 
-Q: Explain the 'multimodal AI navigation' aspect of your system.
+Q: How does Geographic Information System (GIS) technology enhance PasaHERO’s functionality?
 
 Best Answer:
 
-It integrates walking directions for the first and last miles with AI-powered jeepney route recommendations. The AI processes location and transport data to suggest optimal multimodal paths, combining walking and jeepney segments efficiently.
+GIS integrates spatial data, digital maps, and GPS to display color‑coded routes, landmarks, and first‑/last‑mile paths for accurate navigation.
 
 Question 3
 
-Q: How does PasaHERO address the 'spatial blindness' issue for commuters inside a jeepney?
+Q: Explain the role of the Rule‑Based System in fare calculation.
 
 Best Answer:
 
-PasaHERO implements geofenced 'Para' notifications, which provide timely visual alerts or vibrations when the user approaches their designated drop-off point. This gives commuters a clear cue on when to alight, reducing panic.
+A rule‑based engine applies predefined LTFRB fare matrices to compute distance‑based fares for traditional and modernised jeepneys, ensuring consistent estimates.
 
 Question 4
 
-Q: You mention using Graph Theory. How specifically is the jeepney network modeled using this theory in PasaHERO?
+Q: In what way does Mobility as a Service (MaaS) influence the design of PasaHERO?
 
 Best Answer:
 
-Jeepney stops, landmarks, and destinations are represented as vertices or nodes. The jeepney routes and connecting roads are modeled as edges, forming an interconnected network that allows the system to determine possible travel paths.
+MaaS drives the integration of walking, jeepney travel, and multimodal trip planning into a single seamless user experience from origin to destination.
 
 Question 5
 
-Q: What role does Geographic Information System (GIS) play in PasaHERO's functionality?
+Q: How does the Unified Theory of Acceptance and Use of Technology (UTAUT) guide the evaluation of PasaHERO?
 
 Best Answer:
 
-GIS is fundamental for visualizing the jeepney network on a digital map, integrating GPS location services, and displaying color-coded routes. It helps commuters understand their travel path, identify boarding points, and locate nearby landmarks.
+UTAUT provides evaluation criteria‑functionality, usability, reliability, efficiency, and satisfaction‑to measure commuter acceptance and perceived usefulness.
 
 Question 6
 
-Q: Where exactly does 'AI' come into play in PasaHERO, beyond just following predefined rules for fares?
+Q: What commuter pain points motivated the development of PasaHERO?
 
 Best Answer:
 
-The AI in PasaHERO primarily drives the route recommendations. It processes user location and transport data to suggest optimal multimodal journeys, aiming to provide personalized and efficient trip plans.
+Commuters face transit anxiety, lack of route and fare information, difficulty locating boarding zones, and spatial blindness during trips in Cebu City.
 
 Question 7
 
-Q: How does PasaHERO ensure accuracy and transparency in its fare estimation?
+Q: Describe the research methodology employed in the study.
 
 Best Answer:
 
-PasaHERO utilizes a Rule-Based System to compute estimated fares directly based on the official LTFRB distance-based fare matrix. This ensures consistent, transparent, and regulatorily compliant fare calculations for both traditional and modernized jeepneys.
+A quantitative approach was used, gathering commuter data through a structured survey questionnaire administered to selected Cebu jeepney users.
 
 Question 8
 
-Q: How does PasaHERO align with the principles of Mobility as a Service (MaaS)?
+Q: Why was a structured survey chosen as the primary data collection instrument?
 
 Best Answer:
 
-PasaHERO embodies MaaS principles by integrating multiple transportation options—specifically walking directions for first and last miles with jeepney route recommendations—into a single digital platform, providing an end-to-end journey planning experience.
+It enables systematic capture of commuter challenges, route usage patterns, and acceptance metrics needed for validating system functionality and user satisfaction.
 
 Question 9
 
-Q: You mentioned the Unified Theory of Technology Acceptance and Use (UTAUT) as a theoretical basis. Which specific determinants of UTAUT are reflected in your system's acceptability criteria?
+Q: What are the five specific objectives of the research?
 
 Best Answer:
 
-Our evaluation criteria for functionality, efficiency, and reliability align with 'Performance Expectancy.' The 'Usability' criterion directly relates to 'Effort Expectancy,' which are key determinants in UTAUT for predicting technology adoption.
+1) Identify existing commuting processes and problems; 2) Determine mechanisms for multimodal navigation and route visualisation; 3) Define AI‑powered recommendations; 4) Establish acceptable system features; 5) Evaluate acceptability in functionality, usability, reliability, efficiency, and satisfaction.
 
 Question 10
 
-Q: Your application is exclusively web-based. What are the practical implications of this design choice for typical Cebu City commuters?
+Q: List the core functional features of PasaHERO.
 
 Best Answer:
 
-Being web-based means users require a stable internet connection and a modern web browser, which could be a limitation for commuters with unreliable mobile data or older devices. It also lacks offline functionality.
+AI‑powered route recommendation, jeepney code/signboard recognition, interactive color‑coded route visualisation, dynamic fare analytics, landmark‑based guidance, and geofenced “Para” notifications.
 
 Question 11
 
-Q: Why does PasaHERO not provide real-time jeepney locations or arrival times, and how does this affect its utility?
+Q: How does the AI‑powered route recommendation engine work?
 
 Best Answer:
 
-The system relies on predefined jeepney routes and stops, not real-time vehicle tracking. This limitation means PasaHERO cannot account for unexpected delays, traffic, or unannounced route deviations, potentially impacting real-time travel accuracy.
+It processes user origin, destination, and current location data using multimodal algorithms to suggest optimal walking and jeepney segments, integrating Cebu’s alphanumeric route codes.
 
 Question 12
 
-Q: Your fare calculator is limited to standard LTFRB rates. Why aren't discounts for students or senior citizens integrated?
+Q: What is the purpose of jeepney code and signboard recognition?
 
 Best Answer:
 
-Integrating dynamic discounts for specific groups would add significant complexity for verification and real-time application. This was beyond the scope of an academic research prototype focused on establishing core navigation and fare estimation functionality.
+It decodes alphanumeric route identifiers (e.g., 04L) and extracts textual signboard information to provide clear, human‑readable route descriptions.
 
 Question 13
 
-Q: Compared to Google Maps, which also offers public transport routing, what distinct advantage does PasaHERO offer specifically for Cebu City commuters?
+Q: Explain the color‑coded route overlay in the map view.
 
 Best Answer:
 
-Google Maps often overlooks informal paratransit networks. PasaHERO provides highly granular, Cebu-specific jeepney route visualization, jeepney code/signboard recognition, landmark-based guidance, and geofenced 'Para' notifications tailored to the local context.
+Red lines indicate active jeepney routes, green lines depict walking paths for first‑ and last‑mile navigation, and the overlay clarifies multimodal connections.
 
 Question 14
 
-Q: How does PasaHERO improve upon existing Cebu-specific applications like JTransit or Cebu Jeepney Finder, as noted in your comparative matrix?
+Q: How does the dynamic fare calculator estimate fares?
 
 Best Answer:
 
-While competitors offer route information, PasaHERO integrates AI-powered route optimization, dynamic LTFRB-based fare analytics, robust multimodal first-mile/last-mile navigation, and proactive commuter alerts into a single, comprehensive solution.
+It calculates distance between boarding and drop‑off points, applies LTFRB distance‑based fare rates for traditional and modernised jeepneys, and presents the estimate before the trip.
 
 Question 15
 
-Q: How does the 'Jeepney Code and Signboard Identification' feature help a commuter, especially a newcomer to Cebu City?
+Q: What is landmark‑based guidance and why is it important?
 
 Best Answer:
 
-This feature decodes complex alphanumeric jeepney route codes (e.g., 04L, 13C) into understandable route descriptions and signboards. This helps newcomers easily identify the correct jeepney, reducing confusion and anxiety.
+It highlights nearby notable structures near stops, helping users confirm their location and board the correct jeepney, especially for first‑time or visually impaired commuters.
 
 Question 16
 
-Q: What is the importance of 'First-Mile and Last-Mile Navigation Guidance' in your system?
+Q: Describe the geofenced “Para” notification mechanism.
 
 Best Answer:
 
-It provides crucial walking directions from the user's current location to the nearest jeepney stop and from the drop-off point to their final destination. This ensures a complete, seamless end-to-end journey experience, addressing a common pain point in public transport.
+When a user’s GPS position approaches the pre‑selected drop‑off point, the system triggers a visual or vibrational alert, informing them to signal the driver to stop.
 
 Question 17
 
-Q: Define 'Multimodal Navigation' as it applies to PasaHERO.
+Q: How does first‑mile and last‑mile navigation improve commuter experience?
 
 Best Answer:
 
-In PasaHERO, multimodal navigation refers to guiding a commuter through a journey that seamlessly integrates both walking segments and public utility jeepney segments into a single, cohesive trip plan.
+It supplies turn‑by‑turn walking directions from the user’s current location to the nearest jeepney stop and from the drop‑off point to the final destination.
 
 Question 18
 
-Q: You mentioned 'information asymmetry' as a problem in the Philippine PUJ sector. How does PasaHERO specifically mitigate this?
+Q: What limitations does the prototype have regarding real‑time data?
 
 Best Answer:
 
-PasaHERO mitigates information asymmetry by digitizing critical data on boarding zones, detailed routes, and distance-based fare structures that are often only known through local knowledge, making this information readily accessible to all commuters.
+The system does not provide live jeepney positions or arrival times and relies on static route and stop information, which may not reflect sudden changes.
 
 Question 19
 
-Q: Your specific objectives distinguish between 'mechanisms and techniques' and 'best features.' Can you clarify this difference with an example from your study?
+Q: Why can’t the fare calculator automatically include discounted fares for students or PWDs?
 
 Best Answer:
 
-Mechanisms and techniques refer to the underlying methodologies, such as the multimodal route recommendation algorithm. Best features are the resulting user-facing functionalities, like the AI-powered route recommendation display and interactive visualization.
+The prototype uses the standard LTFRB fare matrix; special discount rules are not yet integrated, limiting it to regular distance‑based rates.
 
 Question 20
 
-Q: You mention collecting commuter profile information for research. How do you ensure compliance with data privacy regulations?
+Q: What are three major system constraints mentioned in the document?
 
 Best Answer:
 
-All personal data collected is handled confidentially and strictly in compliance with relevant data privacy regulations. This ensures that commuter information is used solely for research and analytical purposes without compromise.
+It is web‑only, requires stable internet and GPS, and supports only jeepney transport within selected Cebu routes, excluding other modes.
 
 Question 21
 
-Q: Explain the significance of the 'color-coded map' visualization.
+Q: Which evaluation criteria were used to assess user acceptability?
 
 Best Answer:
 
-The color-coded map uses red lines to represent active jeepney routes and green lines for walking paths (first-mile and last-mile segments). This clear visual distinction helps users easily understand and follow their multimodal journey segments.
+Functionality, usability, reliability, efficiency, and user satisfaction, aligned with UTAUT constructs for technology adoption.
 
 Question 22
 
-Q: Elaborate on the 'Geofenced 'Para' Notification' feature. How is it implemented and what benefits does it offer?
+Q: How was functionality tested during acceptance testing?
 
 Best Answer:
 
-It's an alert triggered when the user's device, using GPS, enters a predefined geofenced area near their planned drop-off point. It provides timely visual or vibration cues, preventing passengers from overshooting their destination due to spatial blindness.
+Structured acceptance testing was performed for both administrators (system integration) and end‑users (task completion and error rates).
 
 Question 23
 
-Q: What makes Cebu City's jeepney system particularly challenging for commuters, as highlighted in your rationale?
+Q: What does the Comparative Matrix reveal about PasaHERO’s uniqueness?
 
 Best Answer:
 
-Cebu City has a complex, unintelligible alphanumeric routing network, a significant lack of street-level signage, and commuters often experience 'spatial blindness' inside vehicles without visual or auditory route cues.
+It shows PasaHERO combines multimodal routing, AI optimisation, Cebu‑specific navigation, code recognition, colour‑coded visualisation, fare analytics, landmark guidance, and geofenced “Para” alerts‑features not all present in Moovit, Google Maps, JTransit, Cebu Jeepney Finder, or RUTA.
 
 Question 24
 
-Q: How might future researchers build upon the limitations of your prototype for large-scale commercial deployment?
+Q: Explain the significance of integrating LTFRB Fare Matrix into the system.
 
 Best Answer:
 
-Future work could integrate real-time jeepney tracking, expand support to other public transport modes, incorporate dynamic discount calculations for fares, and develop native mobile applications for offline access and enhanced performance.
+It ensures fare estimates are legally compliant and transparent, reducing disputes and building commuter trust in the navigation assistance.
 
 Question 25
 
-Q: Why is 'Landmark-Based Guidance' a crucial feature for PasaHERO, especially in the context of Cebu City?
+Q: What role does the splash screen and onboarding flow play in user adoption?
 
 Best Answer:
 
-Many commuters, especially those unfamiliar with an area, rely on easily recognizable landmarks rather than obscure street names to navigate. This feature provides clear reference points near boarding and drop-off locations, making guidance intuitive and reliable.
+They provide a first‑impression interface, guide new users through account creation, and simplify the initial interaction with the system.
 
 Question 26
 
-Q: Given the prevalence of mobile apps, why did your team opt for a web-based application instead of a native mobile application?
+Q: How does the system handle user data privacy?
 
 Best Answer:
 
-A web-based approach was chosen for broader accessibility across various devices without specific OS development, simplifying deployment and updates. It also aligned well with the typical scope and resource constraints of an academic research prototype.
+Personal profile information is recorded for research purposes only, stored confidentially, and handled in compliance with data‑privacy regulations.
 
 Question 27
 
-Q: Your comparative matrix indicates PasaHERO has 'AI-Powered Route Optimization' while some competitors do not. What does this mean for the user experience?
+Q: What is the expected impact of PasaHERO on commuters in Cebu City?
 
 Best Answer:
 
-This means PasaHERO doesn't just provide static route suggestions. It dynamically processes user location and destination data to recommend the most optimal multimodal path, potentially considering multiple factors for efficiency that basic systems might overlook.
+It reduces transit anxiety, clarifies route and fare information, provides accurate navigation, and improves overall commuting convenience and efficiency.
 
 Question 28
 
-Q: How can the findings of your study benefit transport-related offices and agencies like CCTO or LTFRB?
+Q: How does the study address the “digital blind spot” identified in informal paratransit networks?
 
 Best Answer:
 
-The study's insights into commuter challenges and the effectiveness of PasaHERO can inform these agencies in designing more responsive commuter information services and developing urban mobility initiatives that address identified gaps in public transport information.
+By digitising jeepney routes, signboards, and fare structures, PasaHERO provides the missing information that mainstream apps ignore.
 
 Question 29
 
-Q: Clarify the distinction between the 'Scope of the Study' and the 'Scope of the Proposed System' as outlined in your document.
+Q: Which hardware specifications are required on the client side?
 
 Best Answer:
 
-The 'Scope of the Study' defines the overall research investigation, including methodology and evaluation parameters. The 'Scope of the Proposed System' details the specific functionalities, boundaries, and features of the PasaHERO application itself.
+Minimum smartphone/tablet with modern web browser, GPS capability, and stable internet connection to support map rendering and geofencing.
 
 Question 30
 
-Q: Your system is limited to jeepneys. What are the challenges or complexities that prevented you from including other modes like buses or taxis?
+Q: What software technologies power the server‑side architecture?
 
 Best Answer:
 
-Integrating other public transport modes would require significantly more extensive data collection, complex intermodal routing algorithms, and resource allocation. This was beyond the scope and resources available for this academic prototype focused specifically on jeepney travel.
+The server leverages a stack of Node.js, Express, PostgreSQL, and relevant GIS and AI libraries to handle routing, analytics, and API services.
 
 Question 31
 
-Q: Beyond the specific theories, how does your project broadly contribute to the field of intelligent transportation systems?
+Q: Why was an iterative methodology chosen for development?
 
 Best Answer:
 
-PasaHERO broadly contributes by demonstrating a practical application of AI, GIS, and MaaS principles to address specific urban mobility challenges within an informal paratransit system, thereby enhancing accessibility and efficiency for commuters.
+Iterative development allows frequent validation of features, early detection of usability issues, and continuous refinement based on stakeholder feedback.
 
 Question 32
 
-Q: Explain why functionality, usability, reliability, efficiency, and user satisfaction were chosen as the primary evaluation criteria for PasaHERO.
+Q: What is the purpose of the “Business Model Canvas” in the project documentation?
 
 Best Answer:
 
-These criteria are standard for assessing software systems and directly align with key aspects of technology acceptance, such as those in UTAUT. They are crucial for determining if the system effectively solves its intended problem and provides a positive user experience.
+It outlines revenue streams, key activities, and partnerships intended to support the system’s sustainability and future commercialisation.
 
 Question 33
 
-Q: What is the origin or meaning behind the name 'PasaHERO'?
+Q: How does the “User Workflow” diagram contribute to the design?
 
 Best Answer:
 
-The name 'PasaHERO' is a portmanteau, combining 'Pasahero,' the Filipino word for passenger, with 'HERO,' symbolizing the system as a helpful guide or assistant for commuters.
+It maps out user interactions from login through trip planning, navigation, and post‑trip actions, ensuring a logical flow and identifying potential friction points.
 
 Question 34
 
-Q: Looking at your List of Tables, you have tables like 'TRIPS', 'TRIP ROUTES', and 'FARES'. Briefly describe how these tables are interconnected and support the core functionality of PasaHERO.
+Q: Explain the significance of the “Entity Relationship Diagram” in the system design.
 
 Best Answer:
 
-The 'TRIPS' table records individual commuter journeys. 'ROUTES' and 'STOPS' define the jeepney network, while 'TRIP ROUTES' links trips to specific route segments. The 'FARES' table, based on the LTFRB matrix, is then used by the rule-based system to calculate fare estimates for these routes, completing the trip information.
+It defines data relationships among users, trips, routes, stops, and landmarks, supporting accurate database modelling and system scalability.
 
 Question 35
 
-Q: Your Table 5 lists a 'GANTT CHART'. What was the primary purpose of using a Gantt chart in the development of PasaHERO?
+Q: What future enhancements could improve PasaHERO’s commercial viability?
 
 Best Answer:
 
-The Gantt Chart was primarily used for comprehensive project planning and management. It helped visualize the project timeline, schedule development tasks, track progress across different stages, and ensure timely completion of PasaHERO.
+Integration of real‑time GPS tracking, dynamic fare discounts, booking/reservation features, and expansion to other transit modes would broaden functionality.
 
 Question 36
 
-Q: Figure 7 indicates you used an 'Iterative Methodology'. Why was this approach chosen for developing PasaHERO?
+Q: How does the system assist tourists unfamiliar with Cebu’s transport network?
 
 Best Answer:
 
-An iterative methodology was chosen to allow for continuous refinement and adaptation throughout development. This approach facilitates early testing, gathering user feedback, and making necessary adjustments incrementally to improve system functionality and user experience.
+It offers clear route visualisation, landmark guidance, and fare estimates, allowing first‑time visitors to navigate confidently without local assistance.
 
 Question 37
 
-Q: Can you outline the general 'User Workflow' as depicted in Figure 10, from initial interaction to trip completion?
+Q: Why is the “geofenced Para notification” essential for commuter safety?
 
 Best Answer:
 
-The user workflow typically involves account authentication, inputting a destination for search, receiving AI route recommendations, navigating the first-mile walk, taking the jeepney with geofenced 'Para' alerts, and finally, completing the trip.
+It alerts users at the appropriate drop‑off point, reducing the risk of overshooting or missing the destination, which mitigates panic and travel errors.
 
 Question 38
 
-Q: What are the primary responsibilities or functionalities supported by the 'Admin Workflow' depicted in Figure 12?
+Q: What is the role of the “AI Route Recommendation” in reducing transit anxiety?
 
 Best Answer:
 
-The Admin Workflow primarily supports managing system data, such as updating jeepney routes, stops, and landmarks, maintaining the fare matrix, overseeing user accounts, and generating system reports for monitoring and maintenance.
+By providing accurate, multimodal route suggestions and proactive alerts, it gives commuters confidence and reduces uncertainty during travel.
 
 Question 39
 
-Q: Figure 22 shows 'AI Route Recommendation - User'. What key information does this screen present to the user after they input a destination?
+Q: How does the study’s evaluation align with the objectives outlined in Chapter 1?
 
 Best Answer:
 
-This screen presents the user with optimized multimodal routes, including specific jeepney codes and signboards to take, visual route paths displayed on a map, estimated travel times, and automated fare estimates.
+Each evaluation criterion directly measures the specific objectives, such as route accuracy, fare calculation, usability, and overall user satisfaction.
 
 Question 40
 
-Q: What is the 'LTFRB Fare Matrix' and why is it critical for PasaHERO's fare analytics?
+Q: In what ways does the prototype differ from a full‑scale commercial application?
 
 Best Answer:
 
-The LTFRB Fare Matrix is the official fare schedule set by the Land Transportation Franchising and Regulatory Board. It is critical because PasaHERO uses this authoritative source as the sole basis for all its automated distance-based fare computations, ensuring accuracy and regulatory compliance.
+The prototype lacks real‑time vehicle tracking, integrated payment processing, and advanced features like seat booking, limiting its deployment scope.
 
 Question 41
 
-Q: Could you elaborate on what 'transit anxiety' entails and how PasaHERO specifically aims to alleviate it?
+Q: Why is GIS essential for visualizing jeepney signboards?
 
 Best Answer:
 
-Transit anxiety refers to the stress commuters experience from fear of missing transfers, getting lost, or overshooting destinations. PasaHERO alleviates this through clear route visualization, landmark-based guidance, and geofenced 'Para' notifications, providing clarity and confidence.
+GIS layers overlay textual signboard data onto digital maps, making route codes interpretable and enabling spatial analysis of stops and landmarks.
 
 Question 42
 
-Q: What is the 'digital blind spot' that PasaHERO addresses, according to transportation scholars Klopp and Cavoli?
+Q: How does the “Iterative Methodology” diagram influence development risk management?
 
 Best Answer:
 
-The 'digital blind spot' refers to the failure of mainstream navigation applications to accurately map informal paratransit networks, such as jeepneys. PasaHERO addresses this by digitizing and visualizing these systems, filling the information gap.
+It introduces incremental validation cycles, allowing early identification of technical or usability risks before large‑scale investment.
 
 Question 43
 
-Q: Your study includes 'Acceptance Testing'. What is the purpose of this stage, and what distinction is made between 'ACCEPTANCE TESTING ADMIN' and 'ACCEPTANCE TESTING USER'?
+Q: What does the “Functional Decomposition diagram” illustrate?
 
 Best Answer:
 
-Acceptance testing validates if the system meets user requirements in a real-world scenario. The distinction ensures that both administrative functionalities (by system administrators) and user-facing functionalities (by end-users/commuters) are thoroughly tested and deemed acceptable for their respective roles.
+It breaks down system functionalities into granular modules, clarifying responsibilities and aiding systematic testing and maintenance.
 
 Question 44
 
-Q: Figure 29 depicts the 'Network Design'. Can you briefly describe the fundamental architecture PasaHERO employs for its operations?
+Q: Why are “customisable notifications” important for commuter experience?
 
 Best Answer:
 
-PasaHERO employs a client-server architecture. User devices act as clients, accessing the web application hosted on a central server, which processes requests and delivers data, relying on internet connectivity for all operations.
+They allow users to receive relevant alerts (e.g., route changes, fare updates) tailored to their preferences, enhancing engagement and convenience.
 
 Question 45
 
-Q: Table 16 lists 'HARDWARE SPECIFICATIONS (CLIENT-SIDE)'. What are the minimum requirements a user's device would need to effectively use PasaHERO?
+Q: How does PasaHERO support the “first‑mile/last‑mile” concept?
 
 Best Answer:
 
-Client-side hardware requirements would minimally include a device capable of running a modern web browser, a stable internet connection for data access, and functional location services like GPS for accurate navigation and geofenced alerts.
+It provides walking navigation between the user’s location and the nearest jeepney stop, and from the drop‑off point to the final destination.
 
 Question 46
 
-Q: Tables 3 and 4 refer to 'STAGE 1 VALIDATION BOARD' and 'STAGE 2 VALIDATION BOARD'. What was the role of these validation boards in your project?
+Q: What is the impact of the system’s web‑only availability on accessibility?
 
 Best Answer:
 
-These validation boards were responsible for reviewing and providing structured feedback on the system's design and development at critical stages. Their role was to ensure that the project adhered to requirements and standards before advancing to the next phase.
+It ensures cross‑platform access via browsers but requires reliable internet, potentially limiting use in low‑connectivity areas.
 
 Question 47
 
-Q: According to your definitions, what does a 'Dynamic Fare Calculator' imply in the context of PasaHERO?
+Q: How does the system address “transit anxiety” as defined in the literature?
 
 Best Answer:
 
-A 'Dynamic Fare Calculator' in PasaHERO implies a feature that estimates jeepney fares based on the calculated distance of a specific route and the current, official LTFRB distance-based fare rules, providing flexible and up-to-date cost estimations.
+By delivering clear route planning, real‑time guidance, and proactive alerts, it reduces uncertainty and fear associated with public transport navigation.
 
 Question 48
 
-Q: Dr. Sheilah Napalang of PIDSx identifies a structural 'information asymmetry'. How does PasaHERO tackle this specific issue?
+Q: What are the primary data sources for the LTFRB fare matrix?
 
 Best Answer:
 
-PasaHERO directly tackles this by centralizing and digitizing critical data on boarding zones, specific routes, and distance-based fare structures. This makes the information readily available to all commuters, bridging the gap between local knowledge and general public access.
+The matrix is derived from official LTFRB regulations and distance‑based fare tables published by the regulatory board.
 
 Question 49
 
-Q: Beyond the technical aspects, what was the underlying motivation or ethical consideration that drove the development of PasaHERO, as hinted in your Acknowledgement and Dedication sections?
+Q: Explain the “AI‑based multimodal navigation” in contrast to simple turn‑by‑turn walking directions.
 
 Best Answer:
 
-The underlying motivation was a dedication to improving public transportation for jeepney riders in Cebu City. The project aims to enhance their daily commuting experience by making it more convenient, reliable, and accessible, acknowledging the challenges they face.
+It combines walking and jeepney segments, factoring in route codes, stops, and fare costs to produce optimal, end‑to‑end trip plans.
 
 Question 50
 
-Q: Your Scope states the system records commuter profile information for research. How does this data contribute to the study's objectives?
+Q: How does the study’s “Significance of the Study” benefit future researchers?
 
 Best Answer:
 
-This data helps identify current commuting challenges and user demographics. It provides a basis for evaluating the system's acceptability by correlating user profiles with feedback on functionality, usability, reliability, efficiency, and overall user satisfaction, informing future improvements.
+It provides a validated framework and dataset for developing intelligent transportation systems and AI‑driven navigation platforms in similar urban contexts.
 

@@ -64,11 +64,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     let text = providedText;
     
     if (!text && filename) {
-      const manuscriptPath = path.join(process.cwd(), 'manuscript', filename);
+      const manuscriptDir = path.join(process.cwd(), 'manuscript');
+      // Auto-prefer Defense Bible if available for instant parsing without AI
+      let resolvedFilename = filename;
+      if (!filename.startsWith('Defense_Bible_') && !filename.startsWith('PasaHERO_Defense_Bible')) {
+        const defenseBibleName = `Defense_Bible_${filename.replace('.txt', '')}.txt`;
+        const defenseBiblePath = path.join(manuscriptDir, defenseBibleName);
+        if (fs.existsSync(defenseBiblePath)) {
+          console.log(`  -> Found pre-made Defense Bible for reviewer, loading: ${defenseBibleName}`);
+          resolvedFilename = defenseBibleName;
+        }
+      }
+      const manuscriptPath = path.join(manuscriptDir, resolvedFilename);
       if (!fs.existsSync(manuscriptPath)) {
         return res.status(404).json({ error: 'Manuscript not found.' });
       }
       text = fs.readFileSync(manuscriptPath, 'utf8');
+    }
+
+    // Also check if the provided text has a matching Defense Bible on disk (sent as filename hint)
+    if (text && !text.includes('Best Answer:') && filename) {
+      const manuscriptDir = path.join(process.cwd(), 'manuscript');
+      const defenseBibleName = `Defense_Bible_${filename.replace('.txt', '')}.txt`;
+      const defenseBiblePath = path.join(manuscriptDir, defenseBibleName);
+      if (fs.existsSync(defenseBiblePath)) {
+        console.log(`  -> Overriding provided text with Defense Bible: ${defenseBibleName}`);
+        text = fs.readFileSync(defenseBiblePath, 'utf8');
+      }
     }
 
     if (!text || text.trim().length < 30) {
@@ -141,9 +163,14 @@ Respond ONLY with this JSON shape:
     try {
       parsed = JSON.parse(output);
     } catch {
+      // OpenRouter sometimes wraps with extra text — extract only the JSON block
       const match = output.match(/\{[\s\S]*\}/);
-      if (match) parsed = JSON.parse(match[0]);
-      else throw new Error('Could not parse model response as JSON.');
+      if (match) {
+        try { parsed = JSON.parse(match[0]); }
+        catch { throw new Error('Could not parse model response as JSON.'); }
+      } else {
+        throw new Error('Could not parse model response as JSON.');
+      }
     }
 
     if (!parsed.pairs || !Array.isArray(parsed.pairs)) {
