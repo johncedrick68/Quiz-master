@@ -39,6 +39,40 @@ export async function generateWithAllKeys(
     throw new Error('GEMINI_API_KEY is not set on the server.');
   }
 
+  if (process.env.OPENROUTER_API_KEY) {
+    try {
+      console.log(`  -> Trying OpenRouter with free model...`);
+      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "openrouter/free",
+          messages: [
+            { role: "system", content: systemInstruction },
+            { role: "user", content: prompt }
+          ]
+        })
+      });
+      const data = await res.json();
+      if (data.error) {
+        console.error("OpenRouter Error Object:", data.error);
+        throw new Error(data.error.message || "Unknown OpenRouter error");
+      }
+      
+      let text = data.choices[0].message.content.trim();
+      if (text.startsWith("\`\`\`json")) {
+        text = text.replace(/^\`\`\`json\n?/, '').replace(/\`\`\`$/, '').trim();
+      }
+      return text; // Return string text directly to match the original function signature
+    } catch (err: any) {
+      console.warn(`  -> OpenRouter failed: ${err.message}, falling back to Gemini keys...`);
+      // Fall through to existing Gemini keys on error
+    }
+  }
+
   let lastError: any;
 
   for (const key of keys) {

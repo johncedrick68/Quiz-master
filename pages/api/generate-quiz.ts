@@ -145,7 +145,7 @@ Respond ONLY with valid JSON. No markdown fences, no preamble.`;
 ${trimmedText}
 """
 
-Generate up to 50 defense-quality multiple-choice questions from this document.
+Generate up to 15 defense-quality multiple-choice questions from this document.
 
 Requirements for QUESTIONS:
 - Ask about design choices, trade-offs, limitations, and algorithms/methods used
@@ -225,7 +225,7 @@ Respond ONLY with this JSON shape:
           q.correctIndex >= 0 &&
           q.correctIndex < 4
       )
-      .slice(0, 50);
+      .slice(0, 15);
 
     if (questions.length === 0) {
       throw new Error('No valid questions could be parsed.');

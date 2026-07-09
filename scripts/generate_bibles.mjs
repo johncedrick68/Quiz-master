@@ -29,6 +29,37 @@ const MODELS = ['gemini-3.1-pro-preview', 'gemini-3.5-flash', 'gemini-2.0-flash'
 async function generateWithAllKeys(prompt, systemInstruction) {
   let lastError = null;
 
+  if (process.env.OPENROUTER_API_KEY) {
+    try {
+      console.log(`  -> Trying OpenRouter with free model...`);
+      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "google/gemma-4-31b-it:free",
+          messages: [
+            { role: "system", content: systemInstruction },
+            { role: "user", content: prompt }
+          ]
+        })
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error.message);
+      
+      let text = data.choices[0].message.content.trim();
+      if (text.startsWith("\`\`\`json")) {
+        text = text.replace(/^\`\`\`json\n?/, '').replace(/\`\`\`$/, '').trim();
+      }
+      return JSON.parse(text);
+    } catch (err) {
+      console.warn(`  -> OpenRouter failed: ${err.message}, falling back to Gemini keys...`);
+      lastError = err;
+    }
+  }
+
   for (const key of keys) {
     const ai = new GoogleGenAI({ apiKey: key });
     for (const model of MODELS) {
