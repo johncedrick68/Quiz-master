@@ -63,8 +63,9 @@ export async function generateWithAllKeys(
       }
       
       let text = data.choices[0].message.content.trim();
-      if (text.startsWith("\`\`\`json")) {
-        text = text.replace(/^\`\`\`json\n?/, '').replace(/\`\`\`$/, '').trim();
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        text = jsonMatch[0];
       }
       return text; // Return string text directly to match the original function signature
     } catch (err: any) {
