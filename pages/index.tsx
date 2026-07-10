@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen } from 'lucide-react';
 import { FileUploader } from '../components/upload/FileUploader';
 import { QuizFlow } from '../components/quiz/QuizFlow';
 import { QuizResults } from '../components/quiz/QuizResults';
@@ -101,7 +99,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>AI Quiz by Cedrick</title>
+        <title>QuizForge — Document to Quiz</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </Head>
 
@@ -117,15 +115,11 @@ export default function Home() {
               <span className="text-white font-bold text-xl leading-none">Q</span>
             </div>
             <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-100 to-slate-400">
-              Quiz Master by Cedrick
+              QuizForge
             </h1>
           </motion.div>
 
-          <Link href="/reviewer">
-            <Button variant="outline" className="flex items-center gap-2 border-primary-500/50 hover:bg-primary-500/10 hover:border-primary-500 text-primary-300">
-              <BookOpen className="w-4 h-4" /> Study Guide / Reviewer
-            </Button>
-          </Link>
+          <span className="text-sm text-slate-400 hidden sm:block">Learn from what you already have</span>
         </header>
 
         {/* Main Content Area */}
@@ -144,7 +138,7 @@ export default function Home() {
                   Turn Any Document Into an <span className="text-primary-400">Interactive Quiz</span>
                 </h2>
                 <p className="text-lg text-slate-400 mb-10 max-w-xl mx-auto">
-                  Upload your study materials, and our AI will instantly generate up to 50 smart, dynamic multiple-choice questions.
+                  Upload a PDF or text file, or paste content. QuizForge creates a focused, interactive quiz grounded in your document.
                 </p>
                 <FileUploader onContentReady={handleContentReady} isLoading={false} />
               </motion.div>
@@ -159,7 +153,7 @@ export default function Home() {
                 className="w-full max-w-xl text-center"
               >
                 <h2 className="text-3xl font-bold mb-4">Choose Your Mode</h2>
-                <p className="text-slate-400 mb-8">File: {fileName}</p>
+                <p className="text-slate-400 mb-8">Ready to turn <span className="text-slate-200 font-medium">{fileName}</span> into a quiz.</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                   <div className="bg-dark-800 border border-dark-700 p-6 rounded-2xl flex flex-col items-center hover:border-primary-500/50 transition-colors">

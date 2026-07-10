@@ -1,10 +1,9 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return clsx(inputs);
 }
 
 export interface ButtonProps extends Omit<HTMLMotionProps<"button">, "className"> {

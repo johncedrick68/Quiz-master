@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import confetti from 'canvas-confetti';
 import { QuizSession } from '../../types/quiz';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
@@ -26,35 +25,6 @@ export function QuizResults({ session, onRestart, onNewQuiz }: QuizResultsProps)
     const s = seconds % 60;
     return `${m}m ${s}s`;
   };
-
-  useEffect(() => {
-    if (accuracy >= 80) {
-      const duration = 3 * 1000;
-      const end = Date.now() + duration;
-
-      const frame = () => {
-        confetti({
-          particleCount: 5,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 },
-          colors: ['#22c55e', '#3b82f6', '#f59e0b']
-        });
-        confetti({
-          particleCount: 5,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 },
-          colors: ['#22c55e', '#3b82f6', '#f59e0b']
-        });
-
-        if (Date.now() < end) {
-          requestAnimationFrame(frame);
-        }
-      };
-      frame();
-    }
-  }, [accuracy]);
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-8">
