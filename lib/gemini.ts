@@ -1,135 +1,50 @@
 import { GoogleGenAI } from '@google/genai';
 
-/**
- * Returns an array of all configured Gemini API keys.
- * Reads GEMINI_API_KEY, GEMINI_API_KEY_2, GEMINI_API_KEY_3, etc.
- */
+const REQUEST_TIMEOUT_MS = 20_000;
+const MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+
 export function getApiKeys(): string[] {
   const keys: string[] = [];
-  
-  // Primary key
-  if (process.env.GEMINI_API_KEY) keys.push(process.env.GEMINI_API_KEY);
-  
-  // Additional keys (for rotation when one hits daily quota)
-  let i = 2;
-  while (true) {
-    const key = process.env[`GEMINI_API_KEY_${i}`];
+  for (let index = 1; ; index++) {
+    const name = index === 1 ? 'GEMINI_API_KEY' : `GEMINI_API_KEY_${index}`;
+    const key = process.env[name];
     if (!key) break;
     keys.push(key);
-    i++;
   }
-  
   return keys;
 }
 
-// Models supported by new-generation Google AI Studio keys
-const MODELS = ['gemini-3.1-pro-preview', 'gemini-3.5-flash', 'gemini-2.0-flash'];
+function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('The AI took too long to respond. Please try again with a shorter document.')), timeoutMs);
+    promise.then((value) => { clearTimeout(timer); resolve(value); }, (error) => { clearTimeout(timer); reject(error); });
+  });
+}
 
-/**
- * Tries every (apiKey × model) combination before giving up.
- * On 429 (quota) or 503 (overloaded), it moves on automatically.
- */
-export async function generateWithAllKeys(
-  prompt: string,
-  systemInstruction: string
-): Promise<string> {
+export async function generateWithAllKeys(prompt: string, systemInstruction: string): Promise<string> {
   const keys = getApiKeys();
-  
-  if (keys.length === 0) {
-    throw new Error('GEMINI_API_KEY is not set on the server.');
-  }
+  if (!keys.length) throw new Error('GEMINI_API_KEY is not set on the server.');
 
-  if (process.env.OPENROUTER_API_KEY) {
-    try {
-      console.log(`  -> Trying OpenRouter with free model...`);
-      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "openrouter/free",
-          messages: [
-            { role: "system", content: systemInstruction },
-            { role: "user", content: prompt }
-          ]
-        })
-      });
-      const data = await res.json();
-      if (data.error) {
-        console.error("OpenRouter Error Object:", data.error);
-        throw new Error(data.error.message || "Unknown OpenRouter error");
-      }
-      
-      let text = data.choices[0].message.content.trim();
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        text = jsonMatch[0];
-      }
-      return text; // Return string text directly to match the original function signature
-    } catch (err: any) {
-      console.warn(`  -> OpenRouter failed: ${err.message}, falling back to Gemini keys...`);
-      // Fall through to existing Gemini keys on error
-    }
-  }
-
-  let lastError: any;
-
+  let lastError: unknown;
   for (const key of keys) {
-    const ai = new GoogleGenAI({ apiKey: key });
-    
-    for (const model of MODELS) {
-      try {
-        console.log(`Trying key ...${key.slice(-6)}, model: ${model}`);
-        const response = await ai.models.generateContent({
-          model,
+    try {
+      const ai = new GoogleGenAI({ apiKey: key });
+      const response = await withTimeout(
+        ai.models.generateContent({
+          model: MODEL,
           contents: prompt,
-          config: { systemInstruction, responseMimeType: 'application/json' }
-        });
-
-        const text = response.text?.trim();
-        if (!text) {
-          console.warn(`  → Empty response from ${model}, trying next...`);
-          continue;
-        }
-
-        // Validate it's actually JSON before returning — Gemini sometimes returns
-        // plain-text error messages like "An error occurred" even with responseMimeType set
-        try {
-          JSON.parse(text);
-          return text; // ✅ Valid JSON — return it
-        } catch {
-          console.warn(`  → Response from ${model} is not valid JSON, trying next...`);
-          console.warn(`     Preview: ${text.slice(0, 80)}`);
-          lastError = new Error(`Model returned non-JSON: ${text.slice(0, 80)}`);
-          continue; // try next model
-        }
-
-      } catch (err: any) {
-        lastError = err;
-        const isQuota = err?.message?.includes('429') || err?.message?.includes('RESOURCE_EXHAUSTED') || err?.message?.includes('quota');
-        const isOverloaded = err?.message?.includes('503') || err?.message?.includes('UNAVAILABLE') || err?.message?.includes('high demand');
-        
-        if (isQuota || isOverloaded) {
-          console.warn(`  → Failed (${isQuota ? '429 quota' : '503 busy'}), trying next...`);
-          await new Promise(r => setTimeout(r, 500));
-          continue;
-        }
-        throw err; // Non-retriable error
-      }
+          config: { systemInstruction, responseMimeType: 'application/json', maxOutputTokens: 600 },
+        }),
+        REQUEST_TIMEOUT_MS,
+      );
+      const text = response.text?.trim();
+      if (!text) throw new Error('The AI returned an empty response.');
+      JSON.parse(text);
+      return text;
+    } catch (error) {
+      lastError = error;
+      console.warn('Quiz generation attempt failed:', error instanceof Error ? error.message : error);
     }
   }
-
-
-  // All keys and models exhausted
-  const retryMatch = lastError?.message?.match(/(\d+)s/);
-  const waitSeconds = retryMatch ? parseInt(retryMatch[1]) : 60;
-  const isQuota = lastError?.message?.includes('429') || lastError?.message?.includes('quota');
-
-  throw new Error(
-    isQuota
-      ? `All ${keys.length} API key(s) have hit their daily free quota. Wait ~${waitSeconds}s then try again. Add more keys as GEMINI_API_KEY_2, GEMINI_API_KEY_3, etc. in your environment variables.`
-      : 'All AI models are currently unavailable. Please try again in a minute.'
-  );
+  throw lastError instanceof Error ? lastError : new Error('The AI service is unavailable. Please try again.');
 }

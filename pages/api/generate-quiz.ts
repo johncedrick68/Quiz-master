@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { Question } from '../../types/quiz';
 import { generateWithAllKeys } from '../../lib/gemini';
 
-export const config = { maxDuration: 60, api: { bodyParser: { sizeLimit: '10mb' } } };
-const MAX_CHARS = 40000;
+export const config = { maxDuration: 30, api: { bodyParser: { sizeLimit: '10mb' } } };
+const MAX_CHARS = 20_000;
 
 function parseQuiz(output: string): { topic?: string; questions?: unknown[] } {
   try { return JSON.parse(output); } catch {
@@ -28,7 +28,7 @@ Do not invent facts or use knowledge outside the document. Test important ideas,
 ${documentText}
 """
 
-Create 15 high-quality multiple-choice questions for a ${mode === 'challenge' ? 'closed-book challenge' : 'study session'}.
+Create 10 high-quality multiple-choice questions for a ${mode === 'challenge' ? 'closed-book challenge' : 'study session'}.
 The correct answer must always be the first item in each options array.
 
 Return exactly this JSON structure:
@@ -52,7 +52,7 @@ Return exactly this JSON structure:
         const options = [...question.options].sort(() => Math.random() - 0.5);
         return { question: question.question.trim(), options, correctIndex: options.indexOf(correct), explanation: question.explanation.trim(), difficulty: ['Easy', 'Medium', 'Hard'].includes(question.difficulty) ? question.difficulty : 'Medium' };
       })
-      .slice(0, 15);
+      .slice(0, 10);
     if (!questions.length) throw new Error('The AI returned no usable questions. Please try a document with more readable text.');
     return res.status(200).json({ topic: typeof parsed.topic === 'string' ? parsed.topic : 'Document quiz', questions });
   } catch (error: any) {
