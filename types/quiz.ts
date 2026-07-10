@@ -4,6 +4,7 @@ export interface Question {
   correctIndex: number;
   explanation: string;
   difficulty?: 'Easy' | 'Medium' | 'Hard';
+  image?: string;
 }
 
 export interface QuizSession {

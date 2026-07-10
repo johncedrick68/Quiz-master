@@ -71,3 +71,6 @@ export const motorcycleAA1English: Question[] = rows.map(([question, correctInde
   explanation: `Correct answer: ${options[correctIndex]}.`,
   difficulty: 'Medium',
 }));
+
+// To show a road sign or driving scenario beside a question, add an image path:
+// motorcycleAA1English[2].image = '/images/lto/questions/traffic-lights-ahead.webp';
