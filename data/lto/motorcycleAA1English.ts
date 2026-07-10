@@ -74,3 +74,4 @@ export const motorcycleAA1English: Question[] = rows.map(([question, correctInde
 
 // To show a road sign or driving scenario beside a question, add an image path:
 // motorcycleAA1English[2].image = '/images/lto/questions/traffic-lights-ahead.webp';
+motorcycleAA1English[24].image = '/images/Stop_sign.webp';
