@@ -1,19 +1,21 @@
-# QuizForge
+# LTO Driving License Reviewer
 
-Turn a document into an interactive quiz. Upload a text-based PDF, TXT, or Markdown file—or paste text—and QuizForge generates a 15-question multiple-choice quiz with explanations, scoring, and a review screen.
+A mobile-friendly study reviewer for LTO Code A/A1 motorcycle examination practice.
+
+## Included reviewer
+
+- English question pool: 120 questions across two source sets
+- Each attempt draws a random set of 60 questions
+- Passing score: 48 out of 60
+- Optional traffic-sign images are shown only when they directly match a question
 
 ## Run locally
 
-1. Install dependencies: `npm install`
-2. Copy `.env.example` to `.env.local`
-3. Add a Google AI Studio key as `GEMINI_API_KEY`
-4. Run `npm run dev`
+```bash
+npm install
+npm run dev
+```
 
 Open `http://localhost:3000`.
 
-## Privacy and limits
-
-- Document parsing happens in the browser; only the extracted text is sent to the configured AI provider to generate questions.
-- PDF files must contain selectable text. Scanned PDFs need OCR before use.
-- Files are limited to 10 MB and the first 40,000 characters are used for a single quiz.
-- Word (`.doc` / `.docx`) import is not available yet; export to PDF or TXT first.
+This is an independent study tool, not an official LTO examination. Verify current laws, signs, and penalties against official LTO materials.
