@@ -1,231 +1,67 @@
-import React, { useState } from 'react';
 import Head from 'next/head';
-import { v4 as uuidv4 } from 'uuid';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FileUploader } from '../components/upload/FileUploader';
-import { QuizFlow } from '../components/quiz/QuizFlow';
-import { QuizResults } from '../components/quiz/QuizResults';
-import { QuizSession, Question } from '../types/quiz';
-import { randomizeQuiz } from '../lib/quizLogic';
-import { Button } from '../components/ui/Button';
+import { useState } from 'react';
+import { motorcycleAA1English } from '../data/lto/motorcycleAA1English';
 
-type AppState = 'upload' | 'setup' | 'quiz' | 'results';
+type Screen = 'landing' | 'quiz' | 'result';
+const choices = ['A', 'B', 'C'];
 
 export default function Home() {
-  const [appState, setAppState] = useState<AppState>('upload');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [screen, setScreen] = useState<Screen>('landing');
+  const [current, setCurrent] = useState(0);
+  const [answers, setAnswers] = useState<(number | null)[]>([]);
+  const [selected, setSelected] = useState<number | null>(null);
+  const question = motorcycleAA1English[current];
+  const score = answers.reduce<number>((total, answer, index) => total + (answer === motorcycleAA1English[index].correctIndex ? 1 : 0), 0);
 
-  const [documentText, setDocumentText] = useState('');
-  const [fileName, setFileName] = useState('');
-  const [generatedQuestions, setGeneratedQuestions] = useState<Question[]>([]);
-  const [topic, setTopic] = useState('');
-
-  const [session, setSession] = useState<QuizSession | null>(null);
-
-  const handleContentReady = (text: string, name: string) => {
-    setDocumentText(text);
-    setFileName(name);
-    setAppState('setup');
+  const start = () => { setCurrent(0); setAnswers([]); setSelected(null); setScreen('quiz'); };
+  const next = () => {
+    if (selected === null) return;
+    const updated = [...answers, selected];
+    setAnswers(updated);
+    if (current === motorcycleAA1English.length - 1) setScreen('result');
+    else { setCurrent(current + 1); setSelected(null); }
   };
 
-  const generateAndStart = async (mode: 'study' | 'challenge') => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const res = await fetch('/api/generate-quiz', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: documentText, fileName, mode }),
-      });
+  return <>
+    <Head><title>LTO Driving License Reviewer</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /></Head>
+    <main className="min-h-screen bg-[#0d55ba] text-white" style={{ backgroundImage: "linear-gradient(rgba(5, 62, 153, .58), rgba(5, 62, 153, .72)), url('/images/lto_background.webp')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
+      <header className="border-b-2 border-black bg-[#0348ac]/95 shadow-lg">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-3 py-2 sm:px-6">
+          <div className="flex items-center gap-2 sm:gap-3"><img src="/images/lto_logo.webp" alt="LTO logo" className="h-11 w-11 object-contain sm:h-14 sm:w-14" /><h1 className="text-lg font-black uppercase tracking-tight text-white [text-shadow:2px_2px_0_#111] sm:text-3xl">Driving License Reviewer</h1></div>
+          <span className="hidden text-xl font-bold [text-shadow:2px_2px_0_#111] sm:block">Non-professional</span>
+        </div>
+      </header>
+      <div className="border-b border-blue-300/40 bg-[#115dbe]/80 py-1 text-center text-xs font-bold tracking-wider text-blue-100">LTO EXAM REVIEWER · PRACTICE RESPONSIBLY</div>
 
-      let data;
-      const textResponse = await res.text();
-      try {
-        data = JSON.parse(textResponse);
-      } catch {
-        // If Vercel throws a generic timeout or 500 error, it returns plain text like "An error occurred..."
-        throw new Error(textResponse.slice(0, 100) || 'Server returned an invalid response (not JSON).');
-      }
-      
-      if (!res.ok) {
-        throw new Error(data.error || 'Failed to generate quiz');
-      }
+      {screen === 'landing' && <section className="mx-auto flex min-h-[calc(100vh-90px)] max-w-5xl items-center px-4 py-10">
+        <div className="w-full rounded-2xl border border-white/30 bg-[#064cac]/90 p-6 shadow-2xl backdrop-blur sm:p-10">
+          <div className="mb-8 text-center"><p className="mb-2 text-sm font-bold uppercase tracking-[.2em] text-blue-200">Official-style practice</p><h2 className="text-3xl font-black sm:text-5xl">Choose your reviewer</h2><p className="mx-auto mt-3 max-w-2xl text-blue-100">Practice road rules, signs, safety, and motorcycle knowledge before taking your LTO examination.</p></div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <button onClick={start} className="group rounded-xl border-2 border-white bg-white p-6 text-left text-slate-900 shadow-lg transition hover:-translate-y-1 hover:border-yellow-300 hover:shadow-xl">
+              <span className="mb-4 inline-flex rounded-full bg-[#064cac] px-3 py-1 text-xs font-bold uppercase text-white">Available now</span><h3 className="text-2xl font-black">Motorcycle</h3><p className="mt-1 text-lg font-bold text-[#064cac]">Non-Professional · Code A / A1</p><p className="mt-3 text-sm text-slate-600">English · 60 questions · Multiple choice</p><span className="mt-5 inline-block rounded bg-[#0b51b4] px-5 py-2 font-bold text-white group-hover:bg-[#083d8a]">Start reviewer →</span>
+            </button>
+            <ComingSoon title="Motorcycle" subtitle="Non-Professional · Code A / A1" detail="Tagalog questionnaire" />
+            <ComingSoon title="Light Vehicle" subtitle="Non-Professional · Code B, B1, B2" detail="English questionnaire" />
+            <ComingSoon title="Light Vehicle" subtitle="Non-Professional · Code B, B1, B2" detail="Tagalog questionnaire" />
+          </div>
+          <p className="mt-7 text-center text-xs text-blue-100">This is a study reviewer, not an official LTO examination. Verify rules and penalties with current LTO materials.</p>
+        </div>
+      </section>}
 
-      setGeneratedQuestions(data.questions);
-      setTopic(data.topic);
+      {screen === 'quiz' && <section className="mx-auto max-w-6xl px-3 py-7 sm:px-6">
+        <div className="overflow-hidden rounded-md border border-blue-100 bg-white text-slate-900 shadow-2xl">
+          <div className="flex items-center justify-between gap-3 bg-[#0649ad] px-4 py-3 text-white sm:px-7"><p className="font-bold">◯ Questions: {current + 1} out of {motorcycleAA1English.length}</p><p className="hidden text-2xl font-medium sm:block">Code A, A1&nbsp; | &nbsp;Part 1 of 1</p></div>
+          <div className="border-b border-slate-300 p-3 sm:p-5"><div className="min-h-32 border border-slate-300 p-4 sm:p-6"><span className="block text-sm text-slate-700">Question</span><h2 className="mt-1 text-2xl font-bold leading-tight sm:text-3xl">{question.question}</h2></div></div>
+          <div>{question.options.map((option, index) => <button key={option} onClick={() => setSelected(index)} className={`flex w-full items-center gap-5 border-b border-slate-300 px-6 py-6 text-left text-xl font-medium transition sm:px-10 sm:text-2xl ${selected === index ? 'bg-blue-100 ring-2 ring-inset ring-[#0752b7]' : 'hover:bg-slate-100'}`}><span className="font-black">[{choices[index]}]</span><span>{option}</span></button>)}</div>
+          <div className="flex items-center justify-between gap-4 p-5 sm:px-8"><button onClick={() => setScreen('landing')} className="font-semibold text-slate-500 hover:text-[#0649ad]">Exit reviewer</button><button onClick={next} disabled={selected === null} className="rounded bg-[#084daf] px-6 py-3 text-lg font-bold text-white shadow disabled:cursor-not-allowed disabled:bg-slate-300">{current === motorcycleAA1English.length - 1 ? 'Finish' : 'Next'} ›</button></div>
+        </div>
+      </section>}
 
-      // Initialize Session
-      startNewSession(data.questions, data.topic, mode);
-    } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+      {screen === 'result' && <section className="mx-auto flex min-h-[calc(100vh-90px)] max-w-3xl items-center px-4 py-10"><div className="w-full rounded-xl bg-white p-8 text-center text-slate-900 shadow-2xl sm:p-12"><img src="/images/lto_logo.webp" alt="LTO logo" className="mx-auto h-20 w-20 object-contain" /><p className="mt-4 text-sm font-bold uppercase tracking-widest text-[#0649ad]">Reviewer complete</p><h2 className="mt-2 text-4xl font-black">{score} / {motorcycleAA1English.length}</h2><p className="mt-3 text-lg text-slate-600">You answered {Math.round((score / motorcycleAA1English.length) * 100)}% correctly.</p><div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"><button onClick={start} className="rounded bg-[#084daf] px-6 py-3 font-bold text-white">Retake reviewer</button><button onClick={() => setScreen('landing')} className="rounded border-2 border-[#084daf] px-6 py-3 font-bold text-[#084daf]">Choose another reviewer</button></div></div></section>}
+    </main>
+  </>;
+}
 
-  const startNewSession = (questions: Question[], quizTopic: string, mode: 'study' | 'challenge') => {
-    const randomized = randomizeQuiz(questions);
-    setSession({
-      id: uuidv4(),
-      topic: quizTopic,
-      questions: randomized,
-      mode,
-      currentQuestionIndex: 0,
-      score: 0,
-      streak: 0,
-      bestStreak: 0,
-      answers: [],
-      isComplete: false,
-      startTime: Date.now(),
-    });
-    setAppState('quiz');
-  };
-
-  const restartWithSameQuestions = () => {
-    if (!session || generatedQuestions.length === 0) return;
-    startNewSession(generatedQuestions, topic, session.mode);
-  };
-
-  const handleQuizComplete = (finalSession: QuizSession) => {
-    setSession(finalSession);
-    setAppState('results');
-  };
-
-  const handleUpdateSession = (updatedSession: QuizSession) => {
-    setSession(updatedSession);
-  };
-
-  return (
-    <>
-      <Head>
-        <title>QuizForge — Document to Quiz</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-      </Head>
-
-      <div className="min-h-screen flex flex-col">
-        {/* Header */}
-        <header className="p-6 flex items-center justify-between border-b border-dark-800 bg-dark-900/50 backdrop-blur-md sticky top-0 z-10">
-          <motion.div
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="flex items-center gap-2"
-          >
-            <div className="w-8 h-8 bg-gradient-to-tr from-primary-500 to-blue-500 rounded-lg shadow-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl leading-none">Q</span>
-            </div>
-            <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-100 to-slate-400">
-              QuizForge
-            </h1>
-          </motion.div>
-
-          <span className="text-sm text-slate-400 hidden sm:block">Learn from what you already have</span>
-        </header>
-
-        {/* Main Content Area */}
-        <main className="flex-1 flex flex-col items-center justify-center p-4 overflow-x-hidden">
-          <AnimatePresence mode="wait">
-
-            {appState === 'upload' && (
-              <motion.div
-                key="upload-view"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="w-full max-w-2xl text-center"
-              >
-                <h2 className="text-3xl md:text-5xl font-extrabold mb-6">
-                  Turn Any Document Into an <span className="text-primary-400">Interactive Quiz</span>
-                </h2>
-                <p className="text-lg text-slate-400 mb-10 max-w-xl mx-auto">
-                  Upload a PDF or text file, or paste content. QuizForge creates a focused, interactive quiz grounded in your document.
-                </p>
-                <FileUploader onContentReady={handleContentReady} isLoading={false} />
-              </motion.div>
-            )}
-
-            {appState === 'setup' && (
-              <motion.div
-                key="setup-view"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                className="w-full max-w-xl text-center"
-              >
-                <h2 className="text-3xl font-bold mb-4">Choose Your Mode</h2>
-                <p className="text-slate-400 mb-8">Ready to turn <span className="text-slate-200 font-medium">{fileName}</span> into a quiz.</p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  <div className="bg-dark-800 border border-dark-700 p-6 rounded-2xl flex flex-col items-center hover:border-primary-500/50 transition-colors">
-                    <h3 className="text-xl font-bold text-primary-400 mb-2">Study Mode</h3>
-                    <p className="text-sm text-slate-400 mb-6 flex-1">
-                      Learn as you go. See the correct answer and explanation immediately after answering. No time pressure.
-                    </p>
-                    <Button onClick={() => generateAndStart('study')} isLoading={isLoading} className="w-full">
-                      Start Study Mode
-                    </Button>
-                  </div>
-
-                  <div className="bg-dark-800 border border-dark-700 p-6 rounded-2xl flex flex-col items-center hover:border-orange-500/50 transition-colors">
-                    <h3 className="text-xl font-bold text-orange-400 mb-2">Challenge Mode</h3>
-                    <p className="text-sm text-slate-400 mb-6 flex-1">
-                      Test your knowledge. Timer is active, and answers are only revealed at the very end.
-                    </p>
-                    <Button variant="secondary" onClick={() => generateAndStart('challenge')} isLoading={isLoading} className="w-full border border-orange-500/30 hover:bg-orange-500/20 text-orange-400">
-                      Start Challenge Mode
-                    </Button>
-                  </div>
-                </div>
-
-                {error && (
-                  <div className="p-4 bg-red-500/10 text-red-400 rounded-xl mb-4 text-sm border border-red-500/20">
-                    {error}
-                  </div>
-                )}
-
-                <Button variant="ghost" onClick={() => setAppState('upload')} disabled={isLoading}>
-                  Cancel and Upload Different File
-                </Button>
-              </motion.div>
-            )}
-
-            {appState === 'quiz' && session && (
-              <motion.div
-                key="quiz-view"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.05 }}
-                className="w-full"
-              >
-                <QuizFlow
-                  session={session}
-                  onComplete={handleQuizComplete}
-                  onUpdateSession={handleUpdateSession}
-                />
-              </motion.div>
-            )}
-
-            {appState === 'results' && session && (
-              <motion.div
-                key="results-view"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="w-full"
-              >
-                <QuizResults
-                  session={session}
-                  onRestart={restartWithSameQuestions}
-                  onNewQuiz={() => {
-                    setSession(null);
-                    setAppState('upload');
-                  }}
-                />
-              </motion.div>
-            )}
-
-          </AnimatePresence>
-        </main>
-      </div>
-    </>
-  );
+function ComingSoon({ title, subtitle, detail }: { title: string; subtitle: string; detail: string }) {
+  return <div className="rounded-xl border border-blue-300/50 bg-blue-950/40 p-6 opacity-80"><span className="mb-4 inline-flex rounded-full border border-blue-200/60 px-3 py-1 text-xs font-bold uppercase text-blue-100">Coming soon</span><h3 className="text-2xl font-black">{title}</h3><p className="mt-1 text-lg font-bold text-blue-100">{subtitle}</p><p className="mt-3 text-sm text-blue-200">{detail}</p></div>;
 }
