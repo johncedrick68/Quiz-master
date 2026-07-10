@@ -30,8 +30,24 @@
 .lto-enter { animation: ltoEnter .45s ease-out both; }
 .lto-float { animation: ltoFloat 3.5s ease-in-out infinite; }
 
+@keyframes ltoQuestion {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.lto-view { animation: ltoEnter .45s ease-out both; }
+.lto-question { animation: ltoQuestion .28s ease-out both; }
+.lto-answer { transition: background-color .18s ease, transform .18s ease; }
+.lto-answer:active { transform: scale(.992); }
+.lto-primary { background: linear-gradient(135deg, #ef0017, #c90013); transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease; }
+.lto-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(120, 0, 10, .3); }
+.lto-start-card { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.lto-start-card:hover { transform: translateY(-5px); box-shadow: 0 18px 32px rgba(0, 25, 90, .22); border-color: #8edb9a; }
+.lto-start-button { background: linear-gradient(135deg, #0b51b4, #063e91); }
+
 @media (prefers-reduced-motion: reduce) {
-  .lto-enter, .lto-float { animation: none; }
+  .lto-enter, .lto-float, .lto-view, .lto-question { animation: none; }
+  .lto-primary:hover, .lto-start-card:hover { transform: none; }
 }
 
 @layer base {

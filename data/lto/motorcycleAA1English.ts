@@ -78,6 +78,7 @@ motorcycleAA1English[24].image = '/images/Stop_sign.webp';
 motorcycleAA1English[2].image = '/images/Philippines-Warning-Sign-Warning-for-a-traffic-light.webp';
 motorcycleAA1English[22].image = '/images/children_crossing.webp';
 motorcycleAA1English[35].image = '/images/Philippines-Warning-Sign-Warning-for-a-sharp-curve-to-the-right.webp';
+motorcycleAA1English[41].image = '/images/philippines-no-motorcycles.svg';
 motorcycleAA1English[48].image = '/images/No overtaking.webp';
 motorcycleAA1English[50].image = '/images/Philippines-Warning-Sign-Warning-for-curves.webp';
 motorcycleAA1English[58].image = '/images/No U-turn.webp';

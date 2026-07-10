@@ -66,12 +66,11 @@ const rows: Row[] = [
 
 export const motorcycleAA1EnglishPart2: Question[] = rows.map(([question, correctIndex, ...options]) => ({ question, options, correctIndex, explanation: `Correct answer: ${options[correctIndex]}.`, difficulty: 'Medium' }));
 
-motorcycleAA1EnglishPart2[0].image = '/images/follow_right_onewaytraffic.webp';
 motorcycleAA1EnglishPart2[2].image = '/images/Maximum speed limit.webp';
 motorcycleAA1EnglishPart2[5].image = '/images/no_entry.webp';
 motorcycleAA1EnglishPart2[20].image = '/images/end of speed limit.webp';
 motorcycleAA1EnglishPart2[23].image = '/images/Philippines-Warning-Sign-Warning-for-a-steep-descent.webp';
-motorcycleAA1EnglishPart2[26].image = '/images/Minimum speed limit.webp';
+motorcycleAA1EnglishPart2[26].image = '/images/philippines-minimum-speed-60.png';
 motorcycleAA1EnglishPart2[32].image = '/images/Philippines-Warning-Sign-Warning-for-a-slippery-road-surface.webp';
 motorcycleAA1EnglishPart2[37].image = '/images/No stopping.webp';
 motorcycleAA1EnglishPart2[39].image = '/images/giveway_sign.webp';
