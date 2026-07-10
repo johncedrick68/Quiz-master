@@ -24,7 +24,7 @@ export default function Home() {
 
   return <>
     <Head><title>LTO Driving License Reviewer</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /></Head>
-    <main className="min-h-screen bg-[#0d55ba] text-white" style={{ backgroundImage: "linear-gradient(rgba(5, 62, 153, .58), rgba(5, 62, 153, .72)), url('/images/lto_background.webp')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
+    <main className="min-h-screen bg-[#0d55ba] text-white" style={{ backgroundImage: `linear-gradient(rgba(5, 62, 153, .58), rgba(5, 62, 153, .72)), url('${screen === 'landing' ? '/images/lto_landing_background.webp' : '/images/lto_background.webp'}')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
       <header className="border-b-2 border-black bg-[#0348ac]/95 shadow-lg">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-3 py-2 sm:px-6">
           <div className="flex items-center gap-2 sm:gap-3"><img src="/images/lto_logo.webp" alt="LTO logo" className="h-11 w-11 object-contain sm:h-14 sm:w-14" /><h1 className="text-lg font-black uppercase tracking-tight text-white [text-shadow:2px_2px_0_#111] sm:text-3xl">Driving License Reviewer</h1></div>
