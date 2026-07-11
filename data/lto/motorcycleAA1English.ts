@@ -82,3 +82,7 @@ motorcycleAA1English[41].image = '/images/philippines-no-motorcycles.svg';
 motorcycleAA1English[48].image = '/images/No overtaking.webp';
 motorcycleAA1English[50].image = '/images/Philippines-Warning-Sign-Warning-for-curves.webp';
 motorcycleAA1English[58].image = '/images/No U-turn.webp';
+motorcycleAA1English[10].image = '/images/lto/questions/yellow-traffic-light.svg';
+motorcycleAA1English[14].image = '/images/lto/questions/flashing-yellow-traffic-light.svg';
+motorcycleAA1English[38].image = '/images/lto/questions/yellow-traffic-light.svg';
+motorcycleAA1English[39].image = '/images/lto/questions/yellow-traffic-light.svg';

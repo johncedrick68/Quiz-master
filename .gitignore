@@ -6,3 +6,5 @@ out
 .vercel
 *.log
 *.tsbuildinfo
+.audit-temp/
+.tmp-storyboard-rv/
