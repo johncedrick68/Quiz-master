@@ -137,6 +137,9 @@ export default function Home() {
     <>
       <Head>
         <title>LTO Driving License Reviewer</title>
+        <link rel="icon" href="/images/lto_logo.webp" type="image/webp" />
+        <link rel="shortcut icon" href="/images/lto_logo.webp" />
+        <link rel="apple-touch-icon" href="/images/lto_logo.webp" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
