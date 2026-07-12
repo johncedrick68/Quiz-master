@@ -8,8 +8,9 @@ A mobile-friendly study and exam reviewer for Philippine motorcycle and light-ve
 - Tagalog combined reviewer for motorcycle and light-vehicle topics
 - Shared road signs, signals, right-of-way, and general traffic rules
 - Vehicle-specific questions only where requirements genuinely differ
-- Untimed study mode for road signs and driving rules
-- Timed exams with 60 random questions and a passing score of 48/60
+- Searchable, paginated study mode for road signs and driving rules
+- Full-exam or road-sign-only question banks
+- Configurable 40, 60, or 80-question exams with an 80% passing score
 - Review of incorrect answers after each exam
 
 ## Quality checks

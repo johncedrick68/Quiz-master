@@ -12,10 +12,10 @@ import { Question } from "../types/quiz";
 
 type Screen = "home" | "study" | "selection" | "quiz" | "result";
 type Reviewer = "english" | "tagalog";
+type ExamBank = "full" | "signs";
+type ExamLength = 40 | 60 | 80;
 const letters = ["A", "B", "C"];
 const QUESTION_SECONDS = 60;
-const QUESTION_COUNT = 60;
-const PASSING_SCORE = 48;
 const reviewerDetails: Record<
   Reviewer,
   { title: string; code: string; language: string }
@@ -54,6 +54,11 @@ const uniqueQuestions = (questions: Question[]) =>
           (candidate.image ?? "") === (question.image ?? ""),
       ) === index,
   );
+const isSignQuestion = (question: Question) =>
+  Boolean(question.image) ||
+  /(traffic sign|road sign|sign mean|traffic light|signal light|senyas|ilaw trapiko|ilaw pantrapiko|karatula|pavement marking|linya.*daan)/i.test(
+    question.question,
+  );
 
 export default function Home() {
   const [screen, setScreen] = useState<Screen>("home");
@@ -62,6 +67,8 @@ export default function Home() {
   const [answers, setAnswers] = useState<(number | null)[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
   const [reviewer, setReviewer] = useState<Reviewer>("english");
+  const [examBank, setExamBank] = useState<ExamBank>("full");
+  const [examLength, setExamLength] = useState<ExamLength>(60);
   const [timeLeft, setTimeLeft] = useState(QUESTION_SECONDS);
   const question = questions[current];
   const score = answers.reduce<number>(
@@ -86,10 +93,20 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft, screen]);
 
-  const begin = (selectedReviewer: Reviewer = reviewer) => {
-    const bank = reviewerBanks[selectedReviewer];
+  const begin = (
+    selectedReviewer: Reviewer = reviewer,
+    selectedBank: ExamBank = examBank,
+    selectedLength: ExamLength = examLength,
+  ) => {
+    const completeBank = uniqueQuestions(reviewerBanks[selectedReviewer]);
+    const bank =
+      selectedBank === "signs"
+        ? completeBank.filter(isSignQuestion)
+        : completeBank;
     setReviewer(selectedReviewer);
-    setQuestions(shuffleArray(uniqueQuestions(bank)).slice(0, QUESTION_COUNT));
+    setExamBank(selectedBank);
+    setExamLength(selectedLength);
+    setQuestions(shuffleArray(bank).slice(0, selectedLength));
     setCurrent(0);
     setAnswers([]);
     setSelected(null);
@@ -161,7 +178,7 @@ export default function Home() {
             total={questions.length}
             questions={questions}
             answers={answers}
-            onRetry={() => begin(reviewer)}
+            onRetry={() => begin(reviewer, examBank, examLength)}
             onHome={() => setScreen("home")}
           />
         )}
@@ -286,9 +303,17 @@ function Selection({
   onStart,
   onBack,
 }: {
-  onStart: (reviewer: Reviewer) => void;
+  onStart: (reviewer: Reviewer, bank: ExamBank, length: ExamLength) => void;
   onBack: () => void;
 }) {
+  const [language, setLanguage] = useState<Reviewer>("english");
+  const [bank, setBank] = useState<ExamBank>("full");
+  const [length, setLength] = useState<ExamLength>(60);
+  const availableQuestions = uniqueQuestions(reviewerBanks[language]).filter(
+    (question) => bank === "full" || isSignQuestion(question),
+  ).length;
+  const effectiveLength: ExamLength =
+    availableQuestions >= length ? length : 40;
   return (
     <section className="mx-auto flex min-h-[calc(100vh-76px)] max-w-5xl items-center px-4 py-7 sm:py-10">
       <div className="lto-view w-full rounded-3xl border border-white/30 bg-[#064cac]/90 p-5 shadow-2xl backdrop-blur sm:p-10">
@@ -300,63 +325,102 @@ function Selection({
         </button>
         <div className="mb-8 text-center">
           <p className="text-sm font-medium tracking-wide text-blue-200">
-            Choose a reviewer
+            Configure your practice
           </p>
           <h2 className="mt-2 text-3xl font-semibold sm:text-5xl">
-            Start your practice
+            Build your exam
           </h2>
         </div>
-        <div className="grid gap-4 md:grid-cols-2">
-          <ReviewerCard
-            reviewer="english"
-            title="English Reviewer"
-            code="Motorcycle and Light Vehicle"
-            language="English"
-            onStart={onStart}
-          />
-          <ReviewerCard
-            reviewer="tagalog"
-            title="Tagalog Reviewer"
-            code="Motorcycle and Light Vehicle"
-            language="Tagalog"
-            onStart={onStart}
-          />
+        <div className="mx-auto max-w-3xl space-y-6">
+          <fieldset>
+            <legend className="mb-3 text-lg font-semibold">Language</legend>
+            <div className="grid grid-cols-2 gap-3">
+              {(["english", "tagalog"] as Reviewer[]).map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => setLanguage(option)}
+                  className={`min-h-14 rounded-xl border-2 px-4 py-3 font-semibold capitalize ${language === option ? "border-white bg-white text-[#0649ad]" : "border-blue-300/50 bg-blue-950/25 hover:bg-blue-900/40"}`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend className="mb-3 text-lg font-semibold">
+              Question bank
+            </legend>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => setBank("full")}
+                className={`rounded-xl border-2 p-4 text-left ${bank === "full" ? "border-white bg-white text-[#0649ad]" : "border-blue-300/50 bg-blue-950/25 hover:bg-blue-900/40"}`}
+              >
+                <span className="block font-semibold">Full exam</span>
+                <span className="mt-1 block text-sm opacity-75">
+                  Road rules, safety, and signs
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setBank("signs")}
+                className={`rounded-xl border-2 p-4 text-left ${bank === "signs" ? "border-white bg-white text-[#0649ad]" : "border-blue-300/50 bg-blue-950/25 hover:bg-blue-900/40"}`}
+              >
+                <span className="block font-semibold">Road signs only</span>
+                <span className="mt-1 block text-sm opacity-75">
+                  Signs, signals, and road markings
+                </span>
+              </button>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend className="mb-3 text-lg font-semibold">Exam length</legend>
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              {([40, 60, 80] as ExamLength[]).map((option) => {
+                const disabled = option > availableQuestions;
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => setLength(option)}
+                    className={`min-h-16 rounded-xl border-2 px-2 py-3 ${length === option && !disabled ? "border-white bg-white text-[#0649ad]" : "border-blue-300/50 bg-blue-950/25"} disabled:cursor-not-allowed disabled:opacity-35`}
+                  >
+                    <span className="block text-xl font-bold">{option}</span>
+                    <span className="text-xs">questions</span>
+                  </button>
+                );
+              })}
+            </div>
+            {bank === "signs" && availableQuestions < 80 && (
+              <p className="mt-3 text-sm text-blue-100">
+                This language currently has {availableQuestions} unique unique
+                sign questions, so unavailable lengths are disabled.
+              </p>
+            )}
+          </fieldset>
+          <div className="rounded-2xl bg-blue-950/30 p-4 text-sm text-blue-100">
+            <p>
+              <span className="font-semibold text-white">Selected:</span>{" "}
+              {language === "english" ? "English" : "Tagalog"} ·{" "}
+              {bank === "full" ? "Full exam" : "Road signs only"} ·{" "}
+              {effectiveLength} questions
+            </p>
+            <p className="mt-1">
+              Passing score: {Math.ceil(effectiveLength * 0.8)} /{" "}
+              {effectiveLength} (80%)
+            </p>
+          </div>
+          <button
+            onClick={() => onStart(language, bank, effectiveLength)}
+            className="lto-primary min-h-14 w-full rounded-xl px-6 py-3 text-lg font-semibold text-white"
+          >
+            Start exam →
+          </button>
         </div>
       </div>
     </section>
-  );
-}
-
-function ReviewerCard({
-  reviewer,
-  title,
-  code,
-  language,
-  onStart,
-}: {
-  reviewer: Reviewer;
-  title: string;
-  code: string;
-  language: string;
-  onStart: (reviewer: Reviewer) => void;
-}) {
-  return (
-    <button
-      onClick={() => onStart(reviewer)}
-      className="lto-start-card group rounded-2xl border-2 border-white bg-white p-6 text-left text-slate-900 shadow-lg"
-    >
-      <span className="inline-flex rounded-full bg-[#064cac] px-3 py-1 text-xs font-semibold text-white">
-        Available now
-      </span>
-      <h3 className="mt-4 text-2xl font-semibold">{title}</h3>
-      <p className="mt-1 text-lg font-semibold text-[#064cac]">{code}</p>
-      <p className="mt-3 text-sm leading-relaxed text-slate-600">
-        {language} · 60 random questions · Passing score: 48
-      </p>
-      <span className="lto-start-button mt-5 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-semibold text-white">
-        Start reviewer <span className="text-lg">→</span>
-      </span>
-    </button>
   );
 }
 
@@ -405,7 +469,9 @@ function Quiz({
         <div key={index} className="lto-question">
           <div className="border-b border-slate-300 p-2.5 sm:p-5">
             <div className="min-h-24 border border-slate-300 p-3 sm:min-h-28 sm:p-6">
-              <span className="block text-xs text-slate-600 sm:text-sm">Question</span>
+              <span className="block text-xs text-slate-600 sm:text-sm">
+                Question
+              </span>
               <h2 className="mt-1 break-words text-xl font-semibold leading-snug sm:text-3xl sm:leading-tight">
                 {question.question}
               </h2>
@@ -478,7 +544,8 @@ function Results({
   onRetry: () => void;
   onHome: () => void;
 }) {
-  const passed = score >= PASSING_SCORE;
+  const passingScore = Math.ceil(total * 0.8);
+  const passed = score >= passingScore;
   const wrongAnswers = questions
     .map((question, index) => ({
       question,
@@ -507,7 +574,7 @@ function Results({
             {passed ? "Passed" : "Needs more practice"}
           </p>
           <p className="mt-2 text-base text-slate-600 sm:text-lg">
-            Passing score: {PASSING_SCORE} / {total} · You answered{" "}
+            Passing score: {passingScore} / {total} · You answered{" "}
             {Math.round((score / total) * 100)}% correctly.
           </p>
         </div>
@@ -589,11 +656,36 @@ function Results({
 function StudyReview() {
   const [selectedReviewer, setSelectedReviewer] = useState<Reviewer>("english");
   const [topic, setTopic] = useState<"signs" | "rules">("signs");
-  const bank = reviewerBanks[selectedReviewer];
-  const items =
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const bank = uniqueQuestions(reviewerBanks[selectedReviewer]);
+  const topicItems =
     topic === "signs"
-      ? bank.filter((question) => question.image)
-      : bank.filter((question) => !question.image);
+      ? bank.filter(isSignQuestion)
+      : bank.filter((question) => !isSignQuestion(question));
+  const normalizedQuery = query.trim().toLowerCase();
+  const items = normalizedQuery
+    ? topicItems.filter((question) =>
+        `${question.question} ${question.options[question.correctIndex]}`
+          .toLowerCase()
+          .includes(normalizedQuery),
+      )
+    : topicItems;
+  const pageSize = 9;
+  const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const visibleItems = items.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize,
+  );
+  const changeLanguage = (value: Reviewer) => {
+    setSelectedReviewer(value);
+    setPage(1);
+  };
+  const changeTopic = (value: "signs" | "rules") => {
+    setTopic(value);
+    setPage(1);
+  };
   return (
     <section className="mx-auto max-w-7xl px-3 py-5 sm:px-6 sm:py-8">
       <div className="lto-view rounded-3xl border border-white/25 bg-[#064cac]/90 p-4 shadow-2xl sm:p-8">
@@ -614,7 +706,7 @@ function StudyReview() {
             {(Object.keys(reviewerDetails) as Reviewer[]).map((key) => (
               <button
                 key={key}
-                onClick={() => setSelectedReviewer(key)}
+                onClick={() => changeLanguage(key)}
                 className={`min-h-14 rounded-xl border p-3 text-left text-sm ${selectedReviewer === key ? "border-white bg-white text-[#0649ad]" : "border-blue-300/40 bg-blue-950/25 hover:bg-blue-900/40"}`}
               >
                 <span className="block font-semibold">
@@ -628,24 +720,45 @@ function StudyReview() {
           </div>
           <div className="flex min-h-12 rounded-xl bg-blue-950/35 p-1">
             <button
-              onClick={() => setTopic("signs")}
+              onClick={() => changeTopic("signs")}
               className={`flex-1 rounded-lg px-4 py-2 font-semibold ${topic === "signs" ? "bg-white text-[#0649ad]" : ""}`}
             >
               Road signs
             </button>
             <button
-              onClick={() => setTopic("rules")}
+              onClick={() => changeTopic("rules")}
               className={`flex-1 rounded-lg px-4 py-2 font-semibold ${topic === "rules" ? "bg-white text-[#0649ad]" : ""}`}
             >
               Rules
             </button>
           </div>
         </div>
-        <p className="mt-5 text-sm text-blue-100">
-          {items.length} review cards
-        </p>
+        <div className="mt-5 rounded-2xl border border-blue-300/30 bg-blue-950/25 p-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-semibold">
+                {items.length} matching review cards
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-blue-200">
+                Tagalog contains more cards because its supplied source bank is
+                larger; this is a content-volume difference, not a different set
+                of traffic laws.
+              </p>
+            </div>
+            <input
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setPage(1);
+              }}
+              placeholder="Search reviewer…"
+              aria-label="Search reviewer"
+              className="min-h-11 w-full rounded-xl border border-blue-200/50 bg-white px-4 text-slate-900 outline-none ring-blue-300 placeholder:text-slate-400 focus:ring-2 sm:max-w-xs"
+            />
+          </div>
+        </div>
         <div className="mt-3 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {items.map((question, index) => (
+          {visibleItems.map((question, index) => (
             <article
               key={`${question.question}-${index}`}
               className="rounded-2xl bg-white p-4 text-slate-900 shadow-lg sm:p-5"
@@ -672,6 +785,37 @@ function StudyReview() {
             </article>
           ))}
         </div>
+        {items.length === 0 && (
+          <div className="mt-4 rounded-2xl bg-white p-8 text-center text-slate-600">
+            No review cards match your search.
+          </div>
+        )}
+        {totalPages > 1 && (
+          <nav
+            aria-label="Reviewer pages"
+            className="mt-6 flex items-center justify-between gap-3 rounded-2xl bg-blue-950/30 p-3"
+          >
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setPage((value) => Math.max(1, value - 1))}
+              className="min-h-11 rounded-xl bg-white px-3 font-semibold text-[#0649ad] disabled:cursor-not-allowed disabled:opacity-40 sm:px-4"
+            >
+              ← Previous
+            </button>
+            <p className="text-center text-sm font-semibold">
+              Page {currentPage} of {totalPages}
+            </p>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() =>
+                setPage((value) => Math.min(totalPages, value + 1))
+              }
+              className="min-h-11 rounded-xl bg-white px-3 font-semibold text-[#0649ad] disabled:cursor-not-allowed disabled:opacity-40 sm:px-4"
+            >
+              Next →
+            </button>
+          </nav>
+        )}
       </div>
     </section>
   );
