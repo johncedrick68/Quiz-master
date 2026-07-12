@@ -39,7 +39,7 @@ for (const [bank, questions] of Object.entries(banks)) {
 
 const duplicateGroups = new Map<string, string[]>();
 for (const { bank, index, question } of allQuestions) {
-  const key = normalize(question.question);
+  const key = `${normalize(question.question)}|${question.image ?? ''}`;
   duplicateGroups.set(key, [...(duplicateGroups.get(key) ?? []), `${bank} #${index + 1}`]);
 }
 

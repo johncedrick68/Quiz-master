@@ -28,13 +28,15 @@ const rules: [RegExp, string][] = [
   [/pwd|wheelchair|taong may kapansanan/i, '/images/wheelchair crossing.webp'],
   [/haligi ng tulay|black and yellow|itim at dilaw/i, '/images/lto/signs/bridge-hazard-marker.svg'],
   [/animal crossing|tawiran ng hayop/i, '/images/lto/signs/animal-crossing.svg'],
-  [/stop sign|huminto ka|babala ng pagtigil/i, '/images/Stop_sign.webp'],
   [/flashing yellow|kumikislap na dilaw/i, '/images/lto/questions/flashing-yellow-traffic-light.svg'],
   [/flashing red|kumikislap.*pula|umiindap.*pula/i, '/images/lto/questions/red-traffic-light.svg'],
 ];
 
 export function inferSignImage(question: string, answer: string): string | undefined {
   if (!/(sign|senyas|nakalarawan|ilaw|signal)/i.test(question)) return undefined;
+  // A correct answer may mention treating a failed signal "as a stop sign".
+  // Only attach the STOP image when the prompt itself is actually about that sign.
+  if (/\bstop sign\b|senyas na stop|senyas.*paghinto/i.test(question)) return '/images/Stop_sign.webp';
   const searchable = `${question} ${answer}`;
   return rules.find(([pattern]) => pattern.test(searchable))?.[1];
 }

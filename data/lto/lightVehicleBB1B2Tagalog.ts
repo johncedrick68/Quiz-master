@@ -170,7 +170,7 @@ const rows: AnswerRow[] = [
   ["Ito ay mahalagang kagamitang pangkaligtasan ng isang sasakyan kung iiwanan ito ng driver:", "Parking brake (Handbrake)"],
   ["Ano ang gagawin mo kung ang sumusunod na sasakyan sa iyo ay masyadong nakatutok (tailgating)?", "Unti-unti mong bagalan ang takbo at senyasan siyang mauna"],
   ["Upang mabawasan ang pinsala ng iyong sasakyan sa kapaligiran (fuel emission/pollution), ano ang dapat mong gawin?", "Pumreno sa maayos na oras at iwasan ang biglaang paghinto"],
-  ["Alin sa mga sumusunod ang nakalarawan? (Tungkol sa pulang sign na may salitang STOP)", "Huminto ka"],
+  ["Ano ang ibig sabihin ng senyas na ito?", "Huminto ka", undefined, undefined, "/images/Stop_sign.webp"],
   ["Sa karaniwang kondisyon, ano ang pinakamababang ligtas na distansya sa pagsunod (following distance)?", "Hindi bababa sa dalawang (2) segundo"],
   ["Papalapit ka sa interseksyon na may maraming sasakyan at maraming lane na may mga marka. Sa huling sandali, napagtanto mo na nasa maling lane ka. Dapat kang:", "Manatili sa lane na 'yon"],
   ["Kung nagmamaneho sa daanan o lane na malapit na sa dulo nito, ano ang una mong dapat gawin upang makapasok nang hindi nakakaabala sa daloy ng ibang trapiko? (Rule of Continuity Line)", "Iangkop ang bilis ng takbo sa daloy ng trapiko"],

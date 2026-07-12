@@ -8,3 +8,5 @@ out
 *.tsbuildinfo
 .audit-temp/
 .tmp-storyboard-rv/
+
+.vercel

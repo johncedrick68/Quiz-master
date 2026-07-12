@@ -4,10 +4,10 @@ type Row = [string, number, string, string, string];
 const rows: Row[] = [
   ['After turning right into a one-way street, which lane should you choose?', 0, 'Stay on the rightmost lane', 'Stay on the leftmost lane', 'Stay in the middle lane'],
   ["A person with a disability can possess a driver's license if:", 2, 'They only drive during day hours', 'They are accompanied by a non-disabled person', 'The driving conditions are indicated on the driver’s license'],
-  ['What is the meaning of this traffic sign? (Red circle with 60)', 1, 'Minimum speed is 60 km per hour', 'Speed limit in this area is 60 km per hour', 'Distance to next city is 60 km'],
+  ['What does this traffic sign mean?', 1, 'Minimum speed is 60 km per hour', 'Speed limit in this area is 60 km per hour', 'Distance to next city is 60 km'],
   ['LTO registers roadworthy vehicles, puts order on roads, and:', 1, 'Builds public road infrastructure', 'Licenses quality drivers', 'Provides emergency towing services'],
   ["What is the maximum penalty for a habitual violator of RA 10666?", 2, 'A fine of 10,000 pesos', '1 month imprisonment', "Revocation of driver's license"],
-  ['What does this sign mean? (Red circle with a horizontal white bar)', 1, 'No parking', 'No entry', 'No overtaking'],
+  ['What does this traffic sign mean?', 1, 'No parking', 'No entry', 'No overtaking'],
   ['Changing lanes at an intersection is:', 1, 'Safe if done quickly', 'Unsafe', 'Allowed if there are no traffic enforcers'],
   ['Parking is allowed if the vehicle is:', 1, 'Left directly in front of an entrance', 'Beyond 4 meters of a fire hydrant', 'Within 2 meters of an intersection corner'],
   ['What does this traffic sign mean? (Cross sign icon)', 2, 'Hospital zone ahead', 'Approach to intersection', 'Railroad crossing'],
@@ -22,7 +22,7 @@ const rows: Row[] = [
   ['What does this traffic sign mean? (T-junction)', 1, 'Two-way traffic ahead', 'Approach to intersection side road', 'Dead end ahead'],
   ['You can overtake on a highway with two lanes marked by:', 1, 'Solid yellow lines', 'Broken white lines', 'Double solid white lines'],
   ['What should you do if you feel sleepy while driving?', 1, 'Increase speed to reach home faster', 'Park at a rest stop and rest', 'Turn the radio volume very high'],
-  ['What does this traffic sign mean? (60 in a black circle with diagonal lines)', 0, 'End of maximum speed limit', 'End of minimum speed', 'No vehicles over 60 tons'],
+  ['What does this traffic sign mean?', 0, 'End of maximum speed limit', 'End of minimum speed', 'No vehicles over 60 tons'],
   ['A Temporary Operator’s Permit authorizes driving for not more than:', 2, '24 hours', '48 hours', '72 hours'],
   ['Road rage is especially likely when a driver experiences:', 1, 'A smooth ride on a clear highway', 'Heavy traffic or gridlock', 'Light rain'],
   ['What does this traffic sign mean? (Car on an incline)', 0, 'Steep descent downhill', 'Uphill course', 'Low-clearance bridge'],
@@ -37,7 +37,7 @@ const rows: Row[] = [
   ['What does this traffic sign mean? (Car with wavy skid marks)', 1, 'Winding road ahead', 'Slippery road', 'Rough road surface'],
   ['What is the proper hand signal for a left turn?', 0, 'Left arm straight in a horizontal position', 'Left arm bent upward at 90 degrees', 'Left arm pointing downward'],
   ['A single broken white line on a two-way road means:', 1, 'Overtaking is prohibited', 'It separates traffic moving in opposite directions', 'Pedestrian-only priority zone'],
-  ['What does this sign mean? (Red circle with diagonal lines across numbers)', 0, 'End of maximum speed limit', 'Speed limit applies ahead', 'Speed restriction entry zone'],
+  ['What does this traffic sign mean?', 0, 'End of maximum speed limit', 'Speed limit applies ahead', 'Speed restriction entry zone'],
   ['What should be done first before changing lanes?', 1, 'Check rear-view mirrors only', 'Check traffic ahead and make a signal', 'Swerve into the next gap'],
   ['A No Stopping sign means:', 1, 'You can stop temporarily to load items', 'You cannot stop unless directed by a traffic officer', 'You can stop if the engine overheats'],
   ['What does this traffic sign mean? (Person shoveling)', 1, 'Playground zone ahead', 'Road works', 'Farming area crossway'],
@@ -61,7 +61,7 @@ const rows: Row[] = [
   ['What does this traffic sign mean? (Double S-curve, left first)', 1, 'Dangerous right curve ahead', 'Dangerous left double bend', 'Winding road ahead'],
   ['You must not blow the horn unless:', 0, 'A moving vehicle may cause danger', 'You want to pass on a clear highway', 'You are passing outside a quiet school or hospital'],
   ['Someone is waiting at a pedestrian crossing. What should you do?', 1, 'Blow your horn', 'Stop, let them cross, and wait patiently', 'Speed up before they step down'],
-  ['What does this traffic sign mean? (Red circle border with a number)', 1, 'Distance tracker indicator', 'Speed limit or speed restriction', 'Vehicle axle load limit'],
+  ['What does this traffic sign mean?', 1, 'Distance tracker indicator', 'Speed limit or speed restriction', 'Vehicle axle load limit'],
 ];
 
 export const motorcycleAA1EnglishPart2: Question[] = rows.map(([question, correctIndex, ...options]) => ({ question, options, correctIndex, explanation: `Correct answer: ${options[correctIndex]}.`, difficulty: 'Medium' }));
