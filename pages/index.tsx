@@ -123,7 +123,10 @@ export default function Home() {
     }
   };
   const next = () => {
-    if (selected !== null) saveAndAdvance(selected);
+    if (selected !== null) {
+      saveAndAdvance(selected);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
   const background =
     screen === "quiz" || screen === "result"
@@ -359,7 +362,7 @@ function Selection({
               >
                 <span className="block font-semibold">Full exam</span>
                 <span className="mt-1 block text-sm opacity-75">
-                  Road rules, safety, and signs
+                  Mixed questions: rules, safety, signs, signals, and markings
                 </span>
               </button>
               <button
@@ -369,7 +372,7 @@ function Selection({
               >
                 <span className="block font-semibold">Road signs only</span>
                 <span className="mt-1 block text-sm opacity-75">
-                  Signs, signals, and road markings
+                  Focused questions about signs, signals, and road markings only
                 </span>
               </button>
             </div>
@@ -686,6 +689,10 @@ function StudyReview() {
     setTopic(value);
     setPage(1);
   };
+  const changePage = (value: number) => {
+    setPage(value);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <section className="mx-auto max-w-7xl px-3 py-5 sm:px-6 sm:py-8">
       <div className="lto-view rounded-3xl border border-white/25 bg-[#064cac]/90 p-4 shadow-2xl sm:p-8">
@@ -797,7 +804,7 @@ function StudyReview() {
           >
             <button
               disabled={currentPage === 1}
-              onClick={() => setPage((value) => Math.max(1, value - 1))}
+              onClick={() => changePage(Math.max(1, currentPage - 1))}
               className="min-h-11 rounded-xl bg-white px-3 font-semibold text-[#0649ad] disabled:cursor-not-allowed disabled:opacity-40 sm:px-4"
             >
               ← Previous
@@ -807,9 +814,7 @@ function StudyReview() {
             </p>
             <button
               disabled={currentPage === totalPages}
-              onClick={() =>
-                setPage((value) => Math.min(totalPages, value + 1))
-              }
+              onClick={() => changePage(Math.min(totalPages, currentPage + 1))}
               className="min-h-11 rounded-xl bg-white px-3 font-semibold text-[#0649ad] disabled:cursor-not-allowed disabled:opacity-40 sm:px-4"
             >
               Next →
