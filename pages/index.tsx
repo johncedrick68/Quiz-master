@@ -11,11 +11,7 @@ import { shuffleArray } from "../lib/quizLogic";
 import { Question } from "../types/quiz";
 
 type Screen = "home" | "study" | "selection" | "quiz" | "result";
-type Reviewer =
-  | "motorcycleEnglish"
-  | "motorcycleTagalog"
-  | "lightVehicleEnglish"
-  | "lightVehicleTagalog";
+type Reviewer = "english" | "tagalog";
 const letters = ["A", "B", "C"];
 const QUESTION_SECONDS = 60;
 const QUESTION_COUNT = 60;
@@ -24,36 +20,29 @@ const reviewerDetails: Record<
   Reviewer,
   { title: string; code: string; language: string }
 > = {
-  motorcycleEnglish: {
-    title: "Motorcycle",
-    code: "Code A / A1",
+  english: {
+    title: "All Vehicle Reviewer",
+    code: "Codes A / A1 / B / B1 / B2",
     language: "English",
   },
-  motorcycleTagalog: {
-    title: "Motorcycle",
-    code: "Code A / A1",
-    language: "Tagalog",
-  },
-  lightVehicleEnglish: {
-    title: "Light Vehicle",
-    code: "Code B / B1",
-    language: "English",
-  },
-  lightVehicleTagalog: {
-    title: "Light Vehicle",
-    code: "Code B / B1 / B2",
+  tagalog: {
+    title: "All Vehicle Reviewer",
+    code: "Codes A / A1 / B / B1 / B2",
     language: "Tagalog",
   },
 };
 const reviewerBanks: Record<Reviewer, Question[]> = {
-  motorcycleEnglish: [...motorcycleAA1English, ...motorcycleAA1EnglishPart2],
-  motorcycleTagalog: [
+  english: [
+    ...motorcycleAA1English,
+    ...motorcycleAA1EnglishPart2,
+    ...lightVehicleBB1English,
+  ],
+  tagalog: [
     ...motorcycleAA1Tagalog,
     ...motorcycleAA1TagalogPart2,
     ...motorcycleAA1TagalogPart3,
+    ...lightVehicleBB1B2Tagalog,
   ],
-  lightVehicleEnglish: lightVehicleBB1English,
-  lightVehicleTagalog: lightVehicleBB1B2Tagalog,
 };
 const uniqueQuestions = (questions: Question[]) =>
   questions.filter(
@@ -61,7 +50,8 @@ const uniqueQuestions = (questions: Question[]) =>
       all.findIndex(
         (candidate) =>
           candidate.question.trim().toLowerCase() ===
-          question.question.trim().toLowerCase(),
+            question.question.trim().toLowerCase() &&
+          (candidate.image ?? "") === (question.image ?? ""),
       ) === index,
   );
 
@@ -71,7 +61,7 @@ export default function Home() {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
-  const [reviewer, setReviewer] = useState<Reviewer>("motorcycleEnglish");
+  const [reviewer, setReviewer] = useState<Reviewer>("english");
   const [timeLeft, setTimeLeft] = useState(QUESTION_SECONDS);
   const question = questions[current];
   const score = answers.reduce<number>(
@@ -318,30 +308,16 @@ function Selection({
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           <ReviewerCard
-            reviewer="motorcycleEnglish"
-            title="Motorcycle"
-            code="Code A / A1"
+            reviewer="english"
+            title="English Reviewer"
+            code="Motorcycle and Light Vehicle"
             language="English"
             onStart={onStart}
           />
           <ReviewerCard
-            reviewer="motorcycleTagalog"
-            title="Motorcycle"
-            code="Code A / A1"
-            language="Tagalog"
-            onStart={onStart}
-          />
-          <ReviewerCard
-            reviewer="lightVehicleEnglish"
-            title="Light Vehicle"
-            code="Code B / B1"
-            language="English"
-            onStart={onStart}
-          />
-          <ReviewerCard
-            reviewer="lightVehicleTagalog"
-            title="Light Vehicle"
-            code="Code B, B1, B2"
+            reviewer="tagalog"
+            title="Tagalog Reviewer"
+            code="Motorcycle and Light Vehicle"
             language="Tagalog"
             onStart={onStart}
           />
@@ -609,8 +585,7 @@ function Results({
   );
 }
 function StudyReview() {
-  const [selectedReviewer, setSelectedReviewer] =
-    useState<Reviewer>("motorcycleEnglish");
+  const [selectedReviewer, setSelectedReviewer] = useState<Reviewer>("english");
   const [topic, setTopic] = useState<"signs" | "rules">("signs");
   const bank = reviewerBanks[selectedReviewer];
   const items =
@@ -633,7 +608,7 @@ function StudyReview() {
           </p>
         </div>
         <div className="mt-7 grid gap-3 lg:grid-cols-[1fr_auto]">
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-2">
             {(Object.keys(reviewerDetails) as Reviewer[]).map((key) => (
               <button
                 key={key}

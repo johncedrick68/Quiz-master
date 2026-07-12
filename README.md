@@ -4,8 +4,10 @@ A mobile-friendly study and exam reviewer for Philippine motorcycle and light-ve
 
 ## Included reviewers
 
-- Motorcycle Code A/A1 — English and Tagalog
-- Light Vehicle Code B/B1/B2 — English and Tagalog
+- English combined reviewer for motorcycle and light-vehicle topics
+- Tagalog combined reviewer for motorcycle and light-vehicle topics
+- Shared road signs, signals, right-of-way, and general traffic rules
+- Vehicle-specific questions only where requirements genuinely differ
 - Untimed study mode for road signs and driving rules
 - Timed exams with 60 random questions and a passing score of 48/60
 - Review of incorrect answers after each exam

@@ -22,6 +22,7 @@ const banks: Record<string, Question[]> = {
 const visualPattern = /(what does this (traffic )?sign|what does this picture|this picture shows|where do you see this traffic sign|ano ang ibig sabihin ng (senyas|ilaw).*ito|alin .*nakalarawan|saan .*senyas.*ito|senyas na ito|signal na ito|sign na ito|this sign mean|this traffic light)/i;
 const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 const problems: string[] = [];
+const transcriptArtifacts: string[] = [];
 const allQuestions: { bank: string; index: number; question: Question }[] = [];
 
 for (const [bank, questions] of Object.entries(banks)) {
@@ -33,6 +34,10 @@ for (const [bank, questions] of Object.entries(banks)) {
     if (question.image) {
       const imagePath = path.join(process.cwd(), 'public', question.image.replace(/^\//, ''));
       if (!fs.existsSync(imagePath)) problems.push(`${bank} #${index + 1}: missing image ${question.image}`);
+    }
+    const combinedText = `${question.question} ${question.options.join(' ')}`;
+    if (/visual option in video|tungkol sa traffic sign|kaunting putol sa audio|ayon sa video|\b[ABC]\s*\(ang\b/i.test(combinedText)) {
+      transcriptArtifacts.push(`${bank} #${index + 1}: ${question.question}`);
     }
   });
 }
@@ -51,7 +56,8 @@ console.log(JSON.stringify({
   total: allQuestions.length,
   problems,
   visualWithoutImage: visualWithoutImage.map(({ bank, index, question }) => `${bank} #${index + 1}: ${question.question}`),
+  transcriptArtifacts,
   duplicateGroups: duplicates,
 }, null, 2));
 
-if (problems.length) process.exitCode = 1;
+if (problems.length || visualWithoutImage.length || transcriptArtifacts.length) process.exitCode = 1;

@@ -30,7 +30,7 @@ const rows: AnswerRow[] = [
   ['Ano ang unang gagawin kapag aksidenteng nakabangga ng pedestrian?', 'Tulungan ang taong nasaktan', 'Umalis agad sa lugar', 'Unahin ang pagkuha ng litrato ng sasakyan'],
   ['Dapat bang sundin ang direksyon ng traffic enforcer?', 'Oo, dapat itong sundin', 'Hindi kung iba sa traffic light', 'Kapag may kasamang pulis lamang'],
   ['Ano ang gagawin bago pumasok sa makitid na bahagi ng two-way highway?', 'Maghintay hanggang maluwag sa magkabilang direksyon', 'Pumasok agad at bumusina', 'Mag-overtake bago pumasok'],
-  ['Ano ang inilalarawan ng senyas na may anyong tubig?', 'Ilog', 'Paliparan', 'Paaralan'],
+  ['Ano ang ibig sabihin ng senyas na ito?', 'Ilog o tawiran sa tubig sa unahan', 'Paliparan sa unahan', 'Paaralan sa unahan', '/images/lto/signs/river.svg'],
   ['Ano ang hugis ng Yield sign?', 'Baligtad na tatsulok', 'Octagon', 'Parisukat', '/images/giveway_sign.webp'],
   ['Ano ang gagawin kapag nakakasilaw ang ilaw ng kasalubong?', 'Iwasang tumingin dito at sumulyap sa kanang bahagi ng daan', 'Tumingin diretso sa ilaw', 'Patayin ang sariling headlight'],
   ['Ano ang tawag sa bilog, inverted triangle, o octagonal signs na may pulang border?', 'Regulatory signs', 'Informative signs', 'Tourist signs'],

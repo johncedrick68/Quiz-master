@@ -22,7 +22,7 @@ const rules: [RegExp, string][] = [
   [/two-way|two way|magkasalungat.*arrow/i, '/images/lto/signs/two-way-traffic.svg'],
   [/merging traffic|sasanib.*trapiko/i, '/images/lto/signs/merging-traffic.svg'],
   [/rough road|baku-bakong kalsada|bako-bakong kalsada/i, '/images/lto/signs/rough-road.svg'],
-  [/river|ilog/i, '/images/lto/signs/river.svg'],
+  [/\briver\b|\bilog\b/i, '/images/lto/signs/river.svg'],
   [/no horn|bawal bumusina/i, '/images/lto/signs/no-horn.svg'],
   [/intersection warning|babala ng sanganda/i, '/images/lto/signs/intersection.svg'],
   [/pwd|wheelchair|taong may kapansanan/i, '/images/wheelchair crossing.webp'],
@@ -33,7 +33,8 @@ const rules: [RegExp, string][] = [
 ];
 
 export function inferSignImage(question: string, answer: string): string | undefined {
-  if (!/(sign|senyas|nakalarawan|ilaw|signal)/i.test(question)) return undefined;
+  const asksAboutVisibleSign = /(what does this (traffic )?sign|which (traffic )?sign|this (traffic )?sign mean|where do you.*sign|ano ang ibig sabihin ng (senyas|sign)|aling senyas|senyas.*ito|nakalarawan|saan.*senyas|ano ang inilalarawan)/i.test(question);
+  if (!asksAboutVisibleSign) return undefined;
   // A correct answer may mention treating a failed signal "as a stop sign".
   // Only attach the STOP image when the prompt itself is actually about that sign.
   if (/\bstop sign\b|senyas na stop|senyas.*paghinto/i.test(question)) return '/images/Stop_sign.webp';
