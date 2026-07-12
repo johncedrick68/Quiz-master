@@ -292,9 +292,8 @@ function Welcome({
               Take an exam <span aria-hidden="true">→</span>
             </button>
           </div>
-          <p className="mt-8 max-w-xl text-xs leading-relaxed text-blue-100">
-            Independent study tool. This is not the official LTMS portal or an
-            official LTO examination.
+          <p className="mt-8 max-w-xl rounded-full border border-blue-200/30 bg-blue-950/25 px-4 py-2 text-xs font-medium leading-relaxed text-blue-50">
+            Made by John Cedrick A. Libradilla · Free forever!
           </p>
         </div>
       </div>

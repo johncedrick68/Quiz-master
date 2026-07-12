@@ -36,3 +36,5 @@ Open `http://localhost:3000`.
 The project is a standard Next.js application and can be imported directly into Vercel from the GitHub repository. Use the default build command (`npm run build`) and do not set an output directory.
 
 This is an independent study tool, not an official LTO examination. Verify current laws, signs, penalties, and licensing requirements against current official LTO materials.
+
+Made by John Cedrick A. Libradilla. Free forever.
