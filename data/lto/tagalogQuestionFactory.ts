@@ -1,6 +1,7 @@
 import { Question } from "../../types/quiz";
 import { inferSignImage } from "./inferSignImage";
 import { buildDistractors } from "./buildDistractors";
+import { attachQuestionSource } from "./questionSources";
 
 export type AnswerRow = [
   question: string,
@@ -16,7 +17,7 @@ const fallbackWrongAnswers = [
 ];
 
 export function makeTagalogQuestions(rows: AnswerRow[]): Question[] {
-  return rows.map(
+  return rows.filter(([, , wrongAnswer1, wrongAnswer2]) => Boolean(wrongAnswer1 && wrongAnswer2)).map(
     ([question, correctAnswer, wrongAnswer1, wrongAnswer2, image], index) => {
       const inferred = buildDistractors(rows, index);
       const wrongAnswers = [
@@ -27,15 +28,15 @@ export function makeTagalogQuestions(rows: AnswerRow[]): Question[] {
       const options = [...wrongAnswers];
       options.splice(correctIndex, 0, correctAnswer);
       const resolvedImage = image ?? inferSignImage(question, correctAnswer);
-      return {
+      return attachQuestionSource({
         question,
         options,
         correctIndex,
         explanation: `Tamang sagot: ${correctAnswer}.`,
         difficulty: "Medium",
-        reviewStatus: wrongAnswer1 && wrongAnswer2 ? "curated" : "generated",
+        reviewStatus: "curated",
         ...(resolvedImage ? { image: resolvedImage } : {}),
-      };
+      });
     },
   );
 }

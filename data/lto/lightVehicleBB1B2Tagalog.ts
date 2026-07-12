@@ -3,7 +3,7 @@ import { AnswerRow, makeTagalogQuestions } from './tagalogQuestionFactory';
 // Generated from the supplied Code B/B1/B2 Tagalog transcript.
 // The second value in every row is the answer supplied by the user.
 const rows: AnswerRow[] = [
-  ["Ano ang ibig sabihin ng ilaw trapiko na ito?", "Huminto at magpatuloy lamang kapag ligtas", "Magpatuloy nang mabilis", "Minimum speed ang umiiral", "/images/lto/questions/red-traffic-light.svg"],
+  ["Ano ang ibig sabihin ng kumikislap na pulang ilaw trapiko?", "Huminto at magpatuloy lamang kapag ligtas", "Magpatuloy nang mabilis", "Minimum speed ang umiiral", "/images/lto/questions/flashing-red-traffic-light.svg"],
   ["Kapag ang motorista ay nag-flash ng kanilang headlight sa iyo, ang ibig sabihin nito:", "Na binabalaan ka nila ng kanilang presensya"],
   ["Alin sa mga ito kung pinapayagan na mababa ay maaaring makapagdulot ng aksidente o pag-crash sa kalsada?", "Level ng likido ng preno"],
   ["Anong uri ng senyas ang nagsasaad ng regulasyon at pagbabawal?", "Regulatory signs", "Warning signs", "Informative signs"],
@@ -12,7 +12,7 @@ const rows: AnswerRow[] = [
   ["Nakakita ka ng school bus na nakaparada sa kabilang bahagi ng highway na nakabukas ang hazard warning na ilaw. Kailangan mo bang huminto?", "Hindi, ngunit kailangan mong magdahan-dahan"],
   ["Aling accessory ang ipinag-uutos na mapanatili sa magandang kondisyon?", "Seat belt at headlight"],
   ["Paano ka dapat pumarada sa tabi ng sasakyan na may ganitong sticker (PWD)?", "Pumarada ngunit magbigay ng tamang puwang para sa wheelchair"],
-  ["Sa malinaw na pananaw na hindi bababa sa dalawang daang talampakan, aling lugar ang hindi mo dapat overtakan?", "Sa paanan ng tulay at sa sangandaan"],
+  ["Sa ilalim ng RA 4136, saang lugar hindi dapat mag-overtake kapag nakaharang ang tanaw sa loob ng 500 talampakan (humigit-kumulang 150 metro) sa unahan?", "Sa paanan ng tulay at sa sangandaan"],
   ["Ang ibig sabihin ng kumikislap na dilaw na ilaw ay:", "Magmabagal at magpatuloy sa sangandaan na may pag-iingat"],
   ["Mandatory na dalhin ng mga driver ng kotse ang anong uri ng siguro o insurance?", "Third party (CTPL)"],
   ["Kapag pumaparada sa paahon na daan na walang bangketa, iliko ang iyong gulong:", "Patungo sa gilid ng kalsada"],
@@ -41,7 +41,7 @@ const rows: AnswerRow[] = [
   ["Kung may nakita kang bola mula sa likuran ng isang nakaparadang sasakyan sa isang kalye, malamang na may batang nakasunod dito. Ano ang gagawin mo?", "Bagalan ang takbo"],
   ["Ano ang mga code ng driver's license o restriction para sa lisensya sa pagmamaneho ng hindi propesyonal ng maliliit na sasakyan?", "DL Codes: B, B1, B2 (o dating Restrictions: 1, 2, 4, 6) at A, A1, BE"],
   ["Kapag papalapit sa pataas na tulay, dapat kang:", "Magdahan-dahan"],
-  ["Sa aling lugar ka hindi dapat mag-overtake ng walang malinaw na nakikita kahit man lamang sa dalawang daang talampakan sa unahan?", "Bago ang kurbada"],
+  ["Sa aling lugar hindi dapat mag-overtake kapag nakaharang ang tanaw sa loob ng 500 talampakan (humigit-kumulang 150 metro) sa unahan?", "Bago ang kurbada"],
   ["Ano ang mga epekto ng alak o droga?", "Walang gaanong kontrol, kawalan ng kumpyansa, at hindi pagsaalang-alang sa bilis ng pagmamaneho"],
   ["Ang isang solong buong dilaw na linya ay nangangahulugang:", "Pagdaan o pag-o-overtake ay hindi pwede"],
   ["Lumapit ka sa isang kantong hindi gumagana ang mga ilaw ng trapiko. Isang traffic enforcer ang nagbigay ng signal na ito. Dapat mong:", "Huminto sa linya ng paghinto", undefined, undefined, "/images/lto/signs/enforcer-stop.svg"],
@@ -103,7 +103,7 @@ const rows: AnswerRow[] = [
   ["Ang sign na ito ay laging nangangahulugan na stop o hinto:", "Octagon", undefined, undefined, "/images/Stop_sign.webp"],
   ["Ikaw ba ay pwedeng lumiko pakanan sa isang pulang signal?", "Oo, magagawa mo lamang ito kung pinapayagan ka ng isang senyas na gawin ito"],
   ["Kailan ka dapat ganap na huminto?", "Kapag nakailaw na ang pulang traffic light"],
-  ["Ang pagmamaneho ng nakainom o may impluwensya ng iba pang ilegal na sangkap ay labag sa batas at maaaring magresulta sa:", "Habang buhay na pagbawi ng lisensya sa pagmamaneho"],
+  ["Sa ilalim ng RA 10586, ano ang mangyayari sa nonprofessional driver's license sa ikalawang hatol sa DUI?", "Panghabambuhay na pagbawi ng lisensya"],
   ["Ang ibig sabihin ng pulang X sa mga tollgate ay:", "Hindi ka maaari sa lane na ito"],
   ["Ano ang ibig sabihin ng berdeng arrow na trapong ilaw?", "Nagpapahintulot sa mga sasakyan na pumunta sa direksyon ng arrow"],
   ["Papalapit ka sa traffic light na naka-green na ng ilang minuto. Dapat kang:", "Maghanda sa paghinto"],
@@ -122,7 +122,7 @@ const rows: AnswerRow[] = [
   ["Ano ang dapat mong gawin kapag nasa interseksyon at nakarinig ng sirena sa likod mo?", "Magpatuloy sa interseksyon, pagkatapos ay gumilid at hayaang makadaan ang sasakyang pag-emergency"],
   ["Ano ang gagawin mo kung ikaw ay nakaramdam ng pagod habang nagmamaneho?", "Maghintay hanggang maging mabuti ang pakiramdam bago magmaneho"],
   ["Ano ang ibig sabihin ng kumikislap na dilaw na ilaw?", "Magmabagal at magpatuloy ng may pag-iingat"],
-  ["Kailan mainam mag-practice ang mga student driver?", "Kahit anong oras pero dapat labis na mag-ingat"],
+  ["Ano ang pangunahing kondisyon kapag nagpa-practice ang student driver sa pampublikong daan?", "Dapat may kasamang lisensyadong driver na may angkop na DL code"],
   ["Ano ang dapat mong gawin kung pinapatakbo ka ng pulis pangrapiko kahit naka-pula na ang traffic light o senyas ng paghinto?", "Dapat kang sumunod"],
   ["Kapag may Anti-lock Braking System (ABS) ang sasakyan at kailangang huminto agad, ano ang dapat gawin?", "Apakan nang madiin at tuloy-tuloy ang preno habang minamaneho palayo sa panganib"],
   ["Pagkalampas sa isang sasakyan, maaari ka nang bumalik sa orihinal na daanan o lane kung:", "Natatanaw mo sa gilid na salamin (side mirror) o kaya sa rear view mirror ang sasakyang nilampasan"],
@@ -130,7 +130,7 @@ const rows: AnswerRow[] = [
   ["Naghahanap ka ng mapaparadahan ng iyong sasakyan. Puno na ang lugar maliban sa puwang na may marking \"Taong may Kapansanan\" (PWD). Alin sa mga ito ang tama?", "Hindi ka dapat pumarada doon maliban kung ikaw ay PWD o mayroon kang kasama na PWD"],
   ["Pagkaraang mabigyan ng student driver's permit, ano ang pangunahing isasaalang-alang sa pag-aaral at pagpapatakbo ng sasakyang de-motor?", "Kailangang magsanay sa pagmamaneho ang nag-aaral at dapat may kasamang lisensyadong driver na may DL code na angkop sa uri ng sasakyang de-motor na imamaneho"],
   ["Kapag nakarating ka sa interseksyon na walang traffic enforcer at walang mga traffic signal, dapat magbigay daan sa:", "Trapiko o mga sasakyan na nagmula sa iyong kanan"],
-  ["Ang paglusot o overtaking sa pataas na kalsadang patungo sa tulay ay ipinagbabawal maliban kung:", "Malinaw na nakikita ng nagmamaneho ang daan sa layong hindi bababa sa 100 metro"],
+  ["Ang paglusot o overtaking malapit sa tuktok ng paakyat na kalsada ay ipinagbabawal maliban kung:", "Malinaw ang tanaw at walang kasalubong sa sapat na layong hindi bababa sa 500 talampakan (humigit-kumulang 150 metro)"],
   ["Pumapasok ka sa isang lugar ng mga ginagawang kalsada kung saan pansamantalang may limitasyon sa bilis ng sasakyan. Ikaw ay dapat:", "Sundin ang limitasyon ng bilis tulad ng nasa batas"],
   ["Sa interseksyon na may ilaw pangtrapiko, liliko lamang pakaliwa kapag:", "Nakailaw ang berdeng kaliwang arrow"],
   ["Ano ang kulay ng marka sa kalsada na naghihiwalay sa isang highway na may maraming lane?", "Puti"],
@@ -150,7 +150,7 @@ const rows: AnswerRow[] = [
   ["Kapag naging pula ang ilaw bago ka makapasok sa sangandaan, ano ang dapat gawin?", "Huminto bago sa stop line at huwag pumasok sa interseksyon", "Bilisan upang makatawid", "Huminto sa gitna ng interseksyon"],
   ["Ano ang ibig sabihin ng senyas na ito?", "Bawal bumusina", "Bawal pumasok", "Maaaring bumusina", "/images/lto/signs/no-horn.svg"],
   ["Ang \"DL\" ay para sa Driver's License. Samantalang ang \"VIN\" ay para sa:", "Vehicle Identification Number"],
-  ["Magkano ang parusa sa unang opensa (1st offense) ng pagpapasakay sa harapang upuan ng batang anim na taong gulang pababa?", "1,000 Pesos"],
+  ["Sa ilalim ng RA 8750, ano ang saklaw ng multa sa unang paglabag ng driver sa seat-belt requirements, kabilang ang pagpapaupo sa harap ng batang anim na taong gulang pababa?", "Mula ₱100 hanggang ₱1,000"],
   ["Kapag nasiraan ka ng sasakyan sa daan, ano ang gagawin mo?", "Pailawin ang hazard warning light at maglagay ng EWD (Early Warning Device) 10 metro man lamang sa likuran ng nakahintong sasakyan"],
   ["Kung ikaw ay pumaparada sa tabi ng sasakyang nakaparada na (double parking), ikaw ay:", "Nakakasagabal sa malayang daloy ng trapiko"],
   ["Ano ang pinakamabuting alituntuning pangkaligtasan (safety rule) habang ikaw ay nagmamaneho?", "Huwag ipilit ang karapatan sa daan (Right of way)"],
@@ -177,7 +177,7 @@ const rows: AnswerRow[] = [
   ["Ano ang dapat mong gawin kung nagmamaneho ka sa gabi sa mga kalsada sa bundok?", "Pailawin ang dim light (mababang ilaw) tuwing papalapit sa kurbada upang hindi mabulag ang kasalubong"],
   ["Sa aling lugar hindi pwedeng mag-overtake kailanman?", "Sa two-way na intersection"],
   ["Kung iniuunat ng driver ng sasakyan sa harapan mo ang kanyang kaliwang braso at tumuturo ang kamay sa kaliwa, siya ay:", "Liliko pakaliwa"],
-  ["Sa anong pagkakataon maaaring pumarada sa harap ng pasukan ng ospital?", "Wala sa mga nabanggit (Bawal pumarada rito kailanman)"],
+  ["Saan lamang maaaring pumarada malapit sa ospital nang hindi nakahahadlang sa serbisyong pang-emergency?", "Sa itinalagang parking area lamang"],
   ["Ano ang ibig sabihin ng senyas na ito?", "May trapikong sasanib sa unahan", "Dead end sa unahan", "Bawal pumasok", "/images/lto/signs/merging-traffic.svg"],
   ["Maaari lamang gumamit ng mobile phone kapag:", "Nakaparada ang sasakyan"],
   ["Tama bang pumarada sa tabi ng boca incendio o fire hydrant anumang oras?", "Mali. Ang boca incendio o fire hydrant ay isang kagamitang pangkagipitan, walang sinuman ang pinahihintulutan pumarada sa tabi nito"],
@@ -185,4 +185,6 @@ const rows: AnswerRow[] = [
   ["Ano ang magiging resulta ng hindi pagpatay ng signal light matapos lumiko mula sa interseksyon?", "Makakapagpapalito sa lahat ng mga nasa daan"],
 ];
 
-export const lightVehicleBB1B2Tagalog = makeTagalogQuestions(rows);
+export const lightVehicleBB1B2Tagalog = makeTagalogQuestions(rows).filter(
+  (question) => question.image !== "/images/lto/signs/river.svg",
+);

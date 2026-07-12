@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" role="img" aria-labelledby="title description">
+  <title id="title">Flashing red traffic signal</title>
+  <desc id="description">A vertical traffic light with the red lamp illuminated and flashing.</desc>
+  <rect x="62" y="20" width="176" height="380" rx="34" fill="#20252b" stroke="#111827" stroke-width="10"/>
+  <rect x="82" y="42" width="136" height="336" rx="24" fill="#111418"/>
+  <circle cx="150" cy="106" r="51" fill="#ef3340" stroke="#090b0d" stroke-width="9"/>
+  <circle cx="150" cy="210" r="48" fill="#594d20" stroke="#090b0d" stroke-width="9"/>
+  <circle cx="150" cy="314" r="48" fill="#174d35" stroke="#090b0d" stroke-width="9"/>
+  <circle cx="136" cy="89" r="12" fill="#ffd5d8" opacity=".9"/>
+  <g fill="none" stroke="#ef3340" stroke-linecap="round" stroke-width="9">
+    <path d="M150 37V15"/><path d="M81 106H55"/><path d="M245 106h-26"/>
+    <path d="m99 55-17-17"/><path d="m201 55 17-17"/>
+    <path d="m99 157-17 17"/><path d="m201 157 17 17"/>
+  </g>
+</svg>

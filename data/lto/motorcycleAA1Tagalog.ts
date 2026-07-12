@@ -1,16 +1,17 @@
 import { Question } from '../../types/quiz';
+import { attachQuestionSource } from './questionSources';
 
 type Row = [string, number, string, string, string, string?];
 
 const rows: Row[] = [
   ['Ano ibig sabihin ng senyas trapiko na ito?', 1, 'Ang itinakdang bilis sa lugar na ito ay 30 km bawat oras', 'Ang itinakdang bilis sa lugar na ito ay 60 km bawat oras', 'Ang itinakdang bilis sa lugar na ito ay 80 km bawat oras', '/images/Maximum speed limit.webp'],
-  ['Ano ang pinakamabigat na parusa sa pagmamaneho ng nakainom o nakadroga?', 2, 'Multa na ₱10,000 at pagkumpiska ng sasakyan', 'Isang taong suspensyon ng lisensya', 'Panghabang buhay na suspendido ang lisensya'],
+  ["Sa ilalim ng RA 10586, ano ang mangyayari sa nonprofessional driver's license sa ikalawang hatol sa DUI?", 2, 'Anim na buwang suspensyon', 'Isang taong suspensyon', 'Panghabambuhay na pagbawi ng lisensya'],
   ["Ayon sa RA 4136, ang student driver's permit ay maaaring ibigay sa mga may malusog na pangangatawan at pag-iisip at dapat ay hindi bababa sa edad na:", 1, '15 na taong gulang', '16 na taong gulang', '17 na taong gulang'],
   ['Ang ibig sabihin ng dobleng puting putol-putol na linya sa daan ay:', 1, 'Bawal mag-overtake kailanman dahil mapanganib', 'Pwede kang mag-overtake sa kaliwa o sa kanan kapag walang panganib', 'Para lamang ito sa mga emergency na sasakyan'],
   ['Ano ang kulay ng traffic light na nagsasabing go o maaari ka nang umandar?', 0, 'Berde', 'Pula', 'Dilaw'],
   ['Ano ang dapat na haba ng saddle box o bag ng motorsiklo?', 1, 'Maaaring lumampas ng isang metro sa likod', 'Ang haba ay hindi dapat lalampas sa dulong bahagi ng likuran', 'Dapat ay pantay sa harapan ng manibela'],
   ['Maaari kang mag-overtake sa highway kung ito ay may dalawang lane na may:', 0, 'Putol-putol na puting linya', 'Solidong dilaw na linya', 'Dobleng solidong puting linya'],
-  ['Sa anong pagkakataon maaaring pumarada sa harap ng pasukan ng ospital?', 2, 'Kung walang nakaparadang ambulansya', 'Kung magbababa ng pasaherong hindi naman maysakit', 'Karaniwang bawal maliban na lamang kung emergency o itinalagang drop-off'],
+  ['Saan lamang maaaring pumarada malapit sa ospital nang hindi nakahahadlang sa serbisyong pang-emergency?', 2, 'Sa mismong emergency entrance', 'Sa harap ng daanan ng ambulansya', 'Sa itinalagang parking area lamang'],
   ['Ang dobleng buong dilaw na linya ay nangangahulugang:', 2, 'Maaaring tumawid kung walang kasalubong', 'Pwede mag-overtake anumang oras', 'Hindi dapat tawirin kailanman'],
   ['Ang sasakyan sa harapan mo ay nagpapakita ng nagdidilaw na ilaw. Ang ibig sabihin nito ay:', 1, 'Ang sasakyan ay hihinto nang biglaan', 'Mabagal na paggalaw', 'Mabilis na aabante'],
   ['Ano ibig sabihin ng ilaw trapiko na ito?', 0, 'Huminto bago dumating sa stop line', 'Bagalan ang takbo at magpatuloy', 'Maghanda sa pagtakbo', '/images/lto/questions/red-traffic-light.svg'],
@@ -68,12 +69,12 @@ const rows: Row[] = [
 export const motorcycleAA1Tagalog: Question[] = rows.map(([question, correctIndex, ...rest]) => {
   const options = rest.slice(0, 3) as string[];
   const image = rest[3];
-  return {
+  return attachQuestionSource({
     question,
     options,
     correctIndex,
     explanation: `Tamang sagot: ${options[correctIndex]}.`,
     difficulty: 'Medium',
     ...(image ? { image } : {}),
-  };
+  });
 });

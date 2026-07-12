@@ -1,4 +1,5 @@
 import { Question } from '../../types/quiz';
+import { attachQuestionSource } from './questionSources';
 
 type Row = [string, number, string, string, string];
 const rows: Row[] = [
@@ -9,7 +10,7 @@ const rows: Row[] = [
   ['A driver while on a highway shall yield the right of way to:', 1, 'Vehicles entering from private driveways', 'Pedestrians crossing within a crosswalk', 'Heavy trucks rushing their deliveries'],
   ['Among the list, who are exempted from speed limits?', 0, 'Doctors or their drivers going to an emergency', 'Drivers delivering perishable goods', 'Government officials rushing to a meeting'],
   ['When do you need to switch on your turn signal?', 2, 'After turning', 'While turning', 'Before turning'],
-  ['What is the maximum penalty for driving under the influence of liquor or prohibited drugs?', 2, '6 months suspension', '1 year suspension', 'Perpetual revocation of license'],
+  ["What is the driver's-license consequence under RA 10586 for a nonprofessional driver's second DUI conviction?", 2, 'Six-month suspension', 'One-year suspension', 'Perpetual revocation of the license'],
   ['If the brake light of the vehicle in front of you lights up, you should:', 0, 'Prepare to brake', 'Press the horn', 'Turn right or left'],
   ['The primary objective of looking ahead while driving is:', 1, 'To check your dashboard instruments', 'To check the traffic ahead and changes of road condition', 'To look at the scenery along the highway'],
   ['What does this traffic light mean?', 0, 'Prepare to stop', 'Stop if the red light comes', 'Stop if necessary'],
@@ -64,7 +65,7 @@ const rows: Row[] = [
   ['Why should you not use a mobile phone while riding a motorcycle?', 2, 'Reception is poor while the engine runs', 'It affects the vehicle electronic system', 'It is prohibited by law and distracts your attention while driving'],
 ];
 
-export const motorcycleAA1English: Question[] = rows.map(([question, correctIndex, ...options]) => ({
+export const motorcycleAA1English: Question[] = rows.map(([question, correctIndex, ...options]) => attachQuestionSource({
   question,
   options,
   correctIndex,
@@ -84,3 +85,6 @@ motorcycleAA1English[50].image = '/images/Philippines-Warning-Sign-Warning-for-c
 motorcycleAA1English[58].image = '/images/No U-turn.webp';
 motorcycleAA1English[10].image = '/images/lto/questions/yellow-traffic-light.svg';
 motorcycleAA1English[14].image = '/images/lto/questions/flashing-yellow-traffic-light.svg';
+
+// The equivalent changing-lanes card in Part 2 is clearer and more complete.
+motorcycleAA1English.splice(54, 1);

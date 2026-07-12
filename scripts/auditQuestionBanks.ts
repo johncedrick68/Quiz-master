@@ -28,11 +28,17 @@ const normalize = (value: string) =>
     .trim();
 const problems: string[] = [];
 const transcriptArtifacts: string[] = [];
+const missingSources: string[] = [];
+const missingVerificationDates: string[] = [];
 const allQuestions: { bank: string; index: number; question: Question }[] = [];
 
 for (const [bank, questions] of Object.entries(banks)) {
   questions.forEach((question, index) => {
     allQuestions.push({ bank, index, question });
+    if (!question.sources?.length)
+      missingSources.push(`${bank} #${index + 1}`);
+    if (!question.lastVerified)
+      missingVerificationDates.push(`${bank} #${index + 1}`);
     if (question.options.length !== 3)
       problems.push(`${bank} #${index + 1}: expected 3 options`);
     if (
@@ -81,6 +87,9 @@ const visualWithoutImage = allQuestions.filter(
 const duplicates = [...duplicateGroups.values()].filter(
   (locations) => locations.length > 1,
 );
+const generatedQuestions = allQuestions.filter(
+  ({ question }) => question.reviewStatus === "generated",
+);
 
 console.log(
   JSON.stringify(
@@ -92,15 +101,15 @@ console.log(
         ]),
       ),
       total: allQuestions.length,
-      generatedQuestionsExcludedFromRelease: allQuestions.filter(
-        ({ question }) => question.reviewStatus === "generated",
-      ).length,
+      generatedQuestionsExcludedFromRelease: generatedQuestions.length,
       problems,
       visualWithoutImage: visualWithoutImage.map(
         ({ bank, index, question }) =>
           `${bank} #${index + 1}: ${question.question}`,
       ),
       transcriptArtifacts,
+      missingSources,
+      missingVerificationDates,
       duplicateGroups: duplicates,
     },
     null,
@@ -108,5 +117,5 @@ console.log(
   ),
 );
 
-if (problems.length || visualWithoutImage.length || transcriptArtifacts.length)
+if (problems.length || visualWithoutImage.length || transcriptArtifacts.length || missingSources.length || missingVerificationDates.length || generatedQuestions.length || duplicates.length)
   process.exitCode = 1;

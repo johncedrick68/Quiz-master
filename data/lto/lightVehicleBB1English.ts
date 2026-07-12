@@ -186,11 +186,11 @@ const rows: AnswerRow[] = [
   ],
   ["What does this traffic sign mean?", "Do not overtake"],
   [
-    "What does this traffic signal mean?",
+    "What does this flashing red traffic signal mean?",
     "Stop, then proceed only when safe",
     "Proceed without slowing",
     "Minimum speed applies",
-    "/images/lto/questions/red-traffic-light.svg",
+    "/images/lto/questions/flashing-red-traffic-light.svg",
   ],
   [
     "What does this traffic sign mean?",
@@ -213,11 +213,11 @@ const rows: AnswerRow[] = [
   ],
   [
     "At an intersection with no traffic lights, two cars approach at right angles to each other, which driver must yield?",
-    "The driver of the vehicle that arrived there last",
+    "The driver on the left must yield to the vehicle on the right",
   ],
   [
-    "Answer: The driver of the vehicle that arrived there last [14:10] What else can seriously affect your concentration other than alcohol drinks?",
-    "Drugs, tiredness, and loud music, billboards, tinted window",
+    "Other than alcohol, what can seriously affect a driver's concentration?",
+    "Dangerous drugs, fatigue, loud music, and visual distractions",
   ],
   [
     "You see a school bus parked with its hazard warning lights flashing on the other side of the highway, are you required to stop?",
@@ -295,7 +295,7 @@ const rows: AnswerRow[] = [
     "Maintain or slightly reduce speed and keep to the right",
   ],
   [
-    "Which place you should not overtake without a clear vision of at least 200 feet ahead?",
+    "Under RA 4136, where must you not overtake when your view is obstructed within 500 feet (about 150 meters) ahead?",
     "All of the above (at the foot of the bridge and in an intersection)",
   ],
   [
@@ -404,8 +404,8 @@ const rows: AnswerRow[] = [
     "/images/Stop_sign.webp",
   ],
   [
-    "In RA 8750, how much is the penalty for the first offense for allowing a child 6 years and below to be seated on front passenger seat?",
-    "1,000 pesos",
+    "Under RA 8750, what fine range applies to a driver's first violation of the seat-belt requirements, including allowing a child six years old or younger in the front seat?",
+    "From ₱100 up to ₱1,000",
   ],
   [
     "Any amount of this drink will affect your driving ability to the worst:",
@@ -434,4 +434,9 @@ const rows: AnswerRow[] = [
   ],
 ];
 
-export const lightVehicleBB1English = makeEnglishQuestions(rows);
+export const lightVehicleBB1English = makeEnglishQuestions(rows).filter(
+  (question) => ![
+    "/images/no_entry.webp",
+    "/images/giveway_sign.webp",
+  ].includes(question.image ?? ""),
+);

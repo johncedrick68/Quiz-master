@@ -3,7 +3,7 @@ import { AnswerRow, makeTagalogQuestions } from './tagalogQuestionFactory';
 const rows: AnswerRow[] = [
   ['Ano ang kailangan mong gawin kung masundan mo ang truck na may kumukurap-kurap na senyas sa likuran?', 'Dumaan sa kaliwang linya', 'Dumaan sa kanang balikat ng kalsada', 'Manatili nang napakalapit sa likuran'],
   ['Ano ang dapat gawin kapag nagmamaneho sa highway na maraming lubak?', 'Bagalan ang takbo', 'Bilisan upang malampasan agad ang mga lubak', 'Palaging lumipat-lipat ng lane'],
-  ['Hindi maaaring pumarada o huminto ang driver sa tabi ng kalsada na may stop sign kung ito ay sakop ng:', 'Anim na metro', 'Dalawang metro', 'Labindalawang metro'],
+  ['Sa ilalim ng RA 4136, hindi maaaring pumarada ang driver sa loob ng anong layo mula sa interseksyon ng mga curb line?', 'Anim na metro', 'Dalawang metro', 'Labindalawang metro'],
   ['Ano ang dapat sundin kapag papalapit sa interseksyon na may stop sign?', 'Huminto at magpatuloy kapag ligtas nang gawin ito', 'Magmarahan lamang nang hindi humihinto', 'Bumusina at magpatuloy agad', '/images/Stop_sign.webp'],
   ['Ano ang gagawin kung dumating sa interseksyon na may sirang mga signal pangtrapiko?', 'Ituring itong may stop sign sa lahat ng direksyon', 'Magpatuloy dahil walang gumaganang ilaw', 'Hintaying maging berde ang sirang ilaw'],
   ['Ano ang pinakamabuting gawin kung inimbitahan sa hapunan at magmamaneho pauwi?', 'Huwag uminom ng anumang alak', 'Uminom ng kaunti at magkape', 'Maghintay lamang ng sampung minuto bago magmaneho'],
@@ -63,4 +63,4 @@ const rows: AnswerRow[] = [
   ['Ano ang ibig sabihin ng broken yellow o white center line?', 'Naghihiwalay ito sa magkasalubong na direksyon', 'Tawiran ito ng pedestrian', 'Parking boundary ito'],
 ];
 
-export const motorcycleAA1TagalogPart2 = makeTagalogQuestions(rows);
+export const motorcycleAA1TagalogPart2 = makeTagalogQuestions(rows).filter((_, index) => index !== 50);

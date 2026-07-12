@@ -636,6 +636,15 @@ function Results({
                         </p>
                       </div>
                     </div>
+                    {question.sources?.[0] && (
+                      <p className="mt-4 text-xs leading-relaxed text-slate-600">
+                        Source: {" "}
+                        <a className="font-semibold text-blue-700 underline" href={question.sources[0].url} target="_blank" rel="noreferrer">
+                          {question.sources[0].title}
+                        </a>
+                        {question.lastVerified && ` · Last verified ${question.lastVerified}`}
+                      </p>
+                    )}
                   </div>
                 </article>
               ))}
@@ -800,6 +809,14 @@ function StudyReview() {
                   {question.options[question.correctIndex]}
                 </p>
               </div>
+              {question.sources?.[0] && (
+                <p className="mt-3 text-xs leading-relaxed text-slate-500">
+                  <a className="font-semibold text-blue-700 underline" href={question.sources[0].url} target="_blank" rel="noreferrer">
+                    {question.sources[0].title}
+                  </a>
+                  {question.lastVerified && ` · Last verified ${question.lastVerified}`}
+                </p>
+              )}
             </article>
           ))}
         </div>

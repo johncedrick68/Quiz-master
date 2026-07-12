@@ -88,7 +88,7 @@ const rules: [RegExp, string][] = [
   ],
   [
     /flashing red|kumikislap.*pula|umiindap.*pula/i,
-    "/images/lto/questions/red-traffic-light.svg",
+    "/images/lto/questions/flashing-red-traffic-light.svg",
   ],
 ];
 

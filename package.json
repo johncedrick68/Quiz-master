@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "audit:questions": "tsx scripts/auditQuestionBanks.ts",
+    "audit:export": "tsx scripts/exportQuestionAudit.ts",
+    "audit:images": "node scripts/captureImageAudit.mjs",
     "test": "tsx --test tests/*.test.ts",
     "test:ux": "node tests/ux.e2e.test.mjs"
   },

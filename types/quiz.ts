@@ -6,6 +6,11 @@ export interface Question {
   difficulty?: "Easy" | "Medium" | "Hard";
   image?: string;
   reviewStatus?: "curated" | "generated";
+  sources?: {
+    title: string;
+    url: string;
+  }[];
+  lastVerified?: string;
 }
 
 export interface QuizSession {

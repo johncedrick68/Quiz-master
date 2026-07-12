@@ -1,4 +1,5 @@
 import { Question } from '../../types/quiz';
+import { attachQuestionSource } from './questionSources';
 
 type Row = [string, number, string, string, string];
 const rows: Row[] = [
@@ -15,7 +16,7 @@ const rows: Row[] = [
   ['What should you do if a traffic police officer directs you through a red light or stop sign?', 1, 'Ignore the officer and wait for green', 'You must obey', 'Stop and argue with the officer'],
   ['What is the meaning of a red traffic light?', 0, 'Stop before the stop line', 'Slow down and proceed with caution', 'Stop only if there is crossing traffic'],
   ['Why is it more dangerous to turn left than turn right?', 1, 'Left turns require more steering effort', 'Vehicles from opposite directions are faster', 'Your view to the left is always blocked'],
-  ['A driver must not park or stop beside a stop sign when within:', 1, '2 meters', '6 meters', '10 meters'],
+  ['Under RA 4136, a driver must not park within what distance of the intersection of curb lines?', 1, '2 meters', '6 meters', '10 meters'],
   ['What does this traffic sign mean?', 0, 'No parking', 'No stopping', 'Parking is allowed at all times'],
   ['Double broken white lines mean:', 1, 'No overtaking allowed', 'You may overtake if there is no danger', 'Dedicated PUV lane only'],
   ['Who is responsible for not overloading a vehicle?', 1, 'The passenger riding pillion', 'The driver or rider', 'The LTO checkpoint enforcer'],
@@ -64,7 +65,7 @@ const rows: Row[] = [
   ['What does this traffic sign mean?', 1, 'Distance tracker indicator', 'Speed limit or speed restriction', 'Vehicle axle load limit'],
 ];
 
-export const motorcycleAA1EnglishPart2: Question[] = rows.map(([question, correctIndex, ...options]) => ({ question, options, correctIndex, explanation: `Correct answer: ${options[correctIndex]}.`, difficulty: 'Medium' }));
+export const motorcycleAA1EnglishPart2: Question[] = rows.map(([question, correctIndex, ...options]) => attachQuestionSource({ question, options, correctIndex, explanation: `Correct answer: ${options[correctIndex]}.`, difficulty: 'Medium' }));
 
 motorcycleAA1EnglishPart2[2].image = '/images/Maximum speed limit.webp';
 motorcycleAA1EnglishPart2[5].image = '/images/no_entry.webp';
@@ -84,3 +85,7 @@ motorcycleAA1EnglishPart2[14].image = '/images/No parking.webp';
 motorcycleAA1EnglishPart2[17].image = '/images/Philippines-Warning-Sign-Warning-for-a-crossroad-with-a-side-road-on-the-left.webp';
 motorcycleAA1EnglishPart2[35].image = '/images/end of speed limit.webp';
 motorcycleAA1EnglishPart2[38].image = '/images/lto/signs/road-works.svg';
+
+// Remove repeated visual cards while preserving the more specific versions.
+motorcycleAA1EnglishPart2.splice(59, 1);
+motorcycleAA1EnglishPart2.splice(35, 1);
