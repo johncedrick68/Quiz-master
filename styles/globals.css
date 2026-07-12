@@ -53,6 +53,7 @@
 @layer base {
   body {
     @apply bg-dark-900 text-slate-100 font-sans antialiased;
+    overflow-x: hidden;
   }
 }
 

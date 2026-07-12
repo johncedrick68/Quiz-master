@@ -184,18 +184,18 @@ function Header({
       ? reviewerDetails[reviewer].code
       : "Motorcycle and light vehicle";
   return (
-    <header className="sticky top-0 z-50 border-b border-blue-300/25 bg-[#0348ac]/95 shadow-lg backdrop-blur">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-7">
+    <header className="sticky top-0 z-50 max-w-full overflow-x-hidden border-b border-blue-300/25 bg-[#0348ac]/95 shadow-lg backdrop-blur">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-7 sm:py-3">
         <button
           onClick={() => onNavigate("home")}
-          className="flex min-w-0 items-center gap-3 text-left"
+          className="flex min-w-0 items-center gap-2 text-left sm:gap-3"
         >
           <img
             src="/images/lto_logo.webp"
             alt="LTO logo"
             className="h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12"
           />
-          <div>
+          <div className="min-w-0">
             <p className="text-base font-semibold tracking-tight sm:text-xl">
               LTO Reviewer
             </p>
@@ -206,23 +206,23 @@ function Header({
         </button>
         <nav
           aria-label="Main navigation"
-          className="flex items-center gap-1 rounded-xl bg-blue-950/30 p-1 text-sm font-semibold"
+          className="grid min-w-0 basis-full grid-cols-3 gap-1 rounded-xl bg-blue-950/30 p-1 text-center text-sm font-semibold sm:flex sm:w-auto sm:basis-auto sm:items-center"
         >
           <button
             onClick={() => onNavigate("home")}
-            className={`rounded-lg px-3 py-2 ${screen === "home" ? "bg-white text-[#0649ad]" : "hover:bg-white/10"}`}
+            className={`min-h-10 rounded-lg px-2 py-2 sm:px-3 ${screen === "home" ? "bg-white text-[#0649ad]" : "hover:bg-white/10"}`}
           >
             Home
           </button>
           <button
             onClick={() => onNavigate("study")}
-            className={`rounded-lg px-3 py-2 ${screen === "study" ? "bg-white text-[#0649ad]" : "hover:bg-white/10"}`}
+            className={`min-h-10 rounded-lg px-2 py-2 sm:px-3 ${screen === "study" ? "bg-white text-[#0649ad]" : "hover:bg-white/10"}`}
           >
             Review
           </button>
           <button
             onClick={() => onNavigate("selection")}
-            className={`rounded-lg px-3 py-2 ${screen === "selection" || screen === "quiz" || screen === "result" ? "bg-white text-[#0649ad]" : "hover:bg-white/10"}`}
+            className={`min-h-10 rounded-lg px-2 py-2 sm:px-3 ${screen === "selection" || screen === "quiz" || screen === "result" ? "bg-white text-[#0649ad]" : "hover:bg-white/10"}`}
           >
             Exams
           </button>
@@ -240,9 +240,9 @@ function Welcome({
   onExam: () => void;
 }) {
   return (
-    <section className="mx-auto flex min-h-[calc(100vh-76px)] max-w-6xl items-center px-4 py-6 sm:py-10">
-      <div className="lto-view w-full overflow-hidden rounded-3xl border border-white/30 bg-[#0b55b8]/85 shadow-2xl backdrop-blur-sm">
-        <div className="flex min-h-[560px] flex-col items-center justify-center px-6 py-12 text-center">
+    <section className="mx-auto flex min-h-[calc(100vh-76px)] min-w-0 max-w-6xl items-center overflow-x-hidden px-3 py-6 sm:px-4 sm:py-10">
+      <div className="lto-view min-w-0 max-w-full flex-1 overflow-hidden rounded-3xl border border-white/30 bg-[#0b55b8]/85 shadow-2xl backdrop-blur-sm">
+        <div className="flex min-h-[520px] flex-col items-center justify-center px-4 py-9 text-center sm:min-h-[560px] sm:px-6 sm:py-12">
           <p className="text-sm font-medium tracking-wide text-blue-100 sm:text-lg">
             Welcome to
           </p>
@@ -251,14 +251,14 @@ function Welcome({
             alt="Land Transportation Office"
             className="lto-float my-5 h-28 w-28 object-contain drop-shadow-lg sm:h-36 sm:w-36"
           />
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">
+          <h1 className="max-w-full break-words text-3xl font-semibold leading-tight tracking-tight sm:text-6xl">
             LTO Driving License Reviewer
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-blue-50 sm:text-xl">
             Study road signs and driving rules first, then test yourself with a
             timed 60-question exam.
           </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex w-full max-w-sm flex-col gap-3 sm:mt-9 sm:w-auto sm:max-w-none sm:flex-row">
             <button
               onClick={onStudy}
               className="min-h-12 rounded-xl bg-white px-8 py-3 text-base font-semibold text-[#0649ad] shadow-lg transition hover:-translate-y-0.5"
@@ -383,16 +383,16 @@ function Quiz({
 }) {
   const seconds = `${timeLeft % 60}`.padStart(2, "0");
   return (
-    <section className="mx-auto max-w-6xl px-3 py-5 sm:px-6 sm:py-8">
+    <section className="mx-auto max-w-6xl px-2 py-3 sm:px-6 sm:py-8">
       <div className="overflow-hidden rounded-xl border border-blue-100 bg-white text-slate-900 shadow-2xl">
-        <div className="flex items-center justify-between gap-3 bg-[#0649ad] px-4 py-3 text-white sm:px-7">
-          <p className="font-semibold">
-            Questions: <span className="text-lg">{index + 1}</span>{" "}
+        <div className="flex flex-wrap items-center justify-between gap-2 bg-[#0649ad] px-3 py-3 text-sm text-white sm:gap-3 sm:px-7 sm:text-base">
+          <p className="whitespace-nowrap font-semibold">
+            Question <span className="text-base sm:text-lg">{index + 1}</span>{" "}
             <span className="font-medium text-blue-100">out of</span> {total}
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <span
-              className={`flex items-center gap-2 rounded-full px-3 py-1 font-semibold ${timeLeft <= 10 ? "animate-pulse bg-red-500" : "bg-blue-800"}`}
+              className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold sm:gap-2 sm:px-3 ${timeLeft <= 10 ? "animate-pulse bg-red-500" : "bg-blue-800"}`}
             >
               <ClockIcon />
               0:{seconds}
@@ -403,10 +403,10 @@ function Quiz({
           </div>
         </div>
         <div key={index} className="lto-question">
-          <div className="border-b border-slate-300 p-3 sm:p-5">
-            <div className="min-h-28 border border-slate-300 p-4 sm:p-6">
-              <span className="block text-sm text-slate-600">Question</span>
-              <h2 className="mt-1 text-2xl font-semibold leading-tight sm:text-3xl">
+          <div className="border-b border-slate-300 p-2.5 sm:p-5">
+            <div className="min-h-24 border border-slate-300 p-3 sm:min-h-28 sm:p-6">
+              <span className="block text-xs text-slate-600 sm:text-sm">Question</span>
+              <h2 className="mt-1 break-words text-xl font-semibold leading-snug sm:text-3xl sm:leading-tight">
                 {question.question}
               </h2>
             </div>
@@ -415,11 +415,11 @@ function Quiz({
             className={`grid ${question.image ? "lg:grid-cols-[330px_1fr]" : ""}`}
           >
             {question.image && (
-              <div className="flex items-center justify-center border-b border-slate-300 bg-slate-50 p-6 lg:border-b-0 lg:border-r">
+              <div className="flex items-center justify-center border-b border-slate-300 bg-slate-50 p-3 sm:p-6 lg:border-b-0 lg:border-r">
                 <img
                   src={question.image}
                   alt="Traffic sign for this question"
-                  className="max-h-64 max-w-full rounded-lg object-contain shadow-sm"
+                  className="max-h-44 max-w-full rounded-lg object-contain shadow-sm sm:max-h-64"
                 />
               </div>
             )}
@@ -428,30 +428,32 @@ function Quiz({
                 <button
                   key={option}
                   onClick={() => onSelect(optionIndex)}
-                  className={`lto-answer flex w-full items-center gap-5 border-b border-slate-300 px-5 py-5 text-left text-lg font-medium sm:px-10 sm:py-6 sm:text-2xl ${selected === optionIndex ? "bg-[#c9e9a5] ring-2 ring-inset ring-[#65a839]" : "hover:bg-blue-50"}`}
+                  className={`lto-answer flex min-h-16 w-full items-center gap-3 border-b border-slate-300 px-3 py-3.5 text-left text-base font-medium leading-snug sm:min-h-20 sm:gap-5 sm:px-10 sm:py-6 sm:text-2xl ${selected === optionIndex ? "bg-[#c9e9a5] ring-2 ring-inset ring-[#65a839]" : "hover:bg-blue-50"}`}
                 >
                   <span
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg font-semibold ${selected === optionIndex ? "bg-[#5aa431] text-white" : "bg-slate-100 text-slate-700"}`}
+                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-base font-semibold sm:h-10 sm:w-10 sm:text-lg ${selected === optionIndex ? "bg-[#5aa431] text-white" : "bg-slate-100 text-slate-700"}`}
                   >
                     {letters[optionIndex]}
                   </span>
-                  <span>{option}</span>
+                  <span className="min-w-0 break-words [overflow-wrap:anywhere]">
+                    {option}
+                  </span>
                 </button>
               ))}
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-between gap-4 p-4 sm:px-8">
+        <div className="flex items-center justify-between gap-3 p-3 sm:px-8 sm:py-4">
           <button
             onClick={onExit}
-            className="font-medium text-slate-500 transition hover:text-[#0649ad]"
+            className="min-h-11 rounded-lg px-1 text-sm font-medium text-slate-500 transition hover:text-[#0649ad] sm:text-base"
           >
             Exit reviewer
           </button>
           <button
             onClick={onNext}
             disabled={selected === null}
-            className="rounded-lg bg-[#084daf] px-6 py-2.5 text-base font-semibold text-white shadow transition hover:-translate-y-0.5 hover:bg-[#063e91] disabled:cursor-not-allowed disabled:bg-slate-300"
+            className="min-h-11 rounded-lg bg-[#084daf] px-5 py-2.5 text-base font-semibold text-white shadow transition hover:-translate-y-0.5 hover:bg-[#063e91] disabled:cursor-not-allowed disabled:bg-slate-300 sm:px-6"
           >
             {index === total - 1 ? "Finish" : "Next"} →
           </button>
@@ -485,8 +487,8 @@ function Results({
     }))
     .filter(({ question, selected }) => selected !== question.correctIndex);
   return (
-    <section className="mx-auto max-w-4xl px-4 py-10">
-      <div className="lto-view w-full rounded-2xl bg-white p-6 text-slate-900 shadow-2xl sm:p-10">
+    <section className="mx-auto max-w-4xl px-3 py-6 sm:px-4 sm:py-10">
+      <div className="lto-view w-full rounded-2xl bg-white p-4 text-slate-900 shadow-2xl sm:p-10">
         <div className="text-center">
           <img
             src="/images/lto_logo.webp"
@@ -496,7 +498,7 @@ function Results({
           <p className="mt-4 text-sm font-semibold tracking-wide text-[#0649ad]">
             Reviewer complete
           </p>
-          <h2 className="mt-2 text-5xl font-semibold">
+          <h2 className="mt-2 text-4xl font-semibold sm:text-5xl">
             {score} / {total}
           </h2>
           <p
@@ -504,7 +506,7 @@ function Results({
           >
             {passed ? "Passed" : "Needs more practice"}
           </p>
-          <p className="mt-2 text-lg text-slate-600">
+          <p className="mt-2 text-base text-slate-600 sm:text-lg">
             Passing score: {PASSING_SCORE} / {total} · You answered{" "}
             {Math.round((score / total) * 100)}% correctly.
           </p>
@@ -523,8 +525,8 @@ function Results({
                   <div className="border-b border-red-200 bg-red-100 px-5 py-3 font-semibold text-red-800">
                     Question {index + 1}
                   </div>
-                  <div className="p-5">
-                    <h4 className="text-xl font-semibold leading-snug">
+                  <div className="p-4 sm:p-5">
+                    <h4 className="text-lg font-semibold leading-snug sm:text-xl">
                       {question.question}
                     </h4>
                     {question.image && (
@@ -593,13 +595,13 @@ function StudyReview() {
       ? bank.filter((question) => question.image)
       : bank.filter((question) => !question.image);
   return (
-    <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <div className="lto-view rounded-3xl border border-white/25 bg-[#064cac]/90 p-5 shadow-2xl sm:p-8">
+    <section className="mx-auto max-w-7xl px-3 py-5 sm:px-6 sm:py-8">
+      <div className="lto-view rounded-3xl border border-white/25 bg-[#064cac]/90 p-4 shadow-2xl sm:p-8">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-wider text-blue-200">
             Study mode
           </p>
-          <h1 className="mt-2 text-3xl font-semibold sm:text-5xl">
+          <h1 className="mt-2 text-2xl font-semibold leading-tight sm:text-5xl">
             Review before the exam
           </h1>
           <p className="mt-3 text-blue-100">
@@ -608,12 +610,12 @@ function StudyReview() {
           </p>
         </div>
         <div className="mt-7 grid gap-3 lg:grid-cols-[1fr_auto]">
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             {(Object.keys(reviewerDetails) as Reviewer[]).map((key) => (
               <button
                 key={key}
                 onClick={() => setSelectedReviewer(key)}
-                className={`rounded-xl border p-3 text-left text-sm ${selectedReviewer === key ? "border-white bg-white text-[#0649ad]" : "border-blue-300/40 bg-blue-950/25 hover:bg-blue-900/40"}`}
+                className={`min-h-14 rounded-xl border p-3 text-left text-sm ${selectedReviewer === key ? "border-white bg-white text-[#0649ad]" : "border-blue-300/40 bg-blue-950/25 hover:bg-blue-900/40"}`}
               >
                 <span className="block font-semibold">
                   {reviewerDetails[key].title}
@@ -624,7 +626,7 @@ function StudyReview() {
               </button>
             ))}
           </div>
-          <div className="flex rounded-xl bg-blue-950/35 p-1">
+          <div className="flex min-h-12 rounded-xl bg-blue-950/35 p-1">
             <button
               onClick={() => setTopic("signs")}
               className={`flex-1 rounded-lg px-4 py-2 font-semibold ${topic === "signs" ? "bg-white text-[#0649ad]" : ""}`}
@@ -646,7 +648,7 @@ function StudyReview() {
           {items.map((question, index) => (
             <article
               key={`${question.question}-${index}`}
-              className="rounded-2xl bg-white p-5 text-slate-900 shadow-lg"
+              className="rounded-2xl bg-white p-4 text-slate-900 shadow-lg sm:p-5"
             >
               {question.image && (
                 <img
