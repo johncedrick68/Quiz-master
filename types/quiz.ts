@@ -3,15 +3,16 @@ export interface Question {
   options: string[];
   correctIndex: number;
   explanation: string;
-  difficulty?: 'Easy' | 'Medium' | 'Hard';
+  difficulty?: "Easy" | "Medium" | "Hard";
   image?: string;
+  reviewStatus?: "curated" | "generated";
 }
 
 export interface QuizSession {
   id: string;
   topic: string;
   questions: Question[];
-  mode: 'study' | 'challenge';
+  mode: "study" | "challenge";
   currentQuestionIndex: number;
   score: number;
   streak: number;

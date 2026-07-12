@@ -92,6 +92,9 @@ console.log(
         ]),
       ),
       total: allQuestions.length,
+      generatedQuestionsExcludedFromRelease: allQuestions.filter(
+        ({ question }) => question.reviewStatus === "generated",
+      ).length,
       problems,
       visualWithoutImage: visualWithoutImage.map(
         ({ bank, index, question }) =>

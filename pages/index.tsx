@@ -13,7 +13,7 @@ import { Question } from "../types/quiz";
 type Screen = "home" | "study" | "selection" | "quiz" | "result";
 type Reviewer = "english" | "tagalog";
 type ExamBank = "full" | "signs";
-type ExamLength = 40 | 60 | 80;
+type ExamLength = 20 | 40 | 60 | 80;
 const letters = ["A", "B", "C"];
 const QUESTION_SECONDS = 60;
 const reviewerDetails: Record<
@@ -44,6 +44,8 @@ const reviewerBanks: Record<Reviewer, Question[]> = {
     ...lightVehicleBB1B2Tagalog,
   ],
 };
+const releaseReadyQuestions = (questions: Question[]) =>
+  questions.filter((question) => question.reviewStatus !== "generated");
 const uniqueQuestions = (questions: Question[]) =>
   questions.filter(
     (question, index, all) =>
@@ -98,7 +100,9 @@ export default function Home() {
     selectedBank: ExamBank = examBank,
     selectedLength: ExamLength = examLength,
   ) => {
-    const completeBank = uniqueQuestions(reviewerBanks[selectedReviewer]);
+    const completeBank = uniqueQuestions(
+      releaseReadyQuestions(reviewerBanks[selectedReviewer]),
+    );
     const bank =
       selectedBank === "signs"
         ? completeBank.filter(isSignQuestion)
@@ -275,8 +279,8 @@ function Welcome({
             LTO Driving License Reviewer
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-blue-50 sm:text-xl">
-            Study road signs and driving rules first, then build a timed 40,
-            60, or 80-question exam.
+            Study road signs and driving rules first, then build a timed 40, 60,
+            or 80-question exam.
           </p>
           <div className="mt-8 flex w-full max-w-sm flex-col gap-3 sm:mt-9 sm:w-auto sm:max-w-none sm:flex-row">
             <button
@@ -311,11 +315,11 @@ function Selection({
   const [language, setLanguage] = useState<Reviewer>("english");
   const [bank, setBank] = useState<ExamBank>("full");
   const [length, setLength] = useState<ExamLength>(60);
-  const availableQuestions = uniqueQuestions(reviewerBanks[language]).filter(
-    (question) => bank === "full" || isSignQuestion(question),
-  ).length;
+  const availableQuestions = uniqueQuestions(
+    releaseReadyQuestions(reviewerBanks[language]),
+  ).filter((question) => bank === "full" || isSignQuestion(question)).length;
   const effectiveLength: ExamLength =
-    availableQuestions >= length ? length : 40;
+    availableQuestions >= length ? length : bank === "signs" ? 20 : 40;
   return (
     <section className="mx-auto flex min-h-[calc(100vh-76px)] max-w-5xl items-center px-4 py-7 sm:py-10">
       <div className="lto-view w-full rounded-3xl border border-white/30 bg-[#064cac]/90 p-5 shadow-2xl backdrop-blur sm:p-10">
@@ -378,8 +382,14 @@ function Selection({
           </fieldset>
           <fieldset>
             <legend className="mb-3 text-lg font-semibold">Exam length</legend>
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-              {([40, 60, 80] as ExamLength[]).map((option) => {
+            <div
+              className={`grid gap-2 sm:gap-3 ${bank === "signs" ? "grid-cols-4" : "grid-cols-3"}`}
+            >
+              {(
+                (bank === "signs"
+                  ? [20, 40, 60, 80]
+                  : [40, 60, 80]) as ExamLength[]
+              ).map((option) => {
                 const disabled = option > availableQuestions;
                 return (
                   <button
@@ -660,7 +670,9 @@ function StudyReview() {
   const [topic, setTopic] = useState<"signs" | "rules">("signs");
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
-  const bank = uniqueQuestions(reviewerBanks[selectedReviewer]);
+  const bank = uniqueQuestions(
+    releaseReadyQuestions(reviewerBanks[selectedReviewer]),
+  );
   const topicItems =
     topic === "signs"
       ? bank.filter(isSignQuestion)

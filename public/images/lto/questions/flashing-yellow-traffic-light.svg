@@ -1,1 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><circle cx="150" cy="150" r="88" fill="#ffd31a" stroke="#222" stroke-width="24"/><g stroke="#ffd31a" stroke-width="14" stroke-linecap="round"><path d="M150 20V2M150 298v-18M20 150H2M298 150h-18M58 58 44 44M256 256l-14-14M242 58l14-14M44 256l14-14"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" role="img" aria-labelledby="title description">
+  <title id="title">Flashing yellow traffic signal</title>
+  <desc id="description">A vertical traffic light with the yellow lamp illuminated and flashing.</desc>
+  <rect x="62" y="20" width="176" height="380" rx="34" fill="#20252b" stroke="#111827" stroke-width="10"/>
+  <rect x="82" y="42" width="136" height="336" rx="24" fill="#111418"/>
+  <circle cx="150" cy="106" r="48" fill="#5c2024" stroke="#090b0d" stroke-width="9"/>
+  <circle cx="150" cy="210" r="51" fill="#ffd21c" stroke="#090b0d" stroke-width="9"/>
+  <circle cx="150" cy="314" r="48" fill="#174d35" stroke="#090b0d" stroke-width="9"/>
+  <circle cx="136" cy="193" r="12" fill="#fff7b2" opacity=".9"/>
+  <g fill="none" stroke="#ffd21c" stroke-linecap="round" stroke-width="9">
+    <path d="M150 141v-18"/>
+    <path d="M150 297v-18"/>
+    <path d="M81 210H55"/>
+    <path d="M245 210h-26"/>
+    <path d="m99 159-17-17"/>
+    <path d="m218 278-17-17"/>
+    <path d="m201 159 17-17"/>
+    <path d="m82 278 17-17"/>
+  </g>
+</svg>
