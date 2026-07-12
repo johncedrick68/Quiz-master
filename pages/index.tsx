@@ -137,9 +137,6 @@ export default function Home() {
     <>
       <Head>
         <title>LTO Driving License Reviewer</title>
-        <link rel="icon" href="/images/lto_logo.webp" type="image/webp" />
-        <link rel="shortcut icon" href="/images/lto_logo.webp" />
-        <link rel="apple-touch-icon" href="/images/lto_logo.webp" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
@@ -278,8 +275,8 @@ function Welcome({
             LTO Driving License Reviewer
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-blue-50 sm:text-xl">
-            Study road signs and driving rules first, then test yourself with a
-            timed 60-question exam.
+            Study road signs and driving rules first, then build a timed 40,
+            60, or 80-question exam.
           </p>
           <div className="mt-8 flex w-full max-w-sm flex-col gap-3 sm:mt-9 sm:w-auto sm:max-w-none sm:flex-row">
             <button

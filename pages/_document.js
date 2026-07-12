@@ -1,13 +1,17 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="theme-color" content="#16232a" />
-        <meta name="description" content="Upload any document and get quizzed on it, chalkboard-style." />
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖍️</text></svg>" />
+        <meta name="theme-color" content="#0649ad" />
+        <meta
+          name="description"
+          content="Free English and Tagalog LTO driving-license reviewer for road rules, safety, signs, signals, and markings."
+        />
+        <link rel="icon" type="image/webp" href="/images/lto_logo.webp?v=2" />
+        <link rel="shortcut icon" href="/images/lto_logo.webp?v=2" />
+        <link rel="apple-touch-icon" href="/images/lto_logo.webp?v=2" />
       </Head>
       <body>
         <Main />
